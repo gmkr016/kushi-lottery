@@ -1,0 +1,1 @@
+require('./lottery/lottery-form');
