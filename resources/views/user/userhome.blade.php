@@ -1,4 +1,4 @@
-@extends('admin.templates.layout')
+@extends('user.templates.layout')
 @section('content')
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">

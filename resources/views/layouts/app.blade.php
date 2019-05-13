@@ -1,3 +1,4 @@
+{{-- login page layout --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +45,7 @@
         @yield('content')
     </main>
 
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('dist/js/app.js')}}"></script>
 
     {{-- Success Alert --}} @if(session('status'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">

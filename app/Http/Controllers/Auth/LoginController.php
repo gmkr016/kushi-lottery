@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'user/home';
 
     /**
      * Create a new controller instance.
@@ -47,5 +47,14 @@ class LoginController extends Controller
             'forgotPasswordRoute' => 'password.request',
             ]
         );
+    }
+
+    public function logout()
+    {
+        //logout the admin...
+        Auth::logout();
+        return redirect()
+        ->route('login')
+        ->with('status', 'User has been logged out!');
     }
 }
