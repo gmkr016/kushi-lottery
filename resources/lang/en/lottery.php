@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Translation use for lottery
  */
@@ -7,7 +7,7 @@ return [
         'title' => 'Lottery'
     ],
     'head' => [
-        'title' => 'Welcome to the Lottery',
+        'title' => 'Welcome to the Khushi Lottery',
         'description' => 'Feeling lucky today? Try your luck with us and you may have a chance to win exciting prices! What are you waiting for? Get your numbers and submit it to be included in our next raffle draw.'
     ],
     'instruction' => 'Please generate a number. Edit it if you desire other number. <b>Only number between :min-:max</b> will be accepted',

@@ -11,11 +11,17 @@ use App\Http\Requests\ConfirmLottery;
 
 class LotteryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $numbers = config('lottery.numbers');
 
-        return view('lottery', compact('numbers'));
+        return view('user.generatelottery', compact('numbers'));
+
+        // return view('lottery', compact('numbers'));
     }
 
         public function generate()

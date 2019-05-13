@@ -38,7 +38,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
                 <a class="collapse-item" href="#">See Numbers</a>
-                <a class="collapse-item" href="#">Generate Numbers</a>
+                <a class="collapse-item" href="{{route('user.lotteryindex')}}">Generate Numbers</a>
             </div>
         </div>
     </li>

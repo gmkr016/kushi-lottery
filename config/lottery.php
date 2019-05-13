@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Lottery Config
  * @author Rej Mediodia

@@ -38,10 +38,10 @@ confirmBtn.onclick = () => {
     window.axios.post('submit', formData).then((response) => {
         let data = response.data;
         confirmBtn.removeAttribute('disabled');
-        window.swal('Success', data.message, 'success');
+        window.swal.fire('Success', data.message, 'success');
     }, (errors) => {
         confirmBtn.removeAttribute('disabled');
-        window.swal(errors.response.data.message);
+        window.swal.fire(errors.response.data.message);
     });
 }
 

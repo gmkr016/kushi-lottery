@@ -39747,10 +39747,10 @@ confirmBtn.onclick = function () {
   window.axios.post('submit', formData).then(function (response) {
     var data = response.data;
     confirmBtn.removeAttribute('disabled');
-    window.swal('Success', data.message, 'success');
+    window.swal.fire('Success', data.message, 'success');
   }, function (errors) {
     confirmBtn.removeAttribute('disabled');
-    window.swal(errors.response.data.message);
+    window.swal.fire(errors.response.data.message);
   });
 };
 

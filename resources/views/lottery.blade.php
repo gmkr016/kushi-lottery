@@ -27,8 +27,9 @@
         </div>
         <div class="row">
             <form>
-                <button id="generateBtn" type="button" class="btn btn-primary" title="@lang('lottery.form.button.generate.title')">
-                @lang('lottery.form.button.generate.name')</button>
+                <button id="generateBtn" type="button" class="btn btn-primary"
+                    title="@lang('lottery.form.button.generate.title')">
+                    @lang('lottery.form.button.generate.name')</button>
 
                 <div id="randomNumbers" class="d-none">
                     <hr class="clearfix">
@@ -43,7 +44,7 @@
                       'max' => $numbers['max']
                     ])">
 
-                    
+
                         </div>
                         <div class="form-group">
                             <label for="lottery2">@lang('lottery.form.input.secondNumber.label')</label>
@@ -60,8 +61,9 @@
                     ])">
                         </div>
                     </div>
-                    <button id="confirmBtn" type="button" class="btn btn-success" title="@lang('lottery.form.button.confirm.title')">
-                    @lang('lottery.form.button.confirm.name')</button>
+                    <button id="confirmBtn" type="button" class="btn btn-success"
+                        title="@lang('lottery.form.button.confirm.title')">
+                        @lang('lottery.form.button.confirm.name')</button>
 
                 </div>
             </form>

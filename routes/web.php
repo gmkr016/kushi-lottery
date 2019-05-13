@@ -30,7 +30,7 @@ Route::prefix('/user')
             // Route::get('/home', 'HomeController@index')->name('home');
             //using user auth
             Route::get('/home', 'DashboardController@index')->name('home');
-            Route::get('/lottery', 'LotteryController@index');
+            Route::get('/lottery', 'LotteryController@index')->name('lotteryindex');
             Route::get('generate', 'LotteryController@generate');
             Route::post('submit', 'LotteryController@submit');
             Route::namespace('Auth')
