@@ -38,7 +38,12 @@ confirmBtn.onclick = () => {
     window.axios.post('submit', formData).then((response) => {
         let data = response.data;
         confirmBtn.removeAttribute('disabled');
-        window.swal.fire('Success', data.message, 'success');
+        window.swal.fire({
+            position: 'top-end',
+            title: 'Success',
+            text: data.message,
+            type: 'success'
+        });
     }, (errors) => {
         confirmBtn.removeAttribute('disabled');
         window.swal.fire(errors.response.data.message);

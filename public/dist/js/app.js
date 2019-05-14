@@ -39747,7 +39747,12 @@ confirmBtn.onclick = function () {
   window.axios.post('submit', formData).then(function (response) {
     var data = response.data;
     confirmBtn.removeAttribute('disabled');
-    window.swal.fire('Success', data.message, 'success');
+    window.swal.fire({
+      position: 'top-end',
+      title: 'Success',
+      text: data.message,
+      type: 'success'
+    });
   }, function (errors) {
     confirmBtn.removeAttribute('disabled');
     window.swal.fire(errors.response.data.message);
