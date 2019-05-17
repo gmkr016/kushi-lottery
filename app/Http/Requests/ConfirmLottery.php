@@ -20,9 +20,12 @@ class ConfirmLottery extends FormRequest
         $input = [
             $this->first,
             $this->second,
-            $this->third
+            $this->third,
+            $this->fourth,
+            $this->fifth,
+            $this->sixth
         ];
-        
+
         return $this->_validateRepetitive($input) && $this->_validateExist($input);
         // return $this->_validateRepetitive($first, $second, $third);
     }
@@ -78,6 +81,9 @@ class ConfirmLottery extends FormRequest
             'first' => $condition,
             'second' => $condition,
             'third' => $condition,
+            'fourth' => $condition,
+            'fifth' => $condition,
+            'sixth' => $condition
         ];
     }
 
@@ -87,7 +93,11 @@ class ConfirmLottery extends FormRequest
         return [
             'first.required' => $validation,
             'second.required' => $validation,
-            'third.required' => $validation
+            'third.required' => $validation,
+            'fourth.required' => $validation,
+            'fifth.required' => $validation,
+            'sixth.required' => $validation,
+
         ];
     }
 }

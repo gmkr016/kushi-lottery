@@ -38,6 +38,18 @@ return [
                 'label' => '3rd Number',
                 'placeholder' => 'Number between (:min-:max)'
             ],
+            'fourthNumber' => [
+                'label' => '4th Number',
+                'placeholder' => 'Number between (:min-:max)'
+            ],
+            'fifthNumber' => [
+                'label' => '5th Number',
+                'placeholder' => 'Number between (:min-:max)'
+            ],
+            'sixthNumber' => [
+                'label' => '6th Number',
+                'placeholder' => 'Number between (:min-:max)'
+            ],
         ]
     ],
     'success' => [

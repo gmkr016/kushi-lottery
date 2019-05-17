@@ -5,6 +5,12 @@ const input = {
     first: document.querySelector('#lottery1'),
     second: document.querySelector('#lottery2'),
     third: document.querySelector('#lottery3'),
+    fourth: document.querySelector('#lottery4'),
+    fifth: document.querySelector('#lottery5'),
+    sixth: document.querySelector('#lottery6'),
+
+
+
 };
 
 generateBtn.onclick = () => {
@@ -16,6 +22,10 @@ generateBtn.onclick = () => {
         input.first.value = data.first;
         input.second.value = data.second;
         input.third.value = data.third;
+        input.fourth.value = data.fourth;
+        input.fifth.value = data.fifth;
+        input.sixth.value = data.sixth;
+
         generateBtn.removeAttribute('disabled');
     }, (errors) => {
         console.log(errors);
@@ -32,6 +42,10 @@ confirmBtn.onclick = () => {
         first: input.first.value,
         second: input.second.value,
         third: input.third.value,
+        fourth: input.fourth.value,
+        fifth: input.fifth.value,
+        sixth: input.sixth.value,
+
     };
 
     confirmBtn.setAttribute('disabled', 'disabled');

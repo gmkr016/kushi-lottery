@@ -39715,7 +39715,10 @@ var generateBtn = document.querySelector('#generateBtn');
 var input = {
   first: document.querySelector('#lottery1'),
   second: document.querySelector('#lottery2'),
-  third: document.querySelector('#lottery3')
+  third: document.querySelector('#lottery3'),
+  fourth: document.querySelector('#lottery4'),
+  fifth: document.querySelector('#lottery5'),
+  sixth: document.querySelector('#lottery6')
 };
 
 generateBtn.onclick = function () {
@@ -39727,6 +39730,9 @@ generateBtn.onclick = function () {
     input.first.value = data.first;
     input.second.value = data.second;
     input.third.value = data.third;
+    input.fourth.value = data.fourth;
+    input.fifth.value = data.fifth;
+    input.sixth.value = data.sixth;
     generateBtn.removeAttribute('disabled');
   }, function (errors) {
     console.log(errors);
@@ -39741,7 +39747,10 @@ confirmBtn.onclick = function () {
   var formData = {
     first: input.first.value,
     second: input.second.value,
-    third: input.third.value
+    third: input.third.value,
+    fourth: input.fourth.value,
+    fifth: input.fifth.value,
+    sixth: input.sixth.value
   };
   confirmBtn.setAttribute('disabled', 'disabled');
   window.axios.post('submit', formData).then(function (response) {

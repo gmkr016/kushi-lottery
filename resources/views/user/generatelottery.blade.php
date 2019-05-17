@@ -94,6 +94,30 @@
                                           'max' => $numbers['max']
                                         ])">
                                             </div>
+                                            <div class="form-group">
+                                                <label
+                                                    for="lottery4">@lang('lottery.form.input.fourthNumber.label')</label>
+                                                <input type="text" class="form-control" id="lottery4" placeholder="@lang('lottery.form.input.fourthNumber.placeholder', [
+                                          'min' => $numbers['min'],
+                                          'max' => $numbers['max']
+                                        ])">
+                                            </div>
+                                            <div class="form-group">
+                                                <label
+                                                    for="lottery5">@lang('lottery.form.input.fifthNumber.label')</label>
+                                                <input type="text" class="form-control" id="lottery5" placeholder="@lang('lottery.form.input.fifthNumber.placeholder', [
+                                          'min' => $numbers['min'],
+                                          'max' => $numbers['max']
+                                        ])">
+                                            </div>
+                                            <div class="form-group">
+                                                <label
+                                                    for="lottery6">@lang('lottery.form.input.sixthNumber.label')</label>
+                                                <input type="text" class="form-control" id="lottery6" placeholder="@lang('lottery.form.input.sixthNumber.placeholder', [
+                                          'min' => $numbers['min'],
+                                          'max' => $numbers['max']
+                                        ])">
+                                            </div>
                                         </div>
                                         <button id="confirmBtn" type="button" class="btn btn-success"
                                             title="@lang('lottery.form.button.confirm.title')">
@@ -121,7 +145,7 @@
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Your Website 2019</span>
+                <span>Copyright &copy; {{config('app.name')}} 2019</span>
             </div>
         </div>
     </footer>

@@ -18,6 +18,9 @@ class CreateLotteriesTable extends Migration
             $table->integer('first_number');
             $table->integer('second_number');
             $table->integer('third_number');
+            $table->integer('fourth_number');
+            $table->integer('fifth_number');
+            $table->integer('sixth_number');
             $table->timestamps();
         });
     }

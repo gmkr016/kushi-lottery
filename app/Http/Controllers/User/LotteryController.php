@@ -40,10 +40,18 @@ class LotteryController extends Controller
         $second = $this->_generateNumber($numbers, [$first]);
         // 3rd number
         $third = $this->_generateNumber($numbers, [$first, $second]);
+        //4th number
+        $fourth = $this->_generateNumber($numbers, [$first, $second, $third]);
+        //5th number
+        $fifth = $this->_generateNumber($numbers, [$first, $second, $third, $fourth ]);
+        //6th number
+        $sixth = $this->_generateNumber($numbers, [$first, $second, $third, $fourth, $fifth ]);
 
-        $data = compact('first', 'second', 'third');
 
-        $input = [ $first, $second, $third ];
+
+        $data = compact('first', 'second', 'third', 'fourth', 'fifth', 'sixth');
+
+        $input = [ $first, $second, $third, $fourth, $fifth, $sixth ];
         $result = Lottery::validateNumbers($input)->first();
         // if there's already sequence recreate from top
         if (!empty($result)) {
@@ -72,6 +80,10 @@ class LotteryController extends Controller
         $lottery->first_number = $request->first;
         $lottery->second_number = $request->second;
         $lottery->third_number = $request->third;
+        $lottery->fourth_number = $request->fourth;
+        $lottery->fifth_number = $request->fifth;
+        $lottery->sixth_number = $request->sixth;
+
         $lottery->save();
 
         $message = trans('lottery.success.saved');
