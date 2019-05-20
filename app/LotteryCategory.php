@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class LotteryCategory extends Model
 {
-    //
+    protected $table = 'lottery_categories';
 }

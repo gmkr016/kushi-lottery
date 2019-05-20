@@ -15,6 +15,10 @@ class CreateLotteryCategoriesTable extends Migration
     {
         Schema::create('lottery_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title');
+            $table->string('image');
+            $table->string('draw_date');
+            $table->string('lott_count')->nullable();
             $table->timestamps();
         });
     }

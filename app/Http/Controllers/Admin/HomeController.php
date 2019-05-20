@@ -15,7 +15,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('admin.home')->with('title', 'This is Admin Dashboard');
+        return view('admin.home.home')->with('title', 'This is Admin Dashboard');
     }
 
 }

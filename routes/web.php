@@ -65,6 +65,7 @@ Route::prefix('/admin')
         function () {
 
             Route::get('/home', 'HomeController@index')->name('home');
+            Route::resource('categories', 'LotteryCategoryController');
             //using admin auth
 
             Route::namespace('Auth')

@@ -6,7 +6,8 @@
         {{-- <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div> --}}
-        <div class="sidebar-brand-text mx-3">{{ config('app.name') }} Admin </div>
+        <div class="sidebar-brand-text mx-3"><i class="fas fa-smile" style="font-size:40px; vertical-align: middle"></i>
+            Admin </div>
     </a>
 
     <!-- Divider -->
@@ -32,13 +33,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
             aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Category</span>
+            <span>Lottery Category</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 {{-- <h6 class="collapse-header">category</h6> --}}
-                <a class="collapse-item" href="#">Add</a>
-                <a class="collapse-item" href="#">List</a>
+                <a class="collapse-item" href="{{route('admin.categories.create')}}">Add</a>
+                <a class="collapse-item" href="{{route('admin.categories.index')}}">List</a>
             </div>
         </div>
     </li>
