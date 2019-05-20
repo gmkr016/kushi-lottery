@@ -34,6 +34,7 @@ Route::prefix('/user')
             Route::get('/lottery', 'LotteryController@index')->name('lotteryindex');
             Route::get('generate', 'LotteryController@generate');
             Route::post('submit', 'LotteryController@submit');
+
             Route::namespace('Auth')
                 ->group(
                     function () {
@@ -65,6 +66,7 @@ Route::prefix('/admin')
 
             Route::get('/home', 'HomeController@index')->name('home');
             //using admin auth
+
             Route::namespace('Auth')
                 ->group(
                     function () {

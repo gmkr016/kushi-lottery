@@ -349,9 +349,9 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="jackpot-board">
-                        <ul class="lottery-number-list">
+                        <ul class="lottery-number-list" id="choosenumbers">
                             <li>30</li>
-                            <li class="active">55</li>
+                            <li>55</li>
                             <li>36</li>
                             <li>45</li>
                             <li>21</li>
@@ -366,11 +366,11 @@
                             <li>58</li>
                             <li>51</li>
                             <li>32</li>
-                            <li class="active">45</li>
+                            <li>45</li>
                             <li>24</li>
                             <li>48</li>
                             <li>95</li>
-                            <li class="active">77</li>
+                            <li>77</li>
                             <li>56</li>
                             <li>59</li>
                             <li>44</li>
@@ -384,10 +384,10 @@
                             <li>30</li>
                             <li>04</li>
                             <li>09</li>
-                            <li class="active">99</li>
+                            <li>99</li>
                             <li>18</li>
                             <li>75</li>
-                            <li class="active">59</li>
+                            <li>59</li>
                             <li>21</li>
                             <li>44</li>
                             <li>30</li>
@@ -405,13 +405,13 @@
                         <p class="price">Jackpot: <span>£10,000</span></p>
                         <p class="date">Monday 18th February 2019</p>
                         <div class="jackpot-guess-wrapper">
-                            <ul class="lottery-number-list">
-                                <li>55</li>
-                                <li>45</li>
-                                <li>77</li>
-                                <li>99</li>
-                                <li>59</li>
-                                <li>?</li>
+                            <ul class="lottery-number-list" id="choosennumber">
+                                <li id="choosen1">55</li>
+                                <li id="choosen2">45</li>
+                                <li id="choosen3">77</li>
+                                <li id="choosen4">99</li>
+                                <li id="choosen5">59</li>
+                                <li id="choosen6">?</li>
                             </ul>
                         </div>
                         <div class="btn-area d-flex">
@@ -422,6 +422,7 @@
                 </div>
             </div>
         </div>
+
     </section>
     <!-- next-jackpot-section end -->
 
@@ -1117,6 +1118,34 @@
     <script src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js'></script>
     <script src="{{ asset('storage/assets/js/jquery.countdown.js') }}"></script>
     <script src="{{ asset('storage/assets/js/main.js') }}"></script>
+    <script>
+        //         var count = 0;
+//         $("#choosenumbers li").click(function() {
+//             count++
+//             // console.log($(this).text()); // gets text contents of clicked li
+//         switch(count){
+//             case 1:
+//                 $("#choosen1").text($(this).text());
+//                 break;
+//             case 2:
+//                 $("#choosen2").text($(this).text());
+//                 break;
+//             case 3:
+//                 $("#choosen3").text($(this).text());
+//                 break;
+//             case 4:
+//                 $("#choosen4").text($(this).text());
+//                 break;
+//             case 5:
+//                 $("#choosen5").text($(this).text());
+//                 break;
+//             case 6:
+//                 $("#choosen6").text($(this).text());
+//                 $("#choosenumbers li").unbind("click");
+//                 break;
+//     }
+// });
+    </script>
 </body>
 
 </html>

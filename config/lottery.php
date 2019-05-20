@@ -7,6 +7,6 @@
  return [
     'numbers' => [
         'min' => '1',
-        'max' => '58'
+        'max' => '99'
     ]
  ];
