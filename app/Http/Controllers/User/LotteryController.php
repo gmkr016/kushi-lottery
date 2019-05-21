@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Lottery;
+use App\Models\Lottery as Lottery;
 
 use App\Http\Requests\ConfirmLottery;
 
@@ -15,11 +15,19 @@ class LotteryController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public static function lott_count($cat_id)
+    {
+        $list = Lottery::where('cat_id', '=', $cat_id)->get();
+        // return "yes";
+        return $list->count();
+    }
+
     public function index()
     {
         $numbers = config('lottery.numbers');
-
-        return view('user.generatelottery', compact('numbers'));
+        $cat = \App\LotteryCategory::all();
+        return view('user.generatelottery', compact('numbers', 'cat'));
 
         // return view('lottery', compact('numbers'));
     }
@@ -64,7 +72,7 @@ class LotteryController extends Controller
     private function _generateNumber($limit, $comparison = [])
     {
         $generatedNumber = rand($limit['min'], $limit['max']);
-        ;
+
 
         // if generated number already exists regenerate
         if (in_array($generatedNumber, $comparison)) {
@@ -77,6 +85,7 @@ class LotteryController extends Controller
     public function submit(ConfirmLottery $request)
     {
         $lottery = new Lottery;
+        $lottery->cat_id = $request->lott_cat;
         $lottery->first_number = $request->first;
         $lottery->second_number = $request->second;
         $lottery->third_number = $request->third;
@@ -88,5 +97,12 @@ class LotteryController extends Controller
 
         $message = trans('lottery.success.saved');
         return compact('message');
+    }
+
+    public function lists()
+    {
+        $lists = Lottery::paginate(10);
+
+        return view('user.lotterylists', compact('lists'));
     }
 }

@@ -30,8 +30,10 @@ Route::prefix('/user')
         function () {
             // Route::get('/home', 'HomeController@index')->name('home');
             //using user auth
+            Route::get('/', 'DashboardController@index')->name('home');
             Route::get('/home', 'DashboardController@index')->name('home');
             Route::get('/lottery', 'LotteryController@index')->name('lotteryindex');
+            Route::get('/lotterylists', 'LotteryController@lists')->name('lotterylists');
             Route::get('generate', 'LotteryController@generate');
             Route::post('submit', 'LotteryController@submit');
 

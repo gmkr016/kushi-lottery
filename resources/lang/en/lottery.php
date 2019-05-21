@@ -7,6 +7,7 @@ return [
         'title' => 'Lottery'
     ],
     'head' => [
+        'title_list' => 'Lottery List',
         'title' => 'Welcome to the Khushi Lottery',
         'description' => 'Feeling lucky today? Try your luck with us and you may have a chance to win exciting prices! What are you waiting for? Get your numbers and submit it to be included in our next raffle draw.'
     ],

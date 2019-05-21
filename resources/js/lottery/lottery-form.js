@@ -8,6 +8,7 @@ const input = {
     fourth: document.querySelector('#lottery4'),
     fifth: document.querySelector('#lottery5'),
     sixth: document.querySelector('#lottery6'),
+    lott_cat: document.querySelector('#lott_cat'),
 
 
 
@@ -45,7 +46,7 @@ confirmBtn.onclick = () => {
         fourth: input.fourth.value,
         fifth: input.fifth.value,
         sixth: input.sixth.value,
-
+        lott_cat: input.lott_cat.value,
     };
 
     confirmBtn.setAttribute('disabled', 'disabled');

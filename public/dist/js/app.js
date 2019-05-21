@@ -39718,7 +39718,8 @@ var input = {
   third: document.querySelector('#lottery3'),
   fourth: document.querySelector('#lottery4'),
   fifth: document.querySelector('#lottery5'),
-  sixth: document.querySelector('#lottery6')
+  sixth: document.querySelector('#lottery6'),
+  lott_cat: document.querySelector('#lott_cat')
 };
 
 generateBtn.onclick = function () {
@@ -39750,7 +39751,8 @@ confirmBtn.onclick = function () {
     third: input.third.value,
     fourth: input.fourth.value,
     fifth: input.fifth.value,
-    sixth: input.sixth.value
+    sixth: input.sixth.value,
+    lott_cat: input.lott_cat.value
   };
   confirmBtn.setAttribute('disabled', 'disabled');
   window.axios.post('submit', formData).then(function (response) {

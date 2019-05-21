@@ -1,3 +1,6 @@
+@php
+use \App\Http\Controllers\User\LotteryController as LotteryC;
+@endphp
 @extends('admin.templates.layout')
 @section('content')
 <div id="content-wrapper" class="d-flex flex-column">
@@ -24,23 +27,6 @@
                     <a href="{{ route('admin.categories.create') }}" class="btn btn-info mb-2">Add+</a>
                     <div class="table-responsive">
                         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                            {{-- <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="dataTables_length" id="dataTable_length"><label>Show <select
-                                                name="dataTable_length" aria-controls="dataTable"
-                                                class="custom-select custom-select-sm form-control form-control-sm">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select> entries</label></div>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
-                                                type="search" class="form-control form-control-sm" placeholder=""
-                                                aria-controls="dataTable"></label></div>
-                                </div>
-                            </div> --}}
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table class="table table-bordered dataTable" id="dataTable" width="100%"
@@ -73,10 +59,12 @@
                                                         style="width:100px">
                                                 </td>
                                                 <td class="sorting_1" style="vertical-align:middle">
-                                                    {{ $item->draw_date }}</td>
+                                                    {{ $item->draw_date }}
+                                                </td>
                                                 {{-- how many total lotteries submitted from users --}}
                                                 <td class="sorting_1" style="vertical-align:middle">
-                                                    {{ $lott_count }}</td>
+                                                    {{ LotteryC::lott_count($item->id) }}
+                                                </td>
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     <a class="btn btn-primary"
                                                         href="{{ url("admin/categories/$item->id/edit") }}">Edit</a>

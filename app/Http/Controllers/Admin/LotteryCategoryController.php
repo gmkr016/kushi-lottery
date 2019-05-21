@@ -14,6 +14,7 @@ class LotteryCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $lists = Cat::paginate(10);

@@ -15,8 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $lott_count = Lot::count();
-        View::share('lott_count', $lott_count);
+
     }
 
     /**
