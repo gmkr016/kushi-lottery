@@ -75,18 +75,20 @@
                                                     {{ $item->draw_date }}</td>
                                                 {{-- how many total lotteries submitted from users --}}
                                                 <td class="sorting_1" style="vertical-align:middle">
-                                                    {{ $item->lott_count }}</td>
+                                                    {{ $lott_count }}</td>
                                                 <td class="sorting_1" style="vertical-align:middle">
-                                                    <a href="{{ url("admin/categories/$item->id/edit") }}">Edit</a>
-                                                    /
-                                                    <a href="{{ url("admin/categories/$item->id") }}">Delete</a>
+                                                    <a class="btn btn-primary"
+                                                        href="{{ url("admin/categories/$item->id/edit") }}">Edit</a>
+                                                    <a href="javascript:void()" class="btn btn-danger"
+                                                        onclick="event.preventDefault();document.querySelector('#item-delete').submit();">Delete</a>
+                                                    <form method='POST' id="item-delete"
+                                                        action='{{ url("admin/categories/$item->id") }}'>
+                                                        @csrf
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                    </form>
+
                                                 </td>
-                                            </tr>
-                                            @endforeach
-
-                                            @else
-
-                                            <tr role="row" class="odd">
+                                            </tr> @endforeach @else <tr role="row" class="odd">
                                                 <td rowspan="4" class="sorting_1">No data to fetch</td>
                                             </tr>
                                             @endif

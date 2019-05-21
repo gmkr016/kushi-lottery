@@ -57,12 +57,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="submit" class="btn btn-primary" name="submit" value="Submit" />
+                                <input type="submit" class="btn btn-info" name="submit" value="Submit" />
                             </form>
                         </div>
                     </div>
 
-                </div>  
+                </div>
 
             </div>
 

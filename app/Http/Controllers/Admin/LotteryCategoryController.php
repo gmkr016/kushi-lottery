@@ -65,10 +65,12 @@ class LotteryCategoryController extends Controller
         $cat->title = $request->title;
         $cat->draw_date = $request->draw_date;
         $cat->image = $fileNameToStore;
-        if($cat->save()) {
-            return view('admin.categories.cat-insert');
-        } else {
 
+        if($cat->save()) {
+            $lists = Cat::paginate(10);
+            return redirect()->route('admin.categories.index')->with('lists',$lists);
+        } else {
+            return "fail";
         }
     }
 
@@ -102,39 +104,44 @@ class LotteryCategoryController extends Controller
      * @param  \App\LotteryCategory  $lotteryCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LotteryCategory $lotteryCategory)
+    public function update(Request $request, $id)
     {
+        // dd($request->hasFile('image'));
         if ($request->hasFile('image') ) {
             //get the file name with the extension
             $filenameWithExt = $request->file('image')->getClientOriginalName();
 
             //get just file name
-           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
 
             //get just extension
             $extension = $request->file('image')->getClientOriginalExtension();
 
 
-          //file name to store
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //file name to store
+            // $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $fileNameToStore = time().'.'.$extension;
 
-           //upload image
 
+            //upload image
             $path = $request->file('image')
                 ->storeAs('public/lottery_cat/', $fileNameToStore);
-        } else {
-            $fileNameToStore ="noimage.jpg";
+
         }
+        // return !empty($fileNameToStore) ? 'file uploaded' : 'no file';
         $cat = Cat::findorFail($id);
         $cat->title = $request->title;
         $cat->draw_date = $request->draw_date;
-        $cat->image = $fileNameToStore;
-        if($cat->save()) {
-            return view('admin.categories.cat-insert');
-        } else {
-
+        if (!empty($fileNameToStore)) {
+            $cat->image = $fileNameToStore ;
         }
-        return view('admin.categories.cat-index')->with('cat', $cat);
+        if ($cat->save()) {
+            $msg = "Succeed";
+        } else {
+            $msg = "Failed";
+        }
+        $lists = Cat::paginate(10);
+        return redirect()->route('admin.categories.index', ['cat'=>$cat, 'lists'=>$lists]);
     }
 
     /**
@@ -145,6 +152,10 @@ class LotteryCategoryController extends Controller
      */
     public function destroy($id)
     {
-        return "hel";
+        $action = Cat::findorFail($id)->delete();
+        if ($action) {
+            $lists = Cat::paginate(10);
+            return redirect()->route('admin.categories.index', ['lists'=>$lists]);
+        }
     }
 }

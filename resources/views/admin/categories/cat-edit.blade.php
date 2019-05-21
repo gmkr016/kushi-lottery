@@ -31,10 +31,11 @@
                                 draw_date
                                 lott_count
                             --}}
-                            <form method="POST" action="{{route('admin.categories.update')}}"
+                            <form method="POST" action="{{url("admin/categories/$cat->id" )}}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT">
+                                <input type="hidden" name="id" value="$cat->id">
                                 <div class="form-group">
                                     <label for="exampleInputTitle">Category Title</label>
                                     <input type="text" class="form-control" id="exampleInputTitle"
@@ -62,7 +63,7 @@
                                     <img src="{{ asset("storage/lottery_cat/$cat->image") }}"
                                         style="width:100px; margin-top:10px" alt="">
                                 </div>
-                                <input type="submit" class="btn btn-primary" name="submit" value="Submit" />
+                                <input type="submit" class="btn btn-info" name="submit" value="Submit" />
                             </form>
                         </div>
                     </div>
