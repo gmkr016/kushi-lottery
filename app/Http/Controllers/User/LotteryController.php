@@ -105,4 +105,12 @@ class LotteryController extends Controller
 
         return view('user.lotterylists', compact('lists'));
     }
+
+    public function destroy($id)
+    {
+        $action = Lottery::findorFail($id)->delete();
+        if ($action) {
+            return $this->lists();
+        }
+    }
 }

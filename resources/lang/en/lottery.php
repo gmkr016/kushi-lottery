@@ -13,6 +13,7 @@ return [
     ],
     'instruction' => 'Please generate a number. Edit it if you desire other number. <b>Only number between :min-:max</b> will be accepted',
     'form' => [
+        'cat_title' => '<b>Please Choose Category</b>',
         'title' => [
             'generated' => '<b>Generated Number</b>'
         ],

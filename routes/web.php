@@ -36,6 +36,7 @@ Route::prefix('/user')
             Route::get('/lotterylists', 'LotteryController@lists')->name('lotterylists');
             Route::get('generate', 'LotteryController@generate');
             Route::post('submit', 'LotteryController@submit');
+            Route::delete('delete/{id}', 'LotteryController@destroy');
 
             Route::namespace('Auth')
                 ->group(

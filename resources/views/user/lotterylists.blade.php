@@ -56,7 +56,7 @@
                                                 <a href="javascript:void()" class="btn btn-danger"
                                                     onclick="event.preventDefault();document.querySelector('#item-delete').submit();">Delete</a>
                                                 <form method='POST' id="item-delete"
-                                                    action='{{ url("admin/categories/$item->id") }}'>
+                                                    action='{{ url("user/delete/$item->id") }}'>
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">
                                                 </form>

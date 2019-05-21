@@ -52,6 +52,7 @@
                         <div class="card-body">
                             {{-- @dd($cat) --}}
                             <form>
+                                <h3>@lang('lottery.form.cat_title')</h3>
                                 <select name="category" id="lott_cat" class="form-control mb-2">
                                     @foreach ($cat as $c)
                                     <option value="{{$c->id}}">{{ $c->title }}</option>
