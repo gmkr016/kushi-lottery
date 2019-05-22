@@ -198,7 +198,7 @@
                             <p>Only a small portion of that total comesfrom the "Lotten" platform the state launched in
                                 January and is expected to bring in $4 to $10 million in the fiscal year that starts in
                                 March.</p>
-                            <a href="#" class="cmn-btn btn-lg">buy ticket now</a>
+                            <a href="{{url('user/lottery')}}" class="cmn-btn btn-lg">buy ticket now</a>
                         </div>
                     </div>
                 </div>
@@ -222,7 +222,7 @@
                                 <div id="clock"></div>
                             </div>
                             <div class="next-draw-btn text-right">
-                                <a href="#" class="cmn-btn btn-md">pay now</a>
+                                <a href="{{route('user.lotteryindex')}}" class="cmn-btn btn-md">pay now</a>
                             </div>
                         </div>
                     </div>
@@ -415,8 +415,8 @@
                             </ul>
                         </div>
                         <div class="btn-area d-flex">
-                            <a href="#0" class="cmn-btn btn-md">quick pick</a>
-                            <a href="#0" class="cmn-btn second-bg btn-md">buy ticket</a>
+                            <a href="{{route('user.lotteryindex')}}" class="cmn-btn btn-md">quick pick</a>
+                            <a href="{{route('user.lotteryindex')}}" class="cmn-btn second-bg btn-md">buy ticket</a>
                         </div>
                     </div>
                 </div>
