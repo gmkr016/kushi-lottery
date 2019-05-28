@@ -3,6 +3,12 @@
  * Translation use for lottery
  */
 return [
+    'profilepage' =>[
+        'title'=> 'Profile Page',
+        'addtitle' => 'Add Profile Information',
+        'edittitle' => 'Edit Profile Information',
+
+    ],
     'page' => [
         'title' => 'Lottery'
     ],

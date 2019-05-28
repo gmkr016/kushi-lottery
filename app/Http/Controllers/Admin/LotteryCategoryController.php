@@ -69,7 +69,7 @@ class LotteryCategoryController extends Controller
 
         if($cat->save()) {
             $lists = Cat::paginate(10);
-            return redirect()->route('admin.categories.index')->with('lists',$lists);
+            return redirect()->route('admin.categories.index')->with('lists', $lists);
         } else {
             return "fail";
         }
@@ -81,9 +81,14 @@ class LotteryCategoryController extends Controller
      * @param  \App\LotteryCategory  $lotteryCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(LotteryCategory $lotteryCategory)
+    public static function show($id, $field=null)
     {
-        //
+        if (!isset($field)) {
+            return LotteryCategory::findorFail($id);
+            // return "Field is not set";
+        } else {
+            return LotteryCategory::findorFail($id, $field)->title;
+        }
     }
 
     /**
