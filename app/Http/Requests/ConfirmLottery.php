@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Lottery;
-use Carbon\Carbon;
-
 use Exception;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ConfirmLottery extends FormRequest
 {
@@ -23,7 +21,7 @@ class ConfirmLottery extends FormRequest
             $this->third,
             $this->fourth,
             $this->fifth,
-            $this->sixth
+            $this->sixth,
         ];
 
         return $this->_validateRepetitive($input) && $this->_validateExist($input);
@@ -34,10 +32,9 @@ class ConfirmLottery extends FormRequest
     {
         $result = Lottery::validateNumbers($input)->first();
 
-
         if (!empty($result)) {
             throw new Exception(trans('lottery.error.exists', [
-                'date' => $result->created_at->format('M d Y h:i:s A')
+                'date' => $result->created_at->format('M d Y h:i:s A'),
             ]));
         }
         return true;
@@ -50,7 +47,7 @@ class ConfirmLottery extends FormRequest
         // dynamically compare the number of input
         // if in case the setup is 4 numbers this program is ready
         for ($x = 0; $x <= $length; $x++) {
-            for ($y = $x+1;$y <= $length; $y++) {
+            for ($y = $x + 1; $y <= $length; $y++) {
                 if ($input[$x] == $input[$y]) {
                     throw new Exception('There is a repetitive number');
                 }
@@ -83,7 +80,7 @@ class ConfirmLottery extends FormRequest
             'third' => $condition,
             'fourth' => $condition,
             'fifth' => $condition,
-            'sixth' => $condition
+            'sixth' => $condition,
         ];
     }
 

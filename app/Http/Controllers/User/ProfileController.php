@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -37,8 +39,46 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd($request);
+        $address = $request->input('address');
+        $phone = $request->input('phone');
+        $dob = $request->input('dob');
+
+        if ($request->hasFile('image')) {
+
+            //get the file name with the extension
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+
+            //get just file name
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+            //get just extension
+            $extension = $request->file('image')->getClientOriginalExtension();
+
+
+          //file name to store
+           $fileNameToStore = Str::kebab(Auth::user()->name).'_'.time().'.'.$extension;
+
+           //upload image
+
+          $path = $request->file('image')->storeAs('public/profiles', $fileNameToStore);
+
+        } else {
+          $fileNameToStore ="noimage.jpg";
+        }
+
+        $profile = new \App\UserDetail();
+        $profile->u_id = Auth::id();
+        $profile->address = $address;
+        $profile->phone = $phone;
+        $profile->dob = $dob;
+        $profile->image = $fileNameToStore;
+        if ($profile->save()) {
+            return "True";
+        } else {
+            return "False";
+        }
+
+
     }
 
     /**

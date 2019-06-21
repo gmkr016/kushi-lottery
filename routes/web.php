@@ -9,19 +9,17 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/blog', 'HomeController@blog')->name('blog');
 Route::get('/contact', 'HomeController@contact')->name('contact');
-
 
 // Route::get();
 
 // Route::get('/lottery', 'LotteryController@index');
 // Route::get('/', 'Admin\HomeController@index')->middleware('auth:admin');
 // Route::get('/',
-
 
 Route::prefix('/user')
     ->name('user.')
@@ -40,7 +38,7 @@ Route::prefix('/user')
 
             Route::resource('profile', 'ProfileController');
 
-            Route::namespace('Auth')
+            Route::namespace ('Auth')
                 ->group(
                     function () {
 
@@ -60,8 +58,6 @@ Route::prefix('/user')
         }
     );
 
-
-
 //admin group routes
 Route::prefix('/admin')
     ->name('admin.')
@@ -73,7 +69,7 @@ Route::prefix('/admin')
             Route::resource('categories', 'LotteryCategoryController');
             //using admin auth
 
-            Route::namespace('Auth')
+            Route::namespace ('Auth')
                 ->group(
                     function () {
 

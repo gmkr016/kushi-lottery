@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{{ asset('storage/assets/css/slick.css') }}">
 <link rel="stylesheet" href="{{ asset('storage/assets/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('storage/assets/css/responsive.css') }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>Khushi Lottery</title>
 </head>
 
@@ -174,35 +175,185 @@
 
     <!-- banner-section strat -->
     <section class="banner-section">
-        <div class="parallax-container">
-            <span class="slide1"><img src="{{ asset('storage/assets/images/shape/star.png') }}"
-                    alt="banner-shape"></span>
-            <span class="slide2"><img src="{{ asset('storage/assets/images/shape/star.png') }}"
-                    alt="banner-shape"></span>
-            <span class="slide3"><img src="{{ asset('storage/assets/images/shape/man.png') }}"
-                    alt="banner-shape"></span>
-            <span class="slide4"><img src="{{ asset('storage/assets/images/shape/cup.png') }}"
-                    alt="banner-shape"></span>
-            <span class="slide5"><img src="{{ asset('storage/assets/images/shape/banner-girl.png') }}"
-                    alt="banner-shape"></span>
-            <span class="slide6"><img src="{{ asset('storage/assets/images/shape/round.png') }}"
-                    alt="banner-shape"></span>
-        </div>
-        <div class="banner-content-area">
-            <div class="container">
+        <div class="container">
+            <div class="topContentWrapper">
                 <div class="row">
-                    <div class="col-lg-5">
-                        <div class="banner-content">
-                            <h3 class="banner-top-title">Win Online Lottery</h3>
-                            <h1 class="banner-main-title">Just One Way</h1>
-                            <p>Only a small portion of that total comesfrom the "Lotten" platform the state launched in
-                                January and is expected to bring in $4 to $10 million in the fiscal year that starts in
-                                March.</p>
-                            <a href="{{url('user/lottery')}}" class="cmn-btn btn-lg">buy ticket now</a>
+                    <div class="col-md-7 col-sm-7 winnerSection">
+                        <div class="winnerAnnouncementTitle">
+                            Sunday Lucky Draw wining number
+                        </div>
+                        <ul>
+                            <li>25</li>
+                            <li>33</li>
+                            <li>42</li>
+                            <li>55</li>
+                            <li>36</li>
+                            <li>16</li>
+                            <li>+</li>
+                            <li>45</li>
+                        </ul>
+                        <div class="priceTable">
+                            <div class="divisions-full">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Division</th>
+                                            <th>Prize Pool</th>
+                                            <th>Winners</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Division 1</td>
+                                            <td>Rs 19,973,501,254</td>
+                                            <td>7 winners of Rs 2,853,357,322 each.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Division 2</td>
+                                            <td>Rs 3,328,916,928</td>
+                                            <td>64 winners of Rs 52,014,327 each.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Division 3</td>
+                                            <td>Rs 3,328,917,408</td>
+                                            <td>2,042 winners of Rs 1,630,224 each.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Division 4</td>
+                                            <td>Rs 5,247,450,000</td>
+                                            <td>104,949 winners of Rs 50,000 each.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Division 5</td>
+                                            <td>Rs 8,765,485,000</td>
+                                            <td>1,753,097 winners of Rs 5,000 each.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <!-- <div class="upcommingLottery">
+                  <h2>Upcoming Lottery</h2>
+                  <div class="upcomingLotteryHolder">
+                    Monday Lucky Draw
+                  </div>
+                </div> -->
+                    </div>
+                    <div class="col-md-5 col-sm-5 pickLottery">
+                        <div class="lotteryTicketPriceTag"> <span> Rs.</span>500</div>
+                        <div class="winnerAnnouncementTitle">
+                            Select lottery category and number
+                        </div>
+                        <div class="generateLotteryNumber">
+                            <div class="form-group">
+                                <select class="form-control form-group-select" id="selectCategory">
+                                    <option value="0">Select Lottery Category</option>
+                                    <option value="1">Weekend Lottery</option>
+                                    <option value="2">Monday Lottery</option>
+                                </select>
+                            </div>
+                            <div class="lotteryListHolder">
+                                <form action="" class="lotteryNumber" id="f1" name="f1">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery1" id="lottery1">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery2" id="lottery2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery3" id="lottery3">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery4" id="lottery4">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery5" id="lottery5">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery6" id="lottery6">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="button" onclick="myFunction(this)" id="1" value="Quick Pick">
+                                    </div>
+                                </form>
+                                <form action="" class="lotteryNumber" id="f2" name="f2">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery1" id="lottery1">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery2" id="lottery2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery3" id="lottery3">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery4" id="lottery4">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery5" id="lottery5">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery6" id="lottery6">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="button" onclick="myFunction(this)" id="2" value="Quick Pick">
+                                    </div>
+                                </form>
+                                <form action="" class="lotteryNumber" id="f3" name="f3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery1" id="lottery1">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery2" id="lottery2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery3" id="lottery3">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery4" id="lottery4">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery5" id="lottery5">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="" name="lottery6" id="lottery6">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="button" onclick="myFunction(this)" id="3" value="Quick Pick"
+                                            class="quick-pick">
+                                    </div>
+                                </form>
+                            </div>
+                            <a href="javascript:void();" class="lotteryBuyMore" id="3"><i class="fa FA-ticket"></i> Want
+                                to buy
+                                more ticket?</a>
+
+                            {{-- <a href="javascript:void()" class="printTicket" data-toggle="modal"
+                                data-target="#exampleModal"><i class="fa fa-print"></i> Print this ticket</a> --}}
+                            <a href="javascript:void()" class="printTicket"><i class="fa fa-print"></i> Print this
+                                ticket</a>
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <!-- banner-section end -->
@@ -1098,6 +1249,39 @@
     </footer>
     <!-- footer-section end -->
 
+
+    <!-- Modal -->
+    <div class="modal fade ticketPopup" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header topPopupLogo printMe">
+                    <img src="{{ asset('storage/assets/images/logo.png')}}" alt="" class="img-fluid">
+                    <button type="button" class="close btnClose" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="titketToBePrint printMe" id="printThis">
+                        <h3 class="beforeTicketh3">Sunday Lottery Ticket Number</h3>
+
+                        <div id="numberdiv">
+
+                        </div>
+
+
+
+                        <div class="miscInformation">
+
+                        </div>
+                        <a href="#" class="printTicket" id="btnPrint"> <i class="fa fa-print"></i> Print</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- scroll-to-top start -->
     <div class="scroll-to-top">
         <span class="scroll-icon">
@@ -1118,6 +1302,7 @@
     <script src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js'></script>
     <script src="{{ asset('storage/assets/js/jquery.countdown.js') }}"></script>
     <script src="{{ asset('storage/assets/js/main.js') }}"></script>
+    <script src="{{ asset('storage/assets/js/jquery-form.js') }}"></script>
     <script>
         //         var count = 0;
 //         $("#choosenumbers li").click(function() {

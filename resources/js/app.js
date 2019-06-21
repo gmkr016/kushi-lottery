@@ -7,6 +7,8 @@
 require('./bootstrap');
 
 require('./lottery/lottery-form');
+// require('./lottery/frontend-form');
+
 
 //admin js
 // require('jquery');
@@ -15,4 +17,4 @@ require('./lottery/lottery-form');
 // require('./admin/jquery.easing.min');
 
 
-// user js
+// user js/

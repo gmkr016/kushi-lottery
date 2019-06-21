@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lottery extends Model
 {
-
+    protected $fillable = ['cat_id', 'first_number', 'second_number', 'third_number', 'fourth_number', 'fifth_number', 'sixth_number'];
 //     1 2 3
-//     2 3 1
-//     3 1 2
+    //     2 3 1
+    //     3 1 2
 
 //     3 2 1
-//     2 1 3
-//     1 3 2
+    //     2 1 3
+    //     1 3 2
 
     // 1 2 3 4
     // 2 3 4 1
@@ -36,7 +36,7 @@ class Lottery extends Model
 
         // first 3 combination
         $originalData = $data;
-        for($x = 0; $x < $length; $x++) {
+        for ($x = 0; $x < $length; $x++) {
             $whereString .= '(first_number = ? AND second_number = ? AND third_number = ?) ';
 
             $bindings = array_merge($bindings, $originalData);
@@ -45,12 +45,12 @@ class Lottery extends Model
             // then put it in front
             array_unshift($originalData, $lastData);
 
-            $whereString.=$suffix;
+            $whereString .= $suffix;
         }
 
         // then the other 3 is reverse
         $reverse = array_reverse($data);
-        for($x = 0; $x < $length; $x++) {
+        for ($x = 0; $x < $length; $x++) {
             $whereString .= '(first_number = ? AND second_number = ? AND third_number = ?) ';
             $bindings = array_merge($bindings, $reverse);
 
@@ -60,8 +60,10 @@ class Lottery extends Model
             array_unshift($reverse, $lastData);
 
             // if the last array do not and suffix
-            if($x!=$length - 1 )
-                $whereString.=$suffix;
+            if ($x != $length - 1) {
+                $whereString .= $suffix;
+            }
+
         }
 
         // utilize bindings when using a mysql raw query

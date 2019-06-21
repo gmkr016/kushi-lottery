@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Models\Lottery as Lottery;
-
-use App\Http\Requests\ConfirmLottery;
+use Illuminate\Http\Request;
 
 class LotteryController extends Controller
 {
@@ -32,7 +29,7 @@ class LotteryController extends Controller
         // return view('lottery', compact('numbers'));
     }
 
-        public function generate()
+    public function generate()
     {
         $data = $this->_generateThreeNumbers();
         return $data;
@@ -51,15 +48,13 @@ class LotteryController extends Controller
         //4th number
         $fourth = $this->_generateNumber($numbers, [$first, $second, $third]);
         //5th number
-        $fifth = $this->_generateNumber($numbers, [$first, $second, $third, $fourth ]);
+        $fifth = $this->_generateNumber($numbers, [$first, $second, $third, $fourth]);
         //6th number
-        $sixth = $this->_generateNumber($numbers, [$first, $second, $third, $fourth, $fifth ]);
-
-
+        $sixth = $this->_generateNumber($numbers, [$first, $second, $third, $fourth, $fifth]);
 
         $data = compact('first', 'second', 'third', 'fourth', 'fifth', 'sixth');
 
-        $input = [ $first, $second, $third, $fourth, $fifth, $sixth ];
+        $input = [$first, $second, $third, $fourth, $fifth, $sixth];
         $result = Lottery::validateNumbers($input)->first();
         // if there's already sequence recreate from top
         if (!empty($result)) {
@@ -73,7 +68,6 @@ class LotteryController extends Controller
     {
         $generatedNumber = rand($limit['min'], $limit['max']);
 
-
         // if generated number already exists regenerate
         if (in_array($generatedNumber, $comparison)) {
             $generatedNumber = $this->_generateNumber($limit, $comparison);
@@ -82,7 +76,8 @@ class LotteryController extends Controller
         return $generatedNumber;
     }
 
-    public function submit(ConfirmLottery $request)
+    // public function submit(ConfirmLottery $request)
+    public function submit(Request $request)
     {
         $lottery = new Lottery;
         $lottery->cat_id = $request->lott_cat;
@@ -93,9 +88,21 @@ class LotteryController extends Controller
         $lottery->fifth_number = $request->fifth;
         $lottery->sixth_number = $request->sixth;
 
-        $lottery->save();
+        $resdata = [
+            $request->first,
+            $request->second,
+            $request->third,
+            $request->fourth,
+            $request->fifth,
+            $request->sixth,
+        ];
+        if ($lottery->save()) {
+            // $message = trans('lottery.success.saved');
+            $message = response()->json(["msg" => $resdata]);
+        } else {
+            $message = "Operation Failed";
+        }
 
-        $message = trans('lottery.success.saved');
         return compact('message');
     }
 
