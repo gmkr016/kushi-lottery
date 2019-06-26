@@ -503,64 +503,7 @@
     </section>
     <!-- free-lottery-result-section end -->
 
-    <!-- next-jackpot-section start -->
-    <section class="next-jackpot-section section-padding">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="jackpot-board">
-                        <ul class="lottery-number-list" id="choosenumbers">
-                            <li>30</li>
-                            <li>55</li>
-                            <li>36</li>
-                            <li>45</li>
-                            <li>21</li>
-                            <li>99</li>
-                            <li>02</li>
-                            <li>30</li>
-                            <li>48</li>
-                            <li>45</li>
-                            <li>69</li>
-                            <li>71</li>
-                            <li>22</li>
-                            <li>58</li>
-                            <li>51</li>
-                            <li>32</li>
-                            <li>45</li>
-                            <li>24</li>
-                            <li>48</li>
-                            <li>95</li>
-                            <li>77</li>
-                            <li>56</li>
-                            <li>59</li>
-                            <li>44</li>
-                            <li>27</li>
-                            <li>15</li>
-                            <li>11</li>
-                            <li>03</li>
-                            <li>84</li>
-                            <li>55</li>
-                            <li>32</li>
-                            <li>30</li>
-                            <li>04</li>
-                            <li>09</li>
-                            <li>99</li>
-                            <li>18</li>
-                            <li>75</li>
-                            <li>59</li>
-                            <li>21</li>
-                            <li>44</li>
-                            <li>30</li>
-                            <li>55</li>
-                        </ul>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-
-    </section>
-    <!-- next-jackpot-section end -->
 
     <!-- latest-winner-section start -->
     <section class="latest-winner-section section-padding">
