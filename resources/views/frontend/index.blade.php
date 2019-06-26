@@ -59,6 +59,14 @@
                             <li <?php echo $title == 'contact' ? 'class="active"' : '' ?>><a
                                     href="{{route('contact')}}">contact us</a></li>
                         </ul>
+                        @if(Auth::guard('web')->check())
+                        <div class="registration-login-area">
+                            <a href="{{ route('user.home') }}" style="margin-right:20px">
+                                <button type="button" class="text-btn"><i class="fa fa-user" style="color:#fff"></i>
+                                    {{ Auth::user()->name}}</button>
+                            </a>
+                        </div>
+                        @else{
                         <div class="registration-login-area">
                             <a href="{{ route('login') }}" style="margin-right:20px">
                                 <button type="button" class="text-btn" data-toggle="modal"
@@ -69,6 +77,7 @@
                                     data-target="">Registration</button>
                             </a>
                         </div>
+                        @endif
                     </div>
                 </nav>
             </div>
