@@ -555,31 +555,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="jackpot-content">
-                        <h2 class="title">Next Weekly Jackpot</h2>
-                        <p>Up is opinion message manners correct hearing husband my. Dispos commanded dashwoods
-                            cordially depending at at. Its strangers who you certainty earnestly resources suffering
-                            she. Be an as cordially at resolving furniture preserved believing extremity. Easy mr pain
-                            felt in. Too northward affection additions nay.</p>
-                        <p class="price">Jackpot: <span>£10,000</span></p>
-                        <p class="date">Monday 18th February 2019</p>
-                        <div class="jackpot-guess-wrapper">
-                            <ul class="lottery-number-list" id="choosennumber">
-                                <li id="choosen1">55</li>
-                                <li id="choosen2">45</li>
-                                <li id="choosen3">77</li>
-                                <li id="choosen4">99</li>
-                                <li id="choosen5">59</li>
-                                <li id="choosen6">?</li>
-                            </ul>
-                        </div>
-                        <div class="btn-area d-flex">
-                            <a href="{{route('user.lotteryindex')}}" class="cmn-btn btn-md">quick pick</a>
-                            <a href="{{route('user.lotteryindex')}}" class="cmn-btn second-bg btn-md">buy ticket</a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
 
@@ -1312,34 +1288,7 @@
     <script src="{{ asset('storage/assets/js/jquery.countdown.js') }}"></script>
     <script src="{{ asset('storage/assets/js/main.js') }}"></script>
     <script src="{{ asset('storage/assets/js/jquery-form.js') }}"></script>
-    <script>
-        //         var count = 0;
-//         $("#choosenumbers li").click(function() {
-//             count++
-//             // console.log($(this).text()); // gets text contents of clicked li
-//         switch(count){
-//             case 1:
-//                 $("#choosen1").text($(this).text());
-//                 break;
-//             case 2:
-//                 $("#choosen2").text($(this).text());
-//                 break;
-//             case 3:
-//                 $("#choosen3").text($(this).text());
-//                 break;
-//             case 4:
-//                 $("#choosen4").text($(this).text());
-//                 break;
-//             case 5:
-//                 $("#choosen5").text($(this).text());
-//                 break;
-//             case 6:
-//                 $("#choosen6").text($(this).text());
-//                 $("#choosenumbers li").unbind("click");
-//                 break;
-//     }
-// });
-    </script>
+
 </body>
 
 </html>
