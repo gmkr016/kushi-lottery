@@ -242,15 +242,9 @@
 
                             </div>
                         </div>
-                        <!-- <div class="upcommingLottery">
-                  <h2>Upcoming Lottery</h2>
-                  <div class="upcomingLotteryHolder">
-                    Monday Lucky Draw
-                  </div>
-                </div> -->
                     </div>
                     <div class="col-md-5 col-sm-5 pickLottery">
-                        <div class="lotteryTicketPriceTag"> <span> Rs.</span>500</div>
+                        <div class="lotteryTicketPriceTag"> <span> Rs.</span>100</div>
                         <div class="winnerAnnouncementTitle">
                             Select lottery category and number
                         </div>
@@ -291,65 +285,8 @@
                                         <input type="button" onclick="myFunction(this)" id="1" value="Quick Pick">
                                     </div>
                                 </form>
-                                <form action="" class="lotteryNumber" id="f2" name="f2">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery1" id="lottery1">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery2" id="lottery2">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery3" id="lottery3">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery4" id="lottery4">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery5" id="lottery5">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery6" id="lottery6">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="button" onclick="myFunction(this)" id="2" value="Quick Pick">
-                                    </div>
-                                </form>
-                                <form action="" class="lotteryNumber" id="f3" name="f3">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery1" id="lottery1">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery2" id="lottery2">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery3" id="lottery3">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery4" id="lottery4">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery5" id="lottery5">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" value="" name="lottery6" id="lottery6">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="button" onclick="myFunction(this)" id="3" value="Quick Pick"
-                                            class="quick-pick">
-                                    </div>
-                                </form>
                             </div>
-                            <a href="javascript:void();" class="lotteryBuyMore" id="3"><i class="fa FA-ticket"></i> Want
+                            <a href="javascript:void(0)" class="lotteryBuyMore" id="3"><i class="fa FA-ticket"></i> Want
                                 to buy
                                 more ticket?</a>
 

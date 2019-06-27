@@ -1,10 +1,16 @@
 // constructor starts
 $(function() {
-    var count = 3;
+    var count = 1;
+    var price = 100;
     $("a.lotteryBuyMore").click(function(e) {
+        price = price + 100;
         // var count = e.target.id; // first comes three
         // $(this).attr('id', count);
         count++;
+        if (count > 9) {
+            $("a.lotteryBuyMore").off();
+
+        }
         $("div.lotteryListHolder").append(
             $("<form/>").attr({
                 action: '',
@@ -87,11 +93,14 @@ $(function() {
                 )
             )
         )
+        $("div.lotteryTicketPriceTag").html("<span>Rs</span>" + price);
+        // console.log(price);
     });
 
 
     // check if category select option has selected or not and send generated number to modal function
     $("a.printTicket").click(function() {
+
         var datas = [];
         // var sss;
         $("div#numberdiv").html("");
@@ -100,9 +109,7 @@ $(function() {
             alert("Please select category");
         } else {
             var formsCollection = document.getElementsByClassName("lotteryNumber");
-            // console.log(formsCollection[0].id);
             var ssss = 0;
-            var errorTxt = 0;
             for (var i = 0; i < formsCollection.length; i++) {
 
                 let elements1Value = formsCollection[i].elements.lottery1.value;
