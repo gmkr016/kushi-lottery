@@ -1,8 +1,8 @@
-(function ($) {
+(function($) {
     "user strict";
 
 
-    $(window).on('load', function () {
+    $(window).on('load', function() {
         // run test on initial page load
         checkSize();
         // run test on resize of the window
@@ -11,13 +11,13 @@
         //preloader
         $("#preloader").delay(300).animate({
             "opacity": "0"
-        }, 500, function () {
+        }, 500, function() {
             $("#preloader").css("display", "none");
         });
     });
 
     //js code for mobile menu
-    $(".menu-toggle").on("click", function () {
+    $(".menu-toggle").on("click", function() {
         $(this).toggleClass("is-active");
     });
 
@@ -25,14 +25,13 @@
     function checkSize() {
         if (window.matchMedia('(max-width: 991px)').matches) {
             // js code for responsive drop-down-menu-item with swing effect
-            $(".navbar-collapse>ul>li>a, .navbar-collapse ul.sub-menu>li>a").on("click", function () {
+            $(".navbar-collapse>ul>li>a, .navbar-collapse ul.sub-menu>li>a").on("click", function() {
                 var element = $(this).parent("li");
                 if (element.hasClass("open")) {
                     element.removeClass("open");
                     element.find("li").removeClass("open");
                     element.find("ul").slideUp(500, "linear");
-                }
-                else {
+                } else {
                     element.addClass("open");
                     element.children("ul").slideDown();
                     element.siblings("li").children("ul").slideUp();
@@ -46,16 +45,15 @@
 
     // menu options custom affix
     var fixed_top = $(".header-section");
-    $(window).on("scroll", function () {
+    $(window).on("scroll", function() {
         if ($(window).scrollTop() > 50) {
             fixed_top.addClass("animated fadeInDown menu-fixed");
-        }
-        else {
+        } else {
             fixed_top.removeClass("animated fadeInDown menu-fixed");
         }
     });
 
-    $(".parallax-container").on('mousemove', function (e) {
+    $(".parallax-container").on('mousemove', function(e) {
         parallaxIt(e, ".slide1", -90);
         parallaxIt(e, ".slide2", -50);
         parallaxIt(e, ".slide3", -110);
@@ -76,21 +74,21 @@
     }
 
     // countdown plungin init
-    $('#clock').countdown('2019/6/10', function (event) {
-        $(this).html(event.strftime(''
-            + '<div><span>%D</span><p>days</p></div>'
-            + '<div><span>%H</span><p>hrs</p></div>'
-            + '<div><span>%M</span><p>mins</p></div>'
-            + '<div><span>%S</span><p>sec</p></div>'));
+    $('#clock').countdown('2019/6/10', function(event) {
+        $(this).html(event.strftime('' +
+            '<div><span>%D</span><p>days</p></div>' +
+            '<div><span>%H</span><p>hrs</p></div>' +
+            '<div><span>%M</span><p>mins</p></div>' +
+            '<div><span>%S</span><p>sec</p></div>'));
     });
 
     // countdown plungin init
-    $('.clock').countdown('2019/6/10', function (event) {
-        $(this).html(event.strftime(''
-            + '<div><span>%D</span><p>days</p></div>'
-            + '<div><span>%H</span><p>hrs</p></div>'
-            + '<div><span>%M</span><p>mins</p></div>'
-            + '<div><span>%S</span><p>sec</p></div>'));
+    $('.clock').countdown('2019/6/10', function(event) {
+        $(this).html(event.strftime('' +
+            '<div><span>%D</span><p>days</p></div>' +
+            '<div><span>%H</span><p>hrs</p></div>' +
+            '<div><span>%M</span><p>mins</p></div>' +
+            '<div><span>%S</span><p>sec</p></div>'));
     });
 
 
@@ -117,8 +115,7 @@
         focusOnSelect: true,
         arrows: false,
         autoplay: true,
-        responsive: [
-            {
+        responsive: [{
                 breakpoint: 768,
                 settings: {
                     arrows: false,
@@ -139,7 +136,7 @@
         ]
     });
 
-    $(".meta-react").on('click', function () {
+    $(".meta-react").on('click', function() {
         $(this).toggleClass("active");
     });
 
@@ -151,8 +148,7 @@
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
-        responsive: [
-            {
+        responsive: [{
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 3,
@@ -178,48 +174,12 @@
         ]
     });
 
-    $(".lottery-number-list li").on('click', function () {
+    $(".lottery-number-list li").on('click', function() {
         $(this).toggleClass("active");
     });
 
-    $(function () {
-        // const swal = require('sweetalert2');
-        var count = 0;
-        $("#choosenumbers li").click(function () {
-            count++
-            // console.log($(this).text()); // gets text contents of clicked li
-            switch (count) {
-                case 1:
-                    $("#choosen1").text($(this).text());
-                    break;
-                case 2:
-                    $("#choosen2").text($(this).text());
-                    break;
-                case 3:
-                    $("#choosen3").text($(this).text());
-                    break;
-                case 4:
-                    $("#choosen4").text($(this).text());
-                    break;
-                case 5:
-                    $("#choosen5").text($(this).text());
-                    break;
-                case 6:
-                    $("#choosen6").css({ "background-color": "red", "color": "#fff" }).text($(this).text());
-                    $("#choosenumbers li").unbind("click");
-                    break;
-                default:
-                    swal("no");
-            }
-        });
-
-    });
-
-
-
-
     // Show or hide the sticky footer button
-    $(window).on("scroll", function () {
+    $(window).on("scroll", function() {
         if ($(this).scrollTop() > 200) {
             $(".scroll-to-top").fadeIn(200);
         } else {
@@ -228,10 +188,37 @@
     });
 
     // Animate the scroll to top
-    $(".scroll-to-top").on("click", function (event) {
+    $(".scroll-to-top").on("click", function(event) {
         event.preventDefault();
         $("html, body").animate({ scrollTop: 0 }, 300);
     });
 
 
 })(jQuery);
+
+// APPEND DIV
+
+// print js
+jQuery.fn.extend({
+    printElem: function() {
+        var cloned = this.clone();
+        var printSection = $('#printSection');
+        if (printSection.length == 0) {
+            printSection = $('<div id="printSection"></div>')
+            $('body').append(printSection);
+        }
+        printSection.append(cloned);
+        var toggleBody = $('body *:visible');
+        toggleBody.hide();
+        $('#printSection, #printSection *').show();
+        window.print();
+        printSection.remove();
+        toggleBody.show();
+    }
+});
+
+$(document).ready(function() {
+    $(document).on('click', '#btnPrint', function() {
+        $('.printMe').printElem();
+    });
+});
