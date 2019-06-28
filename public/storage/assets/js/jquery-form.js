@@ -88,6 +88,7 @@ $(function() {
                         type: 'button',
                         onclick: 'myFunction(this)',
                         id: '4',
+                        class: 'btn btn-info'
                         value: 'Quick Pick'
                     })
                 )

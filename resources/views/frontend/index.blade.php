@@ -283,7 +283,8 @@
                                         <input type="text" class="form-control" value="" name="lottery6" id="lottery6">
                                     </div>
                                     <div class="form-group">
-                                        <input type="button" onclick="myFunction(this)" id="1" value="Quick Pick">
+                                        <input type="button" onclick="myFunction(this)" id="1" value="Quick Pick"
+                                            class="btn btn-info">
                                     </div>
                                 </form>
                             </div>
