@@ -252,8 +252,9 @@
                             <div class="form-group">
                                 <select class="form-control form-group-select" id="selectCategory">
                                     <option value="0">Select Lottery Category</option>
-                                    <option value="1">Weekend Lottery</option>
-                                    <option value="2">Monday Lottery</option>
+                                    @foreach($lcat as $lc)
+                                    <option value="{{$lc->id}}">{{$lc->title}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="lotteryListHolder">
