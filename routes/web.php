@@ -67,12 +67,14 @@ Route::prefix('/admin')
 
             Route::get('/home', 'HomeController@index')->name('home');
             Route::resource('categories', 'LotteryCategoryController');
+            Route::get('recenthistory/{id}', 'HistoryController@recent');
+            Route::get('archivehistory/{id}', 'HistoryController@archive');
+
             //using admin auth
 
             Route::namespace ('Auth')
                 ->group(
                     function () {
-
                         //Login Routes
                         Route::get('/', 'LoginController@showLoginForm')->name('login');
                         Route::get('/login', 'LoginController@showLoginForm')->name('login');

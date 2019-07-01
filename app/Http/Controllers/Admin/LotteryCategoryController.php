@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\LotteryCategory;
-use Illuminate\Http\Request;
 use App\LotteryCategory as Cat;
+use Illuminate\Http\Request;
 
 class LotteryCategoryController extends Controller
 {
@@ -39,35 +39,33 @@ class LotteryCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->hasFile('image'))
-        {
+        if ($request->hasFile('image')) {
 
             //get the file name with the extension
             $filenameWithExt = $request->file('image')->getClientOriginalName();
 
             //get just file name
-           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
 
             //get just extension
             $extension = $request->file('image')->getClientOriginalExtension();
 
+            //file name to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
 
-          //file name to store
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
-
-           //upload image
+            //upload image
 
             $path = $request->file('image')
                 ->storeAs('public/lottery_cat/', $fileNameToStore);
         } else {
-            $fileNameToStore ="noimage.jpg";
+            $fileNameToStore = "noimage.jpg";
         }
         $cat = new Cat();
         $cat->title = $request->title;
-        $cat->draw_date = $request->draw_date;
+        $cat->draw_date = strtotime($request->draw_date);
         $cat->image = $fileNameToStore;
 
-        if($cat->save()) {
+        if ($cat->save()) {
             $lists = Cat::paginate(10);
             return redirect()->route('admin.categories.index')->with('lists', $lists);
         } else {
@@ -81,7 +79,7 @@ class LotteryCategoryController extends Controller
      * @param  \App\LotteryCategory  $lotteryCategory
      * @return \Illuminate\Http\Response
      */
-    public static function show($id, $field=null)
+    public static function show($id, $field = null)
     {
         if (!isset($field)) {
             return LotteryCategory::findorFail($id);
@@ -97,7 +95,7 @@ class LotteryCategoryController extends Controller
      * @param  \App\LotteryCategory  $lotteryCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit( Request $request, $id )
+    public function edit(Request $request, $id)
     {
         $cat = Cat::findorFail($id);
         return view('admin.categories.cat-edit')->with('cat', $cat);
@@ -113,7 +111,7 @@ class LotteryCategoryController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->hasFile('image'));
-        if ($request->hasFile('image') ) {
+        if ($request->hasFile('image')) {
             //get the file name with the extension
             $filenameWithExt = $request->file('image')->getClientOriginalName();
 
@@ -123,11 +121,9 @@ class LotteryCategoryController extends Controller
             //get just extension
             $extension = $request->file('image')->getClientOriginalExtension();
 
-
             //file name to store
             // $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            $fileNameToStore = time().'.'.$extension;
-
+            $fileNameToStore = time() . '.' . $extension;
 
             //upload image
             $path = $request->file('image')
@@ -137,9 +133,9 @@ class LotteryCategoryController extends Controller
         // return !empty($fileNameToStore) ? 'file uploaded' : 'no file';
         $cat = Cat::findorFail($id);
         $cat->title = $request->title;
-        $cat->draw_date = $request->draw_date;
+        $cat->draw_date = strtotime($request->draw_date);
         if (!empty($fileNameToStore)) {
-            $cat->image = $fileNameToStore ;
+            $cat->image = $fileNameToStore;
         }
         if ($cat->save()) {
             $msg = "Succeed";
@@ -147,7 +143,7 @@ class LotteryCategoryController extends Controller
             $msg = "Failed";
         }
         $lists = Cat::paginate(10);
-        return redirect()->route('admin.categories.index', ['cat'=>$cat, 'lists'=>$lists]);
+        return redirect()->route('admin.categories.index', ['cat' => $cat, 'lists' => $lists]);
     }
 
     /**
@@ -161,7 +157,7 @@ class LotteryCategoryController extends Controller
         $action = Cat::findorFail($id)->delete();
         if ($action) {
             $lists = Cat::paginate(10);
-            return redirect()->route('admin.categories.index', ['lists'=>$lists]);
+            return redirect()->route('admin.categories.index', ['lists' => $lists]);
         }
     }
 }

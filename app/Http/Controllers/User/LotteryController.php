@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Lottery as Lottery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LotteryController extends Controller
 {
@@ -79,28 +80,33 @@ class LotteryController extends Controller
     // public function submit(ConfirmLottery $request)
     public function submit(Request $request)
     {
-        $lottery = new Lottery;
-        $lottery->cat_id = $request->lott_cat;
-        $lottery->first_number = $request->first;
-        $lottery->second_number = $request->second;
-        $lottery->third_number = $request->third;
-        $lottery->fourth_number = $request->fourth;
-        $lottery->fifth_number = $request->fifth;
-        $lottery->sixth_number = $request->sixth;
+        if (Auth::check()) {
+            $lottery = new Lottery;
+            $lottery->cat_id = $request->lott_cat;
+            $lottery->u_id = Auth::user()->id;
+            $lottery->first_number = $request->first;
+            $lottery->second_number = $request->second;
+            $lottery->third_number = $request->third;
+            $lottery->fourth_number = $request->fourth;
+            $lottery->fifth_number = $request->fifth;
+            $lottery->sixth_number = $request->sixth;
 
-        $resdata = [
-            $request->first,
-            $request->second,
-            $request->third,
-            $request->fourth,
-            $request->fifth,
-            $request->sixth,
-        ];
-        if ($lottery->save()) {
-            // $message = trans('lottery.success.saved');
-            $message = response()->json(["msg" => $resdata]);
+            $resdata = [
+                $request->first,
+                $request->second,
+                $request->third,
+                $request->fourth,
+                $request->fifth,
+                $request->sixth,
+            ];
+            if ($lottery->save()) {
+                // $message = trans('lottery.success.saved');
+                $message = response()->json(["msg" => $resdata]);
+            } else {
+                $message = "Operation Failed";
+            }
         } else {
-            $message = "Operation Failed";
+            $message = "you are not logged in";
         }
 
         return compact('message');

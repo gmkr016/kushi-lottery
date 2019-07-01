@@ -46,18 +46,34 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Utilities</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#recenthistory" aria-expanded="true"
+            aria-controls="recenthistory">
+            <i class="fas fa-fw fa-history"></i>
+            <span>Recent History</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="recenthistory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
+                <h6 class="collapse-header">Upcoming Draws :</h6>
+                @foreach($recenthistory as $rs)
+                <a class="collapse-item" href="{{ url("admin/recenthistory/$rs->id") }}">{{ $rs->title }}</a>
+                @endforeach
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#archivehistory" aria-expanded="true"
+            aria-controls="archivehistory">
+            <i class="fas fa-fw fa-history"></i>
+            <span>Archive History</span>
+        </a>
+        <div id="archivehistory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Past Draw History:</h6>
+                @foreach($archivehistory as $as)
+                <a class="collapse-item" href="{{ url("admin/archivehistory/$as->id") }}">{{ $as->title }}</a>
+                @endforeach
             </div>
         </div>
     </li>

@@ -69,4 +69,5 @@ class Lottery extends Model
         // utilize bindings when using a mysql raw query
         return $query->whereRaw($whereString, $bindings);
     }
+
 }

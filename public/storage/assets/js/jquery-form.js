@@ -148,7 +148,7 @@ $(function() {
                         return true;
                     },
                     error: function(response) {
-                        alert("you are not logged in");
+                        alert('Please Login to play');
                     }
                 });
             }
