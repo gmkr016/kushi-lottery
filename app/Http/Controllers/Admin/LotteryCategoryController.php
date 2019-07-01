@@ -18,6 +18,7 @@ class LotteryCategoryController extends Controller
     public function index()
     {
         $lists = Cat::paginate(10);
+        // return $lists;
         return view('admin.categories.cat-index')->with('lists', $lists);
     }
 
