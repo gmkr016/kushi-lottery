@@ -21,9 +21,9 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h2 class="m-0 font-weight-bold text-primary">{{ $cat->title }}</h2><br>
+                    <h2 class="m-0 font-weight-bold text-primary">@if(isset($cat)) {{ $cat->title }} @endif</h2><br>
                     <h6 class="m-0 font-weight-bold text-info">{{ "Draw Date: "}}
-                        {{ date('Y-m-d H:i:s', $cat->draw_date) }} </h6>
+                        @if(isset($cat)) {{ date('Y-m-d H:i:s', $cat->draw_date) }} @endif </h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
