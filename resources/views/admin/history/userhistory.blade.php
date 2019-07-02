@@ -41,6 +41,8 @@ use \App\Http\Controllers\Admin\HistoryController;
                                                     colspan="1" width="20%">Category</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" width="60%">Generated Numbers</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                    colspan="1" width="60%">Purchased At</th>
                                             </tr>
                                         </thead>
 
@@ -56,6 +58,9 @@ use \App\Http\Controllers\Admin\HistoryController;
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     {{ $item->first_number.' '.$item->second_number.' '.$item->third_number.' '.$item->fourth_number.' '.$item->fifth_number.' '.$item->sixth_number }}
                                                 </td>
+                                                <td class="sorting_1" style="vertical-align:middle">
+                                                    {{ $item->created_at }}
+                                                </td>
                                             </tr> @endforeach @else <tr role="row" class="odd">
                                                 <td rowspan="4" class="sorting_1">No data to fetch</td>
                                             </tr>
@@ -67,6 +72,8 @@ use \App\Http\Controllers\Admin\HistoryController;
                                             <tr>
                                                 <th rowspan="1" colspan="1">Category</th>
                                                 <th rowspan="1" colspan="1">Generated Numbers</th>
+                                                <th rowspan="1" colspan="1">Purchased At</th>
+
                                             </tr>
                                         </tfoot>
                                     </table>
