@@ -26,7 +26,6 @@ use \App\Http\Controllers\Admin\HistoryController;
                         History</h6>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('user.lotteryindex')}}" class="btn btn-info mb-2">Add+</a>
                     <div class="table-responsive">
                         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
