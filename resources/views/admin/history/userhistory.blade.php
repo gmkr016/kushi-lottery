@@ -1,5 +1,6 @@
 @php
-use \App\Http\Controllers\User\LotteryController as LotteryC;
+use \App\Http\Controllers\Admin\LotteryCategoryController;
+use \App\Http\Controllers\Admin\HistoryController;
 @endphp
 @extends('admin.templates.layout')
 @section('content')
@@ -21,13 +22,14 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h2 class="m-0 font-weight-bold text-primary">@if(isset($cat)) {{ $cat->title }} @endif</h2><br>
-                    <h6 class="m-0 font-weight-bold text-info">{{ "Draw Date: "}}
-                        @if(isset($cat)) {{ date('Y-m-d H:i:s', $cat->draw_date) }} @endif </h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ ucfirst(HistoryController::getUname($id)) }}'s
+                        History</h6>
                 </div>
                 <div class="card-body">
+                    <a href="{{route('user.lotteryindex')}}" class="btn btn-info mb-2">Add+</a>
                     <div class="table-responsive">
                         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table class="table table-bordered dataTable" id="dataTable" width="100%"
@@ -36,50 +38,35 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                    colspan="1" width="20%"> User</th>
+                                                    colspan="1" width="20%">Category</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                    colspan="1" width="20%">Total Lottery Numbers Choosen</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                    colspan="1" width="20%">Amount</th>
+                                                    colspan="1" width="60%">Generated Numbers</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <?php use App\Http\Controllers\Admin\HistoryController; ?>
-                                            @if (!isset($msg) )
-                                            @foreach($user as $u)
-                                            @if(array_key_exists($u->id, $lc))
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1" style="vertical-align:middle">
-                                                    <a href="{{ url("admin/userhistory/$u->id") }}"
-                                                        title="View Detail">{{ strtoupper($u->name) }}</a>
-                                                </td>
-                                                {{-- how many total lotteries submitted from users --}}
-                                                <td class="sorting_1" style="vertical-align:middle">
-                                                    <?php $ke = $u->id; ?>
-                                                    {{ $lc[$ke] }}
-                                                </td>
-                                                <td class="sorting_1" style="vertical-align:middle">
+                                            @if (count($lists) )
 
-                                                    {{ $lc[$ke]*100 }}
-                                                </td>
-                                            </tr>
-                                            @endif
-                                            @endforeach
-                                            @else
+                                            @foreach ($lists as $item)
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1" style="vertical-align:middle">
-                                                    {{ strtoupper($msg) }}</td>
+                                                    {{ LotteryCategoryController::show($item->cat_id, 'title') }}
+                                                </td>
+
+                                                <td class="sorting_1" style="vertical-align:middle">
+                                                    {{ $item->first_number.' '.$item->second_number.' '.$item->third_number.' '.$item->fourth_number.' '.$item->fifth_number.' '.$item->sixth_number }}
+                                                </td>
+                                            </tr> @endforeach @else <tr role="row" class="odd">
+                                                <td rowspan="4" class="sorting_1">No data to fetch</td>
                                             </tr>
                                             @endif
+
                                         </tbody>
 
                                         <tfoot>
                                             <tr>
-                                                <th rowspan="1" colspan="1">User</th>
-                                                <th rowspan="1" colspan="1">Total Lottery Numbers Choosen</th>
-                                                <th rowspan="1" colspan="1">Amount</th>
-
+                                                <th rowspan="1" colspan="1">Category</th>
+                                                <th rowspan="1" colspan="1">Generated Numbers</th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -88,7 +75,7 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                             <div class="row">
                                 <div class="col-sm-12 col-md-5">
                                     <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                                        Showing 1 to 10 of entries</div>
+                                        Showing 1 to 10 of {{ count($lists) }} entries</div>
 
 
                                 </div>
@@ -96,8 +83,9 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                     <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                                         <ul class="pagination">
                                             <li class="paginate_button page-item previous disabled"
-                                                id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                    data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                                id="dataTable_previous">
+                                                <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0"
+                                                    class="page-link">Previous</a></li>
                                             <li class="paginate_button page-item active"><a href="#"
                                                     aria-controls="dataTable" data-dt-idx="1" tabindex="0"
                                                     class="page-link">1</a></li>

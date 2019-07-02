@@ -64,4 +64,12 @@ class HistoryController extends Controller
     {
         return \App\LotteryCategory::find($id)->draw_date;
     }
+
+    public function userHistory($id)
+    {
+        $lists = Lottery::where('u_id', '=', $id)->get();
+        // return $lists;
+
+        return view('admin.history.userhistory', compact('lists', 'id'));
+    }
 }

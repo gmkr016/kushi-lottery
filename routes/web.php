@@ -69,6 +69,7 @@ Route::prefix('/admin')
             Route::resource('categories', 'LotteryCategoryController');
             Route::get('recenthistory/{id}', 'HistoryController@recent');
             Route::get('archivehistory/{id}', 'HistoryController@archive');
+            Route::get('userhistory/{id}', 'HistoryController@userHistory');
 
             //using admin auth
 
