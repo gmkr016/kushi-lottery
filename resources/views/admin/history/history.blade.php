@@ -21,7 +21,9 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Lottery Bought History</h6>
+                    <h2 class="m-0 font-weight-bold text-primary">{{ $cat->title }}</h2><br>
+                    <h6 class="m-0 font-weight-bold text-info">{{ "Draw Date: "}}
+                        {{ date('Y-m-d H:i:s', $cat->draw_date) }} </h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -36,9 +38,9 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" width="20%"> User</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                    colspan="1" width="20%">Draw Date</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" width="20%">Total Lottery Numbers Choosen</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                    colspan="1" width="20%">Amount</th>
                                             </tr>
                                         </thead>
 
@@ -49,15 +51,16 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                             @if(array_key_exists($u->id, $lc))
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1" style="vertical-align:middle">
-                                                    {{ strtoupper($u->name) }}
-                                                </td>
-                                                <td class="sorting_1" style="vertical-align:middle">
-
+                                                    <a href="#" title="View Detail">{{ strtoupper($u->name) }}</a>
                                                 </td>
                                                 {{-- how many total lotteries submitted from users --}}
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     <?php $ke = $u->id; ?>
                                                     {{ $lc[$ke] }}
+                                                </td>
+                                                <td class="sorting_1" style="vertical-align:middle">
+
+                                                    {{ $lc[$ke]*100 }}
                                                 </td>
                                             </tr>
                                             @endif
@@ -73,8 +76,9 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                         <tfoot>
                                             <tr>
                                                 <th rowspan="1" colspan="1">User</th>
-                                                <th rowspan="1" colspan="1">Draw Date</th>
                                                 <th rowspan="1" colspan="1">Total Lottery Numbers Choosen</th>
+                                                <th rowspan="1" colspan="1">Amount</th>
+
                                             </tr>
                                         </tfoot>
                                     </table>

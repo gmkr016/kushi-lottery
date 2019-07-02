@@ -12,6 +12,8 @@ class HistoryController extends Controller
 
     {
         $lc = Lottery::where('cat_id', '=', $id)->get(); // 9 items
+        $cat = \App\LotteryCategory::findorFail($id);
+        // return $draw_date;
         // return $lc;
         if (count($lc) > 0) {
             $user = \App\User::all();
@@ -24,7 +26,7 @@ class HistoryController extends Controller
             $lc = array_count_values($count);
             // return $user;
             // return $lc;
-            return view('admin.history.history')->with(compact('lc', 'user'));
+            return view('admin.history.history')->with(compact('lc', 'user', 'cat'));
         } else {
             return view('admin.history.history')->with('msg', 'No Data to show');
         }
