@@ -82,7 +82,7 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
 
                                         <tfoot>
                                             <tr>
-                                                <th rowspan="1" colspan="1">User</th>
+                                                <th rowspan="1" colspan="1">Total</th>
                                                 <th rowspan="1" colspan="1">{{ $totalTicket }}</th>
                                                 <th rowspan="1" colspan="1">{{ $totalPrice }}</th>
 
@@ -91,7 +91,7 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                     </table>
                                 </div>
                             </div>
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-sm-12 col-md-5">
                                     <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
                                         Showing 1 to 10 of entries</div>
@@ -123,7 +123,7 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
