@@ -67,18 +67,18 @@ use \App\Http\Controllers\Admin\HistoryController;
 
                                         </tbody>
 
-                                        <tfoot>
+                                        <!-- <tfoot>
                                             <tr>
                                                 <th rowspan="1" colspan="1">Category</th>
                                                 <th rowspan="1" colspan="1">Generated Numbers</th>
                                                 <th rowspan="1" colspan="1">Purchased At</th>
 
                                             </tr>
-                                        </tfoot>
+                                        </tfoot> -->
                                     </table>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-12 col-md-5">
                                     <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
                                         Showing 1 to 10 of {{ count($lists) }} entries</div>
@@ -111,7 +111,7 @@ use \App\Http\Controllers\Admin\HistoryController;
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
