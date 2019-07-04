@@ -45,6 +45,10 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                         </thead>
 
                                         <tbody>
+                                            <?php
+                                            $totalTicket = 0;
+                                            $totalPrice = 0;
+                                             ?>
                                             <?php use App\Http\Controllers\Admin\HistoryController; ?>
                                             @if (!isset($msg) )
                                             @foreach($user as $u)
@@ -58,10 +62,12 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     <?php $ke = $u->id; ?>
                                                     {{ $lc[$ke] }}
+                                                    <?php $totalTicket += $lc[$ke]; ?>
                                                 </td>
                                                 <td class="sorting_1" style="vertical-align:middle">
 
                                                     {{ $lc[$ke]*100 }}
+                                                    <?php $totalPrice += $lc[$ke]*100; ?>
                                                 </td>
                                             </tr>
                                             @endif
@@ -77,8 +83,8 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                         <tfoot>
                                             <tr>
                                                 <th rowspan="1" colspan="1">User</th>
-                                                <th rowspan="1" colspan="1">Total Lottery Numbers Choosen</th>
-                                                <th rowspan="1" colspan="1">Amount</th>
+                                                <th rowspan="1" colspan="1">{{ $totalTicket }}</th>
+                                                <th rowspan="1" colspan="1">{{ $totalPrice }}</th>
 
                                             </tr>
                                         </tfoot>
