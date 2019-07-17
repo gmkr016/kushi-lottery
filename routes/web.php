@@ -38,7 +38,7 @@ Route::prefix('/user')
 
             Route::resource('profile', 'ProfileController');
 
-            Route::namespace ('Auth')
+            Route::namespace('Auth')
                 ->group(
                     function () {
 
@@ -73,7 +73,7 @@ Route::prefix('/admin')
 
             //using admin auth
 
-            Route::namespace ('Auth')
+            Route::namespace('Auth')
                 ->group(
                     function () {
                         //Login Routes

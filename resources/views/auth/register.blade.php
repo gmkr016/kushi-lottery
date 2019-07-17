@@ -31,18 +31,17 @@
 
                         {{-- company name --}}
                         <div class="row form-group">
-                            <label for="company-name"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Company Name') }}
+                            <label for="cname" class="col-md-4 col-form-label text-md-right">{{ __('Company Name') }}
                             </label>
 
                             <div class="col-md-6">
-                                <input type="text" id="company-name"
-                                    class="form-control{{ $errors->has('company-name') ? ' is-invalid' : '' }}"
-                                    name="company-name" value="{{ old('company-name') }}" required autofocus>
+                                <input type="text" id="cname"
+                                    class="form-control{{ $errors->has('cname') ? ' is-invalid' : '' }}" name="cname"
+                                    value="{{ old('cname') }}" required autofocus>
 
-                                @if($errors->has('company-name'))
+                                @if($errors->has('cname'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('company-name') }}</strong>
+                                    <strong>{{ $errors->first('cname') }}</strong>
                                 </span>
                                 @endif
                             </div>
@@ -193,6 +192,10 @@
                             </div>
                         </div>
                     </form>
+                    @foreach ($errors->all() as $error)
+                    <li class="text-danger">{{ $error }}</li>
+                    @endforeach
+
                 </div>
             </div>
         </div>

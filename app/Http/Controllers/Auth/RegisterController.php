@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+
 
 class RegisterController extends Controller
 {
@@ -48,11 +51,20 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        // return $data;
+        return Validator::make(
+            $data,
+            [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+                'pan' => 'required|numeric|min:10|',
+                'cname' => 'required',
+                'location' => 'required',
+                'contact' => 'required|numeric|min:10',
+                'photo' => 'required|image'
+            ]
+        );
     }
 
     /**
@@ -63,10 +75,83 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        // return $data;
+        return User::create(
+            [
+                'pan' => $data['pan'],
+                'cname' => $data['cname'],
+                'location' => $data['location'],
+                'contact' => $data['contact'],
+                'wallet' => $data['wallet'],
+                'photo' => $data['photo'],
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]
+        );
+    }
+
+    public function register(Request $request)
+    {
+        // return $request->all();
+        $this->validator(
+            [
+                '_token' => $request->_token,
+                'pan' => $request->pan,
+                'cname' => $request->cname,
+                'location' => $request->location,
+                'contact' => $request->contact,
+                'wallet' => $request->wallet,
+                'photo' => $request->photo,
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'password_confirmation' => $request->password_confirmation
+            ]
+        )->validate();
+        if ($request->hasFile('photo')) {
+
+            //get the file name with the extension
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+
+            //get just file name
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+            //get just extension
+            $extension = $request->file('photo')->getClientOriginalExtension();
+
+
+            //file name to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+
+            //upload photo
+
+            $path = $request->file('photo')->storeAs('public/profiles', $fileNameToStore);
+        } else {
+            $fileNameToStore = "noimage.jpg";
+        }
+        event(
+            new Registered(
+                $user = $this
+                    ->create(
+                        [
+                            'pan' => $request->pan,
+                            'cname' => $request->cname,
+                            'location' => $request->location,
+                            'contact' => $request->contact,
+                            'wallet' => $request->wallet,
+                            'photo' => $fileNameToStore,
+                            'name' => $request->name,
+                            'email' => $request->email,
+                            'password' => $request->password
+                        ]
+                    )
+            )
+        );
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
     }
 }

@@ -28,7 +28,6 @@ class ProfileController extends Controller
     {
         //
         return view('user.profile.addprofile');
-
     }
 
     /**
@@ -49,21 +48,20 @@ class ProfileController extends Controller
             $filenameWithExt = $request->file('image')->getClientOriginalName();
 
             //get just file name
-           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
 
             //get just extension
             $extension = $request->file('image')->getClientOriginalExtension();
 
 
-          //file name to store
-           $fileNameToStore = Str::kebab(Auth::user()->name).'_'.time().'.'.$extension;
+            //file name to store
+            $fileNameToStore = Str::kebab(Auth::user()->name) . '_' . time() . '.' . $extension;
 
-           //upload image
+            //upload image
 
-          $path = $request->file('image')->storeAs('public/profiles', $fileNameToStore);
-
+            $path = $request->file('image')->storeAs('public/profiles', $fileNameToStore);
         } else {
-          $fileNameToStore ="noimage.jpg";
+            $fileNameToStore = "noimage.jpg";
         }
 
         $profile = new \App\UserDetail();
@@ -77,8 +75,6 @@ class ProfileController extends Controller
         } else {
             return "False";
         }
-
-
     }
 
     /**
