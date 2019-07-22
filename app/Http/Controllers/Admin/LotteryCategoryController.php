@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\LotteryCategory;
 use App\LotteryCategory as Cat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class LotteryCategoryController extends Controller
 {
@@ -52,17 +54,18 @@ class LotteryCategoryController extends Controller
             $extension = $request->file('image')->getClientOriginalExtension();
 
             //file name to store
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            $fileNameToStore = Str::camel($request->title) . '_' . time() . '.' . $extension;
 
             //upload image
-
-            $path = $request->file('image')
-                ->storeAs('public/lottery_cat/', $fileNameToStore);
+            if (!file_exists(asset("storage/lottery_cat/$fileNameToStore"))) {
+                $path = $request->file('image')
+                    ->storeAs('public/lottery_cat/', $fileNameToStore);
+            }
         } else {
             $fileNameToStore = "noimage.jpg";
         }
         $cat = new Cat();
-        $cat->title = $request->title;
+        $cat->title = Str::camel($request->title);
         $cat->draw_date = strtotime($request->draw_date);
         $cat->image = $fileNameToStore;
 
@@ -73,6 +76,7 @@ class LotteryCategoryController extends Controller
             return "fail";
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -124,16 +128,15 @@ class LotteryCategoryController extends Controller
 
             //file name to store
             // $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            $fileNameToStore = time() . '.' . $extension;
+            $fileNameToStore = Str::camel($request->title) . '_' . time() . '.' . $extension;
 
             //upload image
             $path = $request->file('image')
                 ->storeAs('public/lottery_cat/', $fileNameToStore);
-
         }
         // return !empty($fileNameToStore) ? 'file uploaded' : 'no file';
         $cat = Cat::findorFail($id);
-        $cat->title = $request->title;
+        $cat->title = Str::camel($request->title);
         $cat->draw_date = strtotime($request->draw_date);
         if (!empty($fileNameToStore)) {
             $cat->image = $fileNameToStore;
@@ -155,8 +158,9 @@ class LotteryCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $action = Cat::findorFail($id)->delete();
-        if ($action) {
+        $action = Cat::findorFail($id);
+        if ($action->delete()) {
+            Storage::delete('public/lottery_cat' . '/' . $action->image);
             $lists = Cat::paginate(10);
             return redirect()->route('admin.categories.index', ['lists' => $lists]);
         }

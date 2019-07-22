@@ -69,8 +69,8 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                                     <a class="btn btn-primary"
                                                         href="{{ url("admin/categories/$item->id/edit") }}">Edit</a>
                                                     <a href="javascript:void()" class="btn btn-danger"
-                                                        onclick="event.preventDefault();document.querySelector('#item-delete').submit();">Delete</a>
-                                                    <form method='POST' id="item-delete"
+                                                        onclick="event.preventDefault();document.querySelector('#item{{$item->id}}-delete').submit();">Delete</a>
+                                                    <form method='POST' id="item{{$item->id}}-delete"
                                                         action='{{ url("admin/categories/$item->id") }}'>
                                                         @csrf
                                                         <input type="hidden" name="_method" value="DELETE">

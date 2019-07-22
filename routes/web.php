@@ -1,5 +1,5 @@
 <?php
-
+Route::get('/testimg', 'Admin\LotteryCategoryController@testimg');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
