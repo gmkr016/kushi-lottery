@@ -37,36 +37,26 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav main-menu ml-auto">
-                            <li <?php echo $title == 'home' ? 'class="active"' : '' ?>><a
-                                    href="{{route('home')}}">Home</a></li>
-                            <li <?php echo $title == 'about' ? 'class="active"' : '' ?>><a
-                                    href="{{ route('about') }}">About</a></li>
-                            {{-- <li class="menu_has_children"><a href="#0">pages</a>
-                                <ul class="sub-menu">
-                                    <li><a href="latest-winnner.html">latest winner</a></li>
-                                    <li><a href="lottery-result.html">lottery result</a></li>
-                                    <li><a href="faq.html">faq Page</a></li>
-                                    <li><a href="error-404.html">error Page</a></li>
-                                </ul>
-                            </li> --}}
-                            <li <?php echo $title == 'blog' ? 'class="active"' : '' ?>><a
-                                    href="{{ route('blog') }}">blog</a>
-                                {{-- <ul class="sub-menu">
-                                    <li><a href="blog-page.html">Blog page</a></li>
-                                    <li><a href="blog-details.html">blog single</a></li>
-                                </ul> --}}
+                            <li <?php echo $title == 'home' ? 'class="active"' : '' ?>>
+                                <a href="{{route('home')}}">Home</a></li>
+                            <li <?php echo $title == 'about' ? 'class="active"' : '' ?>>
+                                <a href="{{ route('about') }}">About</a></li>
+                            <li <?php echo $title == 'blog' ? 'class="active"' : '' ?>>
+                                <a href="{{ route('blog') }}">blog</a>
                             </li>
-                            <li <?php echo $title == 'contact' ? 'class="active"' : '' ?>><a
-                                    href="{{route('contact')}}">contact us</a></li>
+                            <li <?php echo $title == 'contact' ? 'class="active"' : '' ?>>
+                                <a href="{{ route('contact') }}">contact us</a>
+                            </li>
                         </ul>
+
                         @if(Auth::guard('web')->check())
                         <div class="registration-login-area">
                             <a href="{{ route('user.home') }}" style="margin-right:20px">
                                 <button type="button" class="text-btn"><i class="fa fa-user" style="color:#fff"></i>
-                                    {{ Auth::user()->name}}</button>
+                                    {{ Auth::user()->name }}</button>
                             </a>
                         </div>
-                        @else{
+                        @else
                         <div class="registration-login-area">
                             <a href="{{ route('login') }}" style="margin-right:20px">
                                 <button type="button" class="text-btn" data-toggle="modal"
