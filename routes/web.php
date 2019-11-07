@@ -42,6 +42,8 @@ Route::prefix('/user')
             Route::post('submit', 'LotteryController@submit');
             Route::delete('delete/{id}', 'LotteryController@destroy');
 
+            Route::get('pracJson', 'LotteryController@pracJson');
+
             Route::resource('profile', 'ProfileController');
 
             Route::namespace('Auth')

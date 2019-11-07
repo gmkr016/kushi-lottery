@@ -126,4 +126,36 @@ class LotteryController extends Controller
             return $this->lists();
         }
     }
+
+    public function pracJson()
+    {
+        $lotteryNumbers = '{
+                                "first": {
+                                    "1": "1",
+                                    "2": "2",
+                                    "3": "3",
+                                    "4": "4",
+                                    "5": "5",
+                                    "6": "6"
+                                },
+                                "second": {
+                                    "1": "6",
+                                    "2": "2",
+                                    "3": "3",
+                                    "4": "4",
+                                    "5": "5",
+                                    "6": "6"
+                                },
+                                "third": {
+                                    "1": "1",
+                                    "2": "2",
+                                    "3": "3",
+                                    "4": "4",
+                                    "5": "5",
+                                    "6": "6"
+                                }
+                            }';
+        $lott = json_decode($lotteryNumbers);
+        return $lott->toArray();
+    }
 }
