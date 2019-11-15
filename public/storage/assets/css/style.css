@@ -78,6 +78,10 @@
     color: #ffffff;
 }
 
+.site-title img {
+    max-width: 56%;
+}
+
 .site-title::first-letter {
     color: var(--main-color);
     font-weight: 700;

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lottery extends Model
 {
-    protected $fillable = ['cat_id', 'first_number', 'second_number', 'third_number', 'fourth_number', 'fifth_number', 'sixth_number'];
-//     1 2 3
+    protected $fillable = ['cat_id', 'serial', 'first_number', 'second_number', 'third_number', 'fourth_number', 'fifth_number', 'sixth_number'];
+    //     1 2 3
     //     2 3 1
     //     3 1 2
 
-//     3 2 1
+    //     3 2 1
     //     2 1 3
     //     1 3 2
 
@@ -63,11 +63,9 @@ class Lottery extends Model
             if ($x != $length - 1) {
                 $whereString .= $suffix;
             }
-
         }
 
         // utilize bindings when using a mysql raw query
         return $query->whereRaw($whereString, $bindings);
     }
-
 }

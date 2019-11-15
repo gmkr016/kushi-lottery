@@ -16,6 +16,7 @@ class CreateLotteriesTable extends Migration
         Schema::create('lotteries', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('cat_id');
+            $table->bigInteger('serial');
             $table->bigInteger('u_id');
             $table->integer('first_number');
             $table->integer('second_number');

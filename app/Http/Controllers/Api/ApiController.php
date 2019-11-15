@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\LotteryCategory;
 use Illuminate\Http\Request;
+use App\Models\Lottery as Lottery;
 
 class ApiController extends Controller
 {
@@ -43,36 +44,61 @@ class ApiController extends Controller
         return response()->json($cat);
     }
 
+    private function genSerial($num)
+    {
+        return;
+    }
     // post data came from app
     public function postNumbers(Request $request)
     {
 
-        $lotteryNumbers = '{
-                            "lotteryNumber":[
-                                {
-                                    "categories":"1",
-                                    "first":"42",
-                                    "second":"45",
-                                    "third":"8",
-                                    "forth":"4",
-                                    "fifth":"14",
-                                    "sixth":"20"
-                                },
-                                {
-                                "categories":"1",
-                                    "first":"11",
-                                    "second":"28",
-                                    "third":"21",
-                                    "forth":"13",
-                                    "fifth":"29",
-                                    "sixth":"23"
-                                }
-                            ],
-                            "token":"token",
-                            }';
-        $lott = json_decode($lotteryNumbers);
+        //         $demoData = '[
+        //     {
+        //         "categories": "1",
+        //         "first": "10",
+        //         "second": "24",
+        //         "third": "33",
+        //         "fourth": "47",
+        //         "fifth": "33",
+        //         "sixth": "65"
+        //     },
+        //     {
+        //         "categories": "1",
+        //         "first": "36",
+        //         "second": "47",
+        //         "third": "14",
+        //         "fourth": "52",
+        //         "fifth": "44",
+        //         "sixth": "33"
+        //     }
+        // ]';
+        // return $request->lotteryNumbers;
+        // return auth()->id();
+        foreach ($request->lotteryNumbers as $index) {
+            // return response()->json($index);
+            $lott = new Lottery();
+            $lott->serial = auth()->id();
+            $lott->cat_id = $index['categories'];
+            $lott->u_id = auth()->id();
+            $lott->first_number = $index['first'];
+            $lott->second_number = $index['second'];
+            $lott->third_number = $index['third'];
+            $lott->fourth_number = $index['fourth'];
+            $lott->fifth_number = $index['fifth'];
+            $lott->sixth_number = $index['sixth'];
+            if (response()->json($lott->save())) {
 
-
-        return response()->json($lott);
+                $index['serial_number'] = $lott->id . auth()->id();
+                $msg = [
+                    "response" => response()->json('success', 201),
+                    "numbers" => [
+                        $index
+                    ],
+                ];
+            } else {
+                $msg = ["response" => response()->json('failed', 501)];
+            }
+        }
+        return response()->json($msg);
     }
 }
