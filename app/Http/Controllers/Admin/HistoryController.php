@@ -52,7 +52,6 @@ class HistoryController extends Controller
         } else {
             return view('admin.history.history')->with('msg', 'No Data to show');
         }
-
     }
 
     public static function getUname($id)

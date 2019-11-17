@@ -84,6 +84,7 @@ class LotteryController extends Controller
             $lottery = new Lottery;
             $lottery->cat_id = $request->lott_cat;
             $lottery->u_id = Auth::user()->id;
+            $lottery->serial = 111111;
             $lottery->first_number = $request->first;
             $lottery->second_number = $request->second;
             $lottery->third_number = $request->third;

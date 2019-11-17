@@ -21,9 +21,11 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h2 class="m-0 font-weight-bold text-primary">@if(isset($cat)) {{ $cat->title }} @endif</h2><br>
+                    @if(isset($cat))
+                    <h2 class="m-0 font-weight-bold text-primary">{{ ucfirst($cat->title) }}</h2><br>
                     <h6 class="m-0 font-weight-bold text-info">{{ "Draw Date: "}}
-                        @if(isset($cat)) {{ date('Y-m-d H:i:s', $cat->draw_date) }} @endif </h6>
+                        {{ date('Y-m-d H:i:s', $cat->draw_date) }} </h6>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -56,7 +58,7 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     <a href="{{ url("admin/userhistory/$u->id") }}"
-                                                        title="View Detail">{{ strtoupper($u->name) }}</a>
+                                                        title="View Detail">{{ ucwords($u->name) }}</a>
                                                 </td>
                                                 {{-- how many total lotteries submitted from users --}}
                                                 <td class="sorting_1" style="vertical-align:middle">
