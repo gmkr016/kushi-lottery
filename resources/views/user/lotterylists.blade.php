@@ -55,7 +55,7 @@ use \App\Http\Controllers\Admin\LotteryCategoryController;
                                             @foreach ($lists as $item)
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1" style="vertical-align:middle">
-                                                    {{ LotteryCategoryController::show($item->cat_id, 'title') }}
+                                                    {{ ucfirst(LotteryCategoryController::show($item->cat_id, 'title')) }}
                                                 </td>
 
                                                 <td class="sorting_1" style="vertical-align:middle">

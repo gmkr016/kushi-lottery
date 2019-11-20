@@ -36,8 +36,8 @@
 
 */
 
-@import url('reset.css');
-@import url('global.css');
+@import url("reset.css");
+@import url("global.css");
 
 /*  header-section css start */
 
@@ -78,9 +78,10 @@
     color: #ffffff;
 }
 
-.site-title img {
+
+/* .site-title img {
     max-width: 56%;
-}
+} */
 
 .site-title::first-letter {
     color: var(--main-color);
@@ -93,7 +94,7 @@ li.menu_has_children:after {
     top: 30px;
     right: 2px;
     color: #ffffff;
-    font-family: 'FontAwesome';
+    font-family: "FontAwesome";
     z-index: -10;
     -webkit-transition: all 0.3s;
     -o-transition: all 0.3s;
@@ -267,7 +268,7 @@ li.menu_has_children:hover:after {
 
 .menu-toggle:before,
 .menu-toggle:after {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     height: 2px;
@@ -386,17 +387,17 @@ span.is-active:after {
 
 .banner-section::before {
     position: absolute;
-    content: '';
+    content: "";
     /* top: 5px;
   left: 50px; */
     width: 100%;
     height: 100%;
-    background: url('../images/background.jpg') no-repeat
+    background: url("../images/background.jpg") no-repeat;
 }
 
 .banner-section::after {
     position: absolute;
-    content: '';
+    content: "";
     /* bottom: 7px;
   left: 95px; */
     width: 100%;
@@ -447,7 +448,7 @@ span.is-active:after {
 
 .parallax-container::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     right: 0;
     width: 50%;
@@ -789,7 +790,7 @@ span.is-active:after {
 
 .next-jackpot-section::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     left: 0;
     width: 100%;
@@ -891,7 +892,7 @@ span.is-active:after {
 
 .table thead th {
     border: none;
-    vertical-align: middle
+    vertical-align: middle;
 }
 
 .table td {
@@ -930,7 +931,7 @@ span.is-active:after {
 
 .latest-winner-area .lottery-number-list {
     padding: 0;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 .latest-winner-area .lottery-number-list li:first-child {
@@ -993,7 +994,7 @@ span.is-active:after {
 
 .stay-connected-section::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     left: 0;
     width: 100%;
@@ -1004,7 +1005,7 @@ span.is-active:after {
 
 .stay-connected-section::after {
     position: absolute;
-    content: '';
+    content: "";
     bottom: 0;
     left: 0;
     width: 100%;
@@ -1214,7 +1215,7 @@ span.is-active:after {
 .table thead th {
     font-size: 18px;
     border: none;
-    vertical-align: middle
+    vertical-align: middle;
 }
 
 .table td {
@@ -1336,7 +1337,7 @@ span.is-active:after {
 
 .clock div span::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     left: -4px;
     width: 35%;
@@ -1352,7 +1353,7 @@ span.is-active:after {
 
 .clock div span::after {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     right: 18px;
     width: 35%;
@@ -1389,7 +1390,7 @@ span.is-active:after {
 
 .testimonial-section::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     left: 0;
     width: 100%;
@@ -1427,7 +1428,6 @@ span.is-active:after {
     max-width: 90%;
     margin: 15px auto 0 auto;
     height: 245px;
-    ;
 }
 
 .testimonial-thumb-slider .thumb {
@@ -1456,7 +1456,7 @@ span.is-active:after {
 
 .testimonial-thumb-slider .thumb-slide::after {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     left: 45%;
     width: 10px;
@@ -1472,7 +1472,7 @@ span.is-active:after {
 
 .testimonial-thumb-slider .thumb-slide::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 16px;
     left: 43%;
     height: 15px;
@@ -1653,7 +1653,7 @@ span.is-active:after {
 
 .footer-section::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     /* left: 16px; */
     width: 105%;
@@ -1787,7 +1787,7 @@ span.is-active:after {
 
 .breadcrumb-area::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     left: 0;
     width: 100%;
@@ -1828,7 +1828,7 @@ span.is-active:after {
     top: 0;
     left: -20px;
     color: var(--main-color);
-    font-family: 'FontAwesome';
+    font-family: "FontAwesome";
 }
 
 .page-list li:first-child::before {
@@ -1930,7 +1930,7 @@ span.is-active:after {
 
 .team-section::before {
     position: absolute;
-    content: '';
+    content: "";
     left: 0;
     bottom: 0;
     width: 100%;
@@ -2027,13 +2027,13 @@ span.is-active:after {
 
 .winner-single-item::before {
     position: absolute;
-    content: '';
+    content: "";
     bottom: -65px;
     left: -27px;
     width: 115%;
     height: 67px;
     height: 67px;
-    background-image: url('../images/shape/wave-one.png');
+    background-image: url("../images/shape/wave-one.png");
     background-repeat: repeat-x;
     animation: waterwave 15s linear infinite;
     transition: all 0.3s;
@@ -2049,13 +2049,13 @@ span.is-active:after {
 
 .winner-single-item::after {
     position: absolute;
-    content: '';
+    content: "";
     bottom: -65px;
     left: -27px;
     width: 115%;
     height: 67px;
     height: 67px;
-    background-image: url('../images/shape/wave-two.png');
+    background-image: url("../images/shape/wave-two.png");
     transition: all 0.7s;
     -webkit-transition: all 0.7s;
     -moz-transition: all 0.7s;
@@ -2251,7 +2251,7 @@ blockquote p {
 
 .tags li a:after {
     position: absolute;
-    content: ',';
+    content: ",";
 }
 
 .tags li a:last-child:after {
@@ -2637,7 +2637,7 @@ blockquote p {
 
 .lotten-accordion .card-header .btn-link.collapsed::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 19px;
     right: 35px;
     width: 2px;
@@ -2652,7 +2652,7 @@ blockquote p {
 
 .lotten-accordion .card-header .btn-link.collapsed::after {
     position: absolute;
-    content: '';
+    content: "";
     top: 25px;
     right: 29px;
     width: 14px;
@@ -2667,7 +2667,7 @@ blockquote p {
 
 .lotten-accordion .card-header .btn-link::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 19px;
     right: 35px;
     width: 2px;
@@ -2682,7 +2682,7 @@ blockquote p {
 
 .lotten-accordion .card-header .btn-link::after {
     position: absolute;
-    content: '';
+    content: "";
     top: 25px;
     right: 29px;
     width: 14px;
@@ -2802,18 +2802,18 @@ blockquote p {
 
 .topContentWrapper {
     width: 100%;
-    padding: 200px 0px
+    padding: 200px 0px;
 }
 
 .winnerAnnouncementTitle {
     color: #fff;
     font-weight: 300;
     font-size: 28px;
-    padding-bottom: 15px
+    padding-bottom: 15px;
 }
 
 .winnerSection ul {
-    margin-top: 20px
+    margin-top: 20px;
 }
 
 .winnerSection ul li {
@@ -2825,23 +2825,23 @@ blockquote p {
     text-align: center;
     vertical-align: middle;
     line-height: 2.5em;
-    font-weight: 900
+    font-weight: 900;
 }
 
 .winnerSection ul li:nth-last-child(2) {
     background: transparent;
-    color: #fff
+    color: #fff;
 }
 
 .winnerSection ul li:last-child {
     background: #f13f33;
-    color: #fff
+    color: #fff;
 }
 
 .winnerSection ul li:nth-last-child(3),
 .winnerSection ul li:nth-last-child(4) {
     background: #007991;
-    color: #fff
+    color: #fff;
 }
 
 .lotteryListHolder .form-group {
@@ -2855,55 +2855,55 @@ blockquote p {
     border-radius: 50%;
     text-align: center;
     line-height: 2.5em;
-    padding: .375rem .2rem;
-    border: none
+    padding: 0.375rem 0.2rem;
+    border: none;
 }
 
 .generateLotteryNumber .form-group .form-control:focus,
 .generateLotteryNumber select.form-control:focus {
     box-shadow: none;
-    border: none
+    border: none;
 }
 
 .generateLotteryNumber select.form-control {
     border-radius: 0%;
-    border: none
+    border: none;
 }
 
 .generateLotteryNumber a {
     font-weight: 400;
     color: #fff;
-    padding-left: 2rem
+    padding-left: 2rem;
 }
 
 .generateLotteryNumber .form-group .form-group-select {
     width: 100%;
     border-radius: 0px;
-    width: 100%
+    width: 100%;
 }
 
 a.lotteryBuyMore,
 a.printTicket {
     display: inline-block;
-    background: -moz-linear-gradient(59deg, #E84A5F 0, #FF487D 22%, #FECEA8 100%);
+    background: -moz-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* FF3.6+ */
-    background: -webkit-gradient(linear, 59deg, color-stop(0, E84A5F), color-stop(22%, FF487D), color-stop(100%, FECEA8));
+    background: -webkit-gradient( linear, 59deg, color-stop(0, E84A5F), color-stop(22%, FF487D), color-stop(100%, FECEA8));
     /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(59deg, #E84A5F 0, #FF487D 22%, #FECEA8 100%);
+    background: -webkit-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(59deg, #E84A5F 0, #FF487D 22%, #FECEA8 100%);
+    background: -o-linear-gradient(59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* Opera 11.10+ */
-    background: -ms-linear-gradient(59deg, #E84A5F 0, #FF487D 22%, #FECEA8 100%);
+    background: -ms-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* IE10+ */
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1');
     /* for IE */
-    background: linear-gradient(59deg, #E84A5F 0, #FF487D 22%, #FECEA8 100%);
+    background: linear-gradient(59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* W3C */
     color: #fff;
     padding: 0.35rem 1.5rem;
     border-radius: 0.25rem;
     transition: 0.65s all ease-in-out;
-    margin-top: 20px
+    margin-top: 20px;
 }
 
 a.lotteryBuyMore:hover {
@@ -2912,25 +2912,25 @@ a.lotteryBuyMore:hover {
 
 .pickLottery {
     width: 100%;
-    position: relative
+    position: relative;
 }
 
 .lotteryTicketPriceTag {
     width: 142px;
     height: 140px;
-    background: -moz-linear-gradient(59deg, #E84A5F 0, #FF487D 22%, #FECEA8 100%);
+    background: -moz-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* FF3.6+ */
-    background: -webkit-gradient(linear, 59deg, color-stop(0, E84A5F), color-stop(22%, FF487D), color-stop(100%, FECEA8));
+    background: -webkit-gradient( linear, 59deg, color-stop(0, E84A5F), color-stop(22%, FF487D), color-stop(100%, FECEA8));
     /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(59deg, #E84A5F 0, #FF487D 22%, #FECEA8 100%);
+    background: -webkit-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(59deg, #E84A5F 0, #FF487D 22%, #FECEA8 100%);
+    background: -o-linear-gradient(59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* Opera 11.10+ */
-    background: -ms-linear-gradient(59deg, #E84A5F 0, #FF487D 22%, #FECEA8 100%);
+    background: -ms-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* IE10+ */
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1');
     /* for IE */
-    background: linear-gradient(59deg, #E84A5F 0, #FF487D 22%, #FECEA8 100%);
+    background: linear-gradient(59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* W3C */
     position: absolute;
     bottom: 10%;
@@ -2953,18 +2953,18 @@ a.lotteryBuyMore:hover {
     font-size: 30px;
     color: #fff;
     font-weight: 900;
-    padding-top: 20%
+    padding-top: 20%;
 }
 
 .upcommingLottery {
     width: 100%;
-    margin-top: 30px
+    margin-top: 30px;
 }
 
 .upcommingLottery h2 {
     color: #fff;
     font-size: 20px;
-    font-weight: 400
+    font-weight: 400;
 }
 
 .upcomingLotteryHolder {
@@ -2973,13 +2973,13 @@ a.lotteryBuyMore:hover {
     color: #fff;
     display: inline-block;
     border-radius: 0.2em;
-    margin-top: 15px
+    margin-top: 15px;
 }
 
 .priceTable {
     width: 100%;
     margin-top: 30px;
-    color: #fff
+    color: #fff;
 }
 
 .priceTable thead th {
@@ -2988,28 +2988,28 @@ a.lotteryBuyMore:hover {
 
 .divisions-full,
 .divisions-full table {
-    width: 100%
+    width: 100%;
 }
 
 .modal-content button.btnClose[type="button"] {
-    background: transparent
+    background: transparent;
 }
 
 .ticketPopup .modal-content {
-    border-radius: 0rem
+    border-radius: 0rem;
 }
 
 .topPopupLogo img {
     display: block;
-    margin: 0 auto
+    margin: 0 auto;
 }
 
 a.printTicket {
-    background: #7474BF;
+    background: #7474bf;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #348AC7, #7474BF);
+    background: -webkit-linear-gradient(to right, #348ac7, #7474bf);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #348AC7, #7474BF);
+    background: linear-gradient(to right, #348ac7, #7474bf);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -3018,11 +3018,11 @@ a.printTicket {
     min-height: 300px;
     padding: 2rem;
     margin: 0 auto;
-    text-align: center
+    text-align: center;
 }
 
 .titketToBePrint h3 {
-    font-size: 20px
+    font-size: 20px;
 }
 
 .titketToBePrint ul li {
@@ -3036,13 +3036,13 @@ a.printTicket {
     border-radius: 50%;
     line-height: 2em;
     margin-right: 1em;
-    margin-bottom: 1em
+    margin-bottom: 1em;
 }
 
 .titketToBePrint ul li:last-child {
-    margin-right: 0em
+    margin-right: 0em;
 }
 
 .titketToBePrint h3 {
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
