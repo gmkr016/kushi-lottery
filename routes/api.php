@@ -53,3 +53,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('getCategories', 'ApiController@getCategories');
     Route::post('postNumbers', 'ApiController@postNumbers');
 });
+
+Route::get(
+    'agentwisesale',
+    'Api\ApiController@agentWiseSale'
+);

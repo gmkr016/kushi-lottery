@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\LotteryCategory;
 use Illuminate\Http\Request;
 use App\Models\Lottery as Lottery;
+use Illuminate\Support\Arr;
 
 class ApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        // $this->middleware('auth:api');
     }
 
     public function getNumbers(Request $request)
@@ -100,5 +101,25 @@ class ApiController extends Controller
             }
         }
         return response()->json($msg);
+    }
+
+    public function getUserName($id)
+    {
+        return \App\User::find($id)->name;
+    }
+
+    public function agentWiseSale()
+    {
+        $lott = \App\Models\Lottery::all();
+        $data = [];
+        foreach ($lott as $l) {
+            array_push($data, $this->getUserName($l->u_id));
+        }
+        $acv = array_count_values($data);
+        $na = [];
+        foreach ($acv as $key => $value) {
+            array_push($na, ["agent" => $key, "ticketCount" => $value]);
+        }
+        return $na;
     }
 }

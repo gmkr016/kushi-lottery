@@ -16,6 +16,10 @@ Route::get(
         phpinfo();
     }
 );
+
+Route::get('chart', function () {
+    return view('chart');
+});
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/blog', 'HomeController@blog')->name('blog');
