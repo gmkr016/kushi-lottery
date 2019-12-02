@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\LotteryCategory;
 use Illuminate\Http\Request;
 use App\Models\Lottery as Lottery;
-use Illuminate\Support\Arr;
 
 class ApiController extends Controller
 {
