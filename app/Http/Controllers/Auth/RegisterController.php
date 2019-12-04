@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use App\City;
 
 
 class RegisterController extends Controller
@@ -43,6 +44,25 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    /**
+     * Get full address
+     * 
+     * @parameter city_id
+     * @return    var
+     */
+
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $addrs = City::all();
+        // return $addrs;
+        return view('auth.register', compact('addrs'));
+    }
     /**
      * Get a validator for an incoming registration request.
      *

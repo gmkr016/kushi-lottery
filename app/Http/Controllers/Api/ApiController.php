@@ -49,37 +49,36 @@ class ApiController extends Controller
         return;
     }
     // post data came from app
+
+    //         $demoData = '[
+    //     {
+    //         "categories": "1",
+    //         "first": "10",
+    //         "second": "24",
+    //         "third": "33",
+    //         "fourth": "47",
+    //         "fifth": "33",
+    //         "sixth": "65"
+    //     },
+    //     {
+    //         "categories": "1",
+    //         "first": "36",
+    //         "second": "47",
+    //         "third": "14",
+    //         "fourth": "52",
+    //         "fifth": "44",
+    //         "sixth": "33"
+    //     }
+    // ]';
+    // return $request->lotteryNumbers;
+    // return auth()->id();
     public function postNumbers(Request $request)
     {
-
-        //         $demoData = '[
-        //     {
-        //         "categories": "1",
-        //         "first": "10",
-        //         "second": "24",
-        //         "third": "33",
-        //         "fourth": "47",
-        //         "fifth": "33",
-        //         "sixth": "65"
-        //     },
-        //     {
-        //         "categories": "1",
-        //         "first": "36",
-        //         "second": "47",
-        //         "third": "14",
-        //         "fourth": "52",
-        //         "fifth": "44",
-        //         "sixth": "33"
-        //     }
-        // ]';
-        // return $request->lotteryNumbers;
-        // return auth()->id();
         foreach ($request->lotteryNumbers as $index) {
-            // return response()->json($index);
             $lott = new Lottery();
-            $lott->serial = auth()->id();
+            $lott->serial = auth('api')->id();
             $lott->cat_id = $index['categories'];
-            $lott->u_id = auth()->id();
+            $lott->u_id = auth('api')->id();
             $lott->first_number = $index['first'];
             $lott->second_number = $index['second'];
             $lott->third_number = $index['third'];
@@ -102,11 +101,17 @@ class ApiController extends Controller
         return response()->json($msg);
     }
 
+    /**
+     * Get Username from Id
+     */
     public function getUserName($id)
     {
         return \App\User::find($id)->name;
     }
 
+    /**
+     * Get Data of agentwise sale
+     */
     public function agentWiseSale()
     {
         $lott = \App\Models\Lottery::all();

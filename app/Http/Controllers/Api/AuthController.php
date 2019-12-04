@@ -77,11 +77,17 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        $user = auth('api')->user();
+        $user_data['id'] = $user->id;
+        $user_data['name'] = $user->name;
+        $user_data['email'] = $user->email;
+        $user_data['location'] = $user->location; // city id, 
         return response()->json(
             [
                 'access_token' => $token,
                 'token_type' => 'bearer',
                 'expires_in' => auth('api')->factory()->getTTL() * 60,
+                'user' => $user_data
             ]
         );
     }

@@ -104,3 +104,48 @@ Route::prefix('/admin')
         }
     );
 Auth::routes();
+
+
+Route::get('provincedb', function () {
+    if (($handle = fopen(public_path() . '/province.csv', 'r')) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
+            $province_data = new \App\Province();
+            $province_data->id = $data[0];
+            $province_data->province = $data[1];
+            $province_data->save();
+        }
+        fclose($handle);
+        return response()->json('Data Submitted');
+    }
+});
+
+Route::get('districtdb', function () {
+    if (($handle = fopen(public_path() . '/district.csv', 'r')) !== FALSE) {
+        $i = 0;
+        while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
+            $district_data = new \App\District();
+            $district_data->id = $data[0];
+            $district_data->district = $data[1];
+            $district_data->province_id = $data[2];
+            $district_data->save();
+        }
+        fclose($handle);
+        return response()->json('Data Submitted');
+    }
+});
+
+Route::get('citydb', function () {
+    if (($handle = fopen(public_path() . '/city.csv', 'r')) !== FALSE) {
+        $i = 0;
+        while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
+            $city_data = new \App\City();
+            $city_data->id = $data[0];
+            $city_data->city = $data[1];
+            $city_data->district_id = $data[2];
+            $city_data->province_id = $data[3];
+            $city_data->save();
+        }
+        fclose($handle);
+        return response()->json('Data Submitted');
+    }
+});

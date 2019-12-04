@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('pan');
             $table->string('cname');
-            $table->string('location');
+            $table->integer('location'); // city code field
             $table->string('contact');
             $table->string('wallet')->nullable();
             $table->string('photo');

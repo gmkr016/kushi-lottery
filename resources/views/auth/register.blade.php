@@ -53,15 +53,12 @@
                             </label>
 
                             <div class="col-md-6">
-                                <input type="text" id="location"
-                                    class="form-control{{ $errors->has('location') ? ' is-invalid' : '' }}"
-                                    name="location" value="{{ old('location') }}" required autofocus>
 
-                                @if($errors->has('location'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('location') }}</strong>
-                                </span>
-                                @endif
+                                <select name="location">
+                                    @foreach($addrs as $addr)
+                                    <option value="{{$addr->id}}">{{$addr->city}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
