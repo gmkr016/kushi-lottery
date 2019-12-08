@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use \App\Http\Controllers\Api\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,11 +51,75 @@ Route::group(['namespace' => 'Api'], function () {
     //     return response()->json($params);
     // });
     Route::get('me', 'ApiController@me');
+    Route::get('getcurrentdraw', 'Apicontroller@getCurrentDraw');
     Route::post('getCategories', 'ApiController@getCategories');
     Route::post('postNumbers', 'ApiController@postNumbers');
 });
 
 Route::get(
     'agentwisesale',
-    'Api\ApiController@agentWiseSale'
+    function () {
+        $lott = \App\Models\Lottery::all();
+        $data = array();
+        foreach ($lott as $l) {
+            array_push($data, ApiController::getUserName($l->u_id));
+        }
+        $acv = array_count_values($data);
+        $na = array();
+        foreach ($acv as $key => $value) {
+            array_push($na, ["agent" => $key, "ticketCount" => $value]);
+        }
+        return $na;
+    }
+);
+
+Route::get(
+    'districtwisesale',
+    function () {
+        $lott = \App\Models\Lottery::all();
+        $district = array();
+        foreach ($lott as $l) {
+            array_push($district, ApiController::getDistrictLocation($l->u_id));
+        }
+        $acv = array_count_values($district);
+        $na = array();
+        foreach ($acv as $key => $value) {
+            array_push($na, ["district" => $key, "ticketCount" => $value]);
+        }
+        return $na;
+    }
+);
+
+Route::get(
+    'provincewisesale',
+    function () {
+        $lott = \App\Models\Lottery::all();
+        $province = array();
+        foreach ($lott as $l) {
+            array_push($province, ApiController::getProvinceLocation($l->u_id));
+        }
+        $acv = array_count_values($province);
+        $na = array();
+        foreach ($acv as $key => $value) {
+            array_push($na, ["province" => $key, "ticketCount" => $value]);
+        }
+        return $na;
+    }
+);
+
+Route::get(
+    'drawwisesale',
+    function () {
+        $lott = \App\Models\Lottery::all();
+        $draw = array();
+        foreach ($lott as $l) {
+            array_push($draw, ApiController::getDraw($l->cat_id));
+        }
+        $acv = array_count_values($draw);
+        $na = array();
+        foreach ($acv as $key => $value) {
+            array_push($na, ["draw" => $key, "ticketCount" => $value]);
+        }
+        return $na;
+    }
 );

@@ -78,6 +78,24 @@
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#charts" aria-expanded="true"
+            aria-controls="archivehistory">
+            <i class="fas fa-chart-bar"></i>
+            <span>Charts</span>
+        </a>
+        <div id="charts" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">All Charts</h6>
+
+                <a class="collapse-item" href="{{route("admin.agentwisesale")}}">Agent Sales</a>
+                <a class="collapse-item" href="{{route("admin.districtwisesale")}}">District Sales</a>
+                <a class="collapse-item" href="{{route("admin.provincewisesale")}}">Province Sales</a>
+                <a class="collapse-item" href="{{route("admin.drawwisesale")}}">Total Sales</a>
+            </div>
+        </div>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 

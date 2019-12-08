@@ -11,7 +11,7 @@ class ApiController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth:api');
+        $this->middleware('auth:api');
     }
 
     public function getNumbers(Request $request)
@@ -37,6 +37,7 @@ class ApiController extends Controller
         return response()->json(auth()->user());
     }
 
+
     // get categories list for api
     public function getCategories()
     {
@@ -44,34 +45,23 @@ class ApiController extends Controller
         return response()->json($cat);
     }
 
-    private function genSerial($num)
-    {
-        return;
-    }
-    // post data came from app
 
-    //         $demoData = '[
-    //     {
-    //         "categories": "1",
-    //         "first": "10",
-    //         "second": "24",
-    //         "third": "33",
-    //         "fourth": "47",
-    //         "fifth": "33",
-    //         "sixth": "65"
-    //     },
-    //     {
-    //         "categories": "1",
-    //         "first": "36",
-    //         "second": "47",
-    //         "third": "14",
-    //         "fourth": "52",
-    //         "fifth": "44",
-    //         "sixth": "33"
-    //     }
-    // ]';
-    // return $request->lotteryNumbers;
-    // return auth()->id();
+
+    private function getDrawDate($lott_cat)
+    {
+        $draw_date = \App\LotteryCategory::find($lott_cat)->draw_date;
+        return date('Y-m-d', $draw_date);
+    }
+
+    private function totalTicket()
+    {
+        return Lottery::count();
+    }
+
+    private function ticketIssued($recentlyAddedLottoId)
+    {
+        return Lottery::find($recentlyAddedLottoId)->created_at->toDateString();
+    }
     public function postNumbers(Request $request)
     {
         foreach ($request->lotteryNumbers as $index) {
@@ -87,12 +77,16 @@ class ApiController extends Controller
             $lott->sixth_number = $index['sixth'];
             if (response()->json($lott->save())) {
 
-                $index['serial_number'] = $lott->id . auth()->id();
                 $msg = [
                     "response" => response()->json('success', 201),
                     "numbers" => [
                         $index
                     ],
+                    "serial_number" => $lott->id . auth()->id(),
+                    "drawDate" => $this->getDrawDate($index['categories']),
+                    "totalTicket" => $this->totalTicket(),
+                    "created_at" => $this->ticketIssued($lott->id),
+
                 ];
             } else {
                 $msg = ["response" => response()->json('failed', 501)];
@@ -102,28 +96,85 @@ class ApiController extends Controller
     }
 
     /**
-     * Get Username from Id
+     * Get Username from user Id
      */
-    public function getUserName($id)
+    public static function getUserName($id)
     {
         return \App\User::find($id)->name;
     }
 
     /**
-     * Get Data of agentwise sale
+     * Get drawname
      */
-    public function agentWiseSale()
+    public static function getDraw($cat_id)
     {
-        $lott = \App\Models\Lottery::all();
-        $data = [];
-        foreach ($lott as $l) {
-            array_push($data, $this->getUserName($l->u_id));
-        }
-        $acv = array_count_values($data);
-        $na = [];
-        foreach ($acv as $key => $value) {
-            array_push($na, ["agent" => $key, "ticketCount" => $value]);
-        }
-        return $na;
+        return \App\LotteryCategory::find($cat_id)->title;
+    }
+
+    /**
+     * Get user's location code
+     * 
+     * @param  user_id
+     * @return location_code
+     */
+    public static function getDistrictLocation($u_id)
+    {
+        $city_id = \App\User::find($u_id)->location;
+        return self::getDistrict($city_id);
+    }
+
+    public static function getProvinceLocation($u_id)
+    {
+        $city_id = \App\User::find($u_id)->location;
+        return self::getProvince($city_id);
+    }
+
+    /**
+     * Get districtname from city_id
+     */
+    public static function getDistrict($city_id)
+    {
+        $district_id = \App\City::find($city_id)->district_id;
+        return \App\District::find($district_id)->district;
+    }
+
+    // private static function getDistrictName($district_id)
+    // {
+    //     return \App\District::find($district_id)->district;
+    // }
+
+
+    public static function getProvince($city_id)
+    {
+        $province_id = \App\City::find($city_id)->province_id;
+        return \App\Province::find($province_id)->province;
+        // return self::getProvinceName($district_id);
+    }
+    /** 
+     * Get Current Draw Object
+     * 
+     * @return Current_Draw_object
+     */
+    public static function getCurrentDraw()
+    {
+        $nowUnix = \Carbon\Carbon::now()->timestamp;
+        $currentDraw = \App\LotteryCategory::where('draw_date', '<', $nowUnix)
+            ->orderBy('draw_date', 'desc')
+            ->first();
+        return $currentDraw;
+    }
+
+
+    public static function currentTotalEarning()
+    {
+        $currentDraw = self::getCurrentDraw();
+        $saleCount  = \App\Models\Lottery::where('cat_id', $currentDraw->id)->get();
+        return count($saleCount) * 100;
+    }
+
+    public static function totalEarning()
+    {
+        $saleCount  = \App\Models\Lottery::count();
+        return $saleCount * 100;
     }
 }
