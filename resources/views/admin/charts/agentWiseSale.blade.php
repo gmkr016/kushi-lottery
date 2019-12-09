@@ -1,6 +1,9 @@
 @extends('admin.templates.layout')
 @section('content')
-<?php $host = $_SERVER['HTTP_HOST'] ; ?>
+<?php 
+$host = $_SERVER['HTTP_HOST'] ;
+$devHost = $_SERVER['HTTP_HOST']."/dev/public";
+?>
 <div id="content-wrapper" class="d-flex flex-column">
 
     <!-- Main Content -->
