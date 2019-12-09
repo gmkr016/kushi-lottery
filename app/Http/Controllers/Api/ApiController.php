@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\LotteryCategory;
 use Illuminate\Http\Request;
 use App\Models\Lottery as Lottery;
+use Carbon\Carbon as Carbon;
 
 class ApiController extends Controller
 {
@@ -60,7 +61,8 @@ class ApiController extends Controller
 
     private function ticketIssued($recentlyAddedLottoId)
     {
-        return Lottery::find($recentlyAddedLottoId)->created_at->toDateString();
+        $issuDate = new Carbon(Lottery::find($recentlyAddedLottoId)->created_at);
+        return $issuDate->toDateTimeString();
     }
     public function postNumbers(Request $request)
     {
