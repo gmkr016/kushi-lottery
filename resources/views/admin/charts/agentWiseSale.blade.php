@@ -22,7 +22,7 @@ $devHost = $_SERVER['HTTP_HOST']."/dev/public";
                         var barLabels=[];
                         var barData=[];
                         var color=[];
-                        fetch("http://"+host + "/api/agentwisesale") // Call the fetch function passing the url of the API as a parameter
+                        fetch("http://"+host+ "/api/agentwisesale") // Call the fetch function passing the url of the API as a parameter
                             .then( response => response.json() )
                             .then(json => {
                                 var datas = json;
@@ -48,7 +48,7 @@ $devHost = $_SERVER['HTTP_HOST']."/dev/public";
                                     data: { 
                                         labels: barLabels, 
                                         datasets: [{ 
-                                            label: 'Lottery ticket sales of last draw' ,
+                                            label: 'Agent Ticket Sales of Last Draw' ,
                                             backgroundColor: color, 
                                             borderColor: 'rgb(255, 150, 132)' , 
                                             fillColor:getRandomColor(), 
@@ -71,7 +71,7 @@ $devHost = $_SERVER['HTTP_HOST']."/dev/public";
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Lottery ticket sales of agents of last draw</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Agent Ticket Sales of Last Draw</h6>
                 </div>
                 <div class="card-body">
                     <canvas id="myChart"></canvas>
