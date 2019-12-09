@@ -135,49 +135,70 @@
                         </div>
 
                         {{-- Pie chart script starts --}}
-                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                        @php $host = $_SERVER['HTTP_HOST'] ; @endphp
+
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
                         <script type="text/javascript">
                             window.onload = function () {
-                                        var fdata;
-                                        fetch("http://192.168.11.181:8000/api/drawwisesale") // Call the fetch function passing the url of the API as a parameter
-                                            .then( response => response.json() )
-                                            .then(json => {
-                                                var datas = {
-                                                    "data": json
-                                                };
-                                            var dataPoints=[];
-                        
-                                            for(var i=0;i<datas.data.length;i++){ 
-                                                dataPoints.push({label:datas.data[i].draw,y:datas.data[i].ticketCount}); } 
-                                                var chart=new CanvasJS.Chart("chart-area", 
-                                                { 
-                                                    animationEnabled: true, 
-                                                    theme: "light2" , 
-                                                    zoomEnabled: true,
-                                                    data: [
-                                                            { 
-                                                                type: "column" , 
-                                                                dataPoints:dataPoints ,
-                                                                indexLabel:"Ticket Sold: {y}",
+                                                var host = "{{$host}}" ;
+                                                var ctx = document.getElementById('chart-area');
+                                                var barLabels=[];
+                                                var barData=[];
+                                                var color=[];
+                                                fetch("http://"+host+ "/api/drawwisesale") // Call the fetch function passing the url of the API as a parameter
+                                                    .then( response => response.json() )
+                                                    .then(json => {
+                                                        var datas = json;
+                                                        // pusing datas into label and data
+                                                        for(var i=0;i<datas.length;i++){ 
+                                                            barLabels.push(datas[i].draw); 
+                                                            barData.push(datas[i].ticketCount);
+                                                            color.push(getRandomColor()); 
+                                                        } 
+                                                            function getRandomColor(){ 
+                                                                var letters='0123456789ABCDEF' .split(''); 
+                                                                var color='#'; 
+                                                                for(var i=0;i<6;i++){ 
+                                                                    color+=letters[Math.floor(Math.random()*16)]; 
+                                                                } 
+                                                                return color; 
                                                             } 
-                                                        ] 
-                                                });
-                                                chart.render();
-                                                })
-                                                .catch(function(error) {
-                                                // This is where you run code if the server returns any errors
-                                                console.log(error)
-                                                });
-                        	
-                        }
+                                                            // creating chart chart using labels and data 
+                                                            var chart=new Chart(ctx, { 
+                                                                // The type of chart we want to create 
+                                                                type: 'bar' , 
+                                                                // The data for our dataset 
+                                                            data: { 
+                                                                labels: barLabels, 
+                                                                datasets: [{ 
+                                                                    label: 'Draws Ticket Sales ' ,
+                                                                    backgroundColor: color, 
+                                                                    borderColor: 'rgb(255, 150, 132)' , 
+                                                                    fillColor:getRandomColor(), 
+                                                                    data: barData
+                                                                }] 
+                                                            }, 
+                                                            //Configuration options go here 
+                                                            options: {} 
+                                                        });
+                                                        
+                                                        })
+                                                        .catch(function(error) {
+                                                        // This is where you run code if the server returns any errors
+                                                        console.log(error)
+                                                        }
+                                                        );
+                                                        }   
                         </script>
                         {{-- Pie chart script ends --}}
 
                         <!-- Card Body -->
                         <div class="card-body">
-                            <div class="chart-area" id="chart-area">
+                            <canvas class="chart-area" id="chart-area" width="100%" height="100%">
 
-                            </div>
+                            </canvas>
                         </div>
                     </div>
                 </div>
