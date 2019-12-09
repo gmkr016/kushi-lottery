@@ -1,10 +1,24 @@
 @extends('admin.templates.layout')
 @section('content')
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script type="text/javascript">
-    window.onload = function () {
+<?php $host = $_SERVER['HTTP_HOST'] ; ?>
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        @include('admin.templates.top-nav')
+        <div class="container-fluid">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Lottery ticket sales of agents of last draw</h6>
+                </div>
+                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                <script type="text/javascript">
+                    window.onload = function () {
+                var host = "{{$host}}" ;
                 var fdata;
-                fetch("http://192.168.11.181:8000/api/agentwisesale") // Call the fetch function passing the url of the API as a parameter
+                fetch("http://"+host + "/api/agentwisesale") // Call the fetch function passing the url of the API as a parameter
                     .then( response => response.json() )
                     .then(json => {
                         var datas = {
@@ -19,8 +33,7 @@
                             animationEnabled: true, 
                             theme: "light2" , 
                             zoomEnabled: true,
-                            title:{
-                                    text: "Lottery ticket sales of agents of last draw" }, 
+                           
                                     data: [ 
                                             { 
                                                 type: "column" , 
@@ -34,9 +47,15 @@
                         .catch(function(error) {
                         // This is where you run code if the server returns any errors
                         console.log(error)
-                        });
-	
-}
-</script>
-<div id="chartContainer" style="height: 100%; width: 100%;"></div>
+                        }
+                        );
+                        }   
+                </script>
+                <div class="card-body">
+                    <div id="chartContainer" style="height: 100%; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
