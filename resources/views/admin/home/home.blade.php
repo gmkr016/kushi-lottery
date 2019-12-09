@@ -168,7 +168,7 @@
                                                             // creating chart chart using labels and data 
                                                             var chart=new Chart(ctx, { 
                                                                 // The type of chart we want to create 
-                                                                type: 'bar' , 
+                                                                type: 'pie' , 
                                                                 // The data for our dataset 
                                                             data: { 
                                                                 labels: barLabels, 
@@ -196,7 +196,7 @@
 
                         <!-- Card Body -->
                         <div class="card-body">
-                            <canvas class="chart-area" id="chart-area" width="100%" height="100%">
+                            <canvas class="chart-area" id="chart-area" width="400px">
 
                             </canvas>
                         </div>
