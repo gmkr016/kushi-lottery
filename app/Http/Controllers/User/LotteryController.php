@@ -115,7 +115,7 @@ class LotteryController extends Controller
 
     public function lists()
     {
-        $lists = Lottery::paginate(10);
+        $lists = Lottery::orderBy('id', 'desc')->paginate(10);
 
         return view('user.lotterylists', compact('lists'));
     }
