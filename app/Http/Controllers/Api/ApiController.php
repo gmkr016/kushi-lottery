@@ -54,7 +54,7 @@ class ApiController extends Controller
         return date('Y-m-d', $draw_date);
     }
 
-    private function totalTicket()
+    public function totalTicket()
     {
         return Lottery::count();
     }
@@ -160,7 +160,7 @@ class ApiController extends Controller
     public static function getCurrentDraw()
     {
         $nowUnix = \Carbon\Carbon::now()->timestamp;
-        $currentDraw = \App\LotteryCategory::where('draw_date', '<', $nowUnix)
+        $currentDraw = \App\LotteryCategory::where('draw_date', '>', $nowUnix)
             ->orderBy('draw_date', 'desc')
             ->first();
         return $currentDraw;
@@ -170,8 +170,20 @@ class ApiController extends Controller
     public static function currentTotalEarning()
     {
         $currentDraw = self::getCurrentDraw();
+        // return $currentDraw;
         $saleCount  = \App\Models\Lottery::where('cat_id', $currentDraw->id)->get();
         return count($saleCount) * 100;
+    }
+
+    public static function currentTotalEarningByUser()
+    {
+        $currentDraw = self::getCurrentDraw();
+        $user = auth('api')->user();
+        return $user->id;
+        $ticketSold = \App\Models\Lottery::where('cat_id', $currentDraw->id)
+            ->where('u_id', $user->id)
+            ->get();
+        return count($ticketSold);
     }
 
     public static function totalEarning()
@@ -179,4 +191,16 @@ class ApiController extends Controller
         $saleCount  = \App\Models\Lottery::count();
         return $saleCount * 100;
     }
+
+    public function getCurrentSalesInfo()
+    {
+        $salesInfo['cu_totalTicketSold'] = self::currentTotalEarningByUser(); //ticket sales count of current draw of logged in user
+        $salesInfo['cu_totalTicketRev'] = $salesInfo['cu_totalTicketSold'] * 100;
+        $salesInfo['totalRev'] = self::totalEarning();
+        $salesInfo['c_totalEarning'] = self::currentTotalEarning();
+        return $salesInfo;
+    }
+
+    // $sales_data['totalTicket'] = $this->apiC->totalTicket();
+    // $sales_data['currentTotalTicketByAgent'] = $this->apiC->currentTotalEarningByUser();
 }

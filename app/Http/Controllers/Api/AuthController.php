@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Http\Controllers\Api\ApiController;
 
 class AuthController extends Controller
 {
@@ -12,8 +13,10 @@ class AuthController extends Controller
      *
      * @return void
      */
+    var $apiC;
     public function __construct()
     {
+        $this->apiC = new ApiController();
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
