@@ -53,9 +53,9 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('me', 'ApiController@me');
     Route::get('getcurrentdraw', 'Apicontroller@getCurrentDraw');
     Route::get('getcurrentsalesinfo', 'ApiController@getCurrentSalesInfo');
-    Route::get('getCategories', 'ApiController@getCategories');
+    Route::get('getcategories', 'ApiController@getCategories');
     Route::post('postNumbers', 'ApiController@postNumbers');
-    Route::get('getSelectedNumbersByAgent', 'ApiController@getSelectedNumbersByAgent');
+    Route::get('getselectednumbersbyagent', 'ApiController@getSelectedNumbersByAgent');
 });
 
 Route::get(
