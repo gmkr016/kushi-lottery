@@ -216,8 +216,9 @@ class ApiController extends Controller
 
             ]
         )->get();
-        $s = [...$getData, "draw_date" => $this->getDrawDate($request->draw_id)];
-        return response()->json($s);
+        // $s = [...$getData, "draw_date" => $this->getDrawDate($request->draw_id)];
+        $getData['draw_date'] = $this->getDrawDate($request->draw_id);
+        return response()->json($getData);
     }
 
     // $sales_data['totalTicket'] = $this->apiC->totalTicket();
