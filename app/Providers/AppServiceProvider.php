@@ -22,7 +22,6 @@ class AppServiceProvider extends ServiceProvider
         $archiveCat = LottCat::where('draw_date', '<', $unix_cd)->get();
         View::share('recenthistory', $recentCat);
         View::share('archivehistory', $archiveCat);
-
         Schema::defaultStringLength(191);
     }
 

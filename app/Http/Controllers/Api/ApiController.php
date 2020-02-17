@@ -7,12 +7,13 @@ use App\LotteryCategory;
 use Illuminate\Http\Request;
 use App\Models\Lottery as Lottery;
 use Carbon\Carbon as Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api', ["except" => 'getSelectedNumbersByAgent']);
     }
 
     public function getNumbers(Request $request)
@@ -47,13 +48,6 @@ class ApiController extends Controller
     }
 
 
-
-    private function getDrawDate($lott_cat)
-    {
-        $draw_date = \App\LotteryCategory::find($lott_cat)->draw_date;
-        return date('Y-m-d', $draw_date);
-    }
-
     public function totalTicket()
     {
         return Lottery::count();
@@ -64,11 +58,17 @@ class ApiController extends Controller
         $issuDate = new Carbon(Lottery::find($recentlyAddedLottoId)->created_at);
         return $issuDate->toDateTimeString();
     }
+
+    private function getLastSerial()
+    {
+        return DB::table('lotteries')->latest('serial')->first()->serial;
+    }
     public function postNumbers(Request $request)
     {
+        $newSerial = ($this->getLastSerial()) + 1;
         foreach ($request->lotteryNumbers as $index) {
             $lott = new Lottery();
-            $lott->serial = auth('api')->id();
+            $lott->serial = $newSerial;
             $lott->cat_id = $index['categories'];
             $lott->u_id = auth('api')->id();
             $lott->first_number = $index['first'];
@@ -84,7 +84,7 @@ class ApiController extends Controller
                     "numbers" => [
                         $index
                     ],
-                    "serial_number" => $lott->id . auth()->id(),
+                    "serial_number" => $newSerial,
                     "drawDate" => $this->getDrawDate($index['categories']),
                     "totalTicket" => $this->totalTicket(),
                     "created_at" => $this->ticketIssued($lott->id),
@@ -111,6 +111,12 @@ class ApiController extends Controller
     public static function getDraw($cat_id)
     {
         return \App\LotteryCategory::find($cat_id)->title;
+    }
+
+    private function getDrawDate($lott_cat)
+    {
+        $draw_date = \App\LotteryCategory::find($lott_cat)->draw_date;
+        return date('Y-m-d', $draw_date);
     }
 
     /**
@@ -199,6 +205,20 @@ class ApiController extends Controller
         $salesInfo['totalRev'] = self::totalEarning();
         $salesInfo['c_totalEarning'] = self::currentTotalEarning();
         return $salesInfo;
+    }
+
+    public function getSelectedNumbersByAgent(Request $request)
+    {
+        $getData = Lottery::where(
+            [
+                ['u_id', '=', $request->user_id],
+                ['cat_id', '=', $request->draw_id],
+                ['serial', '=', $request->serial]
+
+            ]
+        )->get();
+        $s = [...$getData, "draw_date" => $this->getDrawDate($request->draw_id)];
+        return response()->json($s);
     }
 
     // $sales_data['totalTicket'] = $this->apiC->totalTicket();
