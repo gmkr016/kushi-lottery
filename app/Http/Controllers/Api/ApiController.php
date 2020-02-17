@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\LotteryCategory;
-use Illuminate\Http\Request;
 use App\Models\Lottery as Lottery;
 use Carbon\Carbon as Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
@@ -39,14 +39,12 @@ class ApiController extends Controller
         return response()->json(auth()->user());
     }
 
-
     // get categories list for api
     public function getCategories()
     {
         $cat = LotteryCategory::select('id', 'title')->get();
         return response()->json($cat);
     }
-
 
     public function totalTicket()
     {
@@ -82,7 +80,7 @@ class ApiController extends Controller
                 $msg = [
                     "response" => response()->json('success', 201),
                     "numbers" => [
-                        $index
+                        $index,
                     ],
                     "serial_number" => $newSerial,
                     "drawDate" => $this->getDrawDate($index['categories']),
@@ -121,7 +119,7 @@ class ApiController extends Controller
 
     /**
      * Get user's location code
-     * 
+     *
      * @param  user_id
      * @return location_code
      */
@@ -151,16 +149,15 @@ class ApiController extends Controller
     //     return \App\District::find($district_id)->district;
     // }
 
-
     public static function getProvince($city_id)
     {
         $province_id = \App\City::find($city_id)->province_id;
         return \App\Province::find($province_id)->province;
         // return self::getProvinceName($district_id);
     }
-    /** 
+    /**
      * Get Current Draw Object
-     * 
+     *
      * @return Current_Draw_object
      */
     public static function getCurrentDraw()
@@ -172,13 +169,15 @@ class ApiController extends Controller
         return $currentDraw;
     }
 
-
     public static function currentTotalEarning()
     {
         $currentDraw = self::getCurrentDraw();
-        // return $currentDraw;
-        $saleCount  = \App\Models\Lottery::where('cat_id', $currentDraw->id)->get();
-        return count($saleCount) * 100;
+        // return var_dump($currentDraw);
+        if ($currentDraw != null) {
+            $saleCount = \App\Models\Lottery::where('cat_id', $currentDraw->id)->get();
+            return count($saleCount) * 100;
+        }
+        return;
     }
 
     public static function currentTotalEarningByUser()
@@ -194,7 +193,7 @@ class ApiController extends Controller
 
     public static function totalEarning()
     {
-        $saleCount  = \App\Models\Lottery::count();
+        $saleCount = \App\Models\Lottery::count();
         return $saleCount * 100;
     }
 
@@ -213,7 +212,7 @@ class ApiController extends Controller
             [
                 ['u_id', '=', $request->user_id],
                 ['cat_id', '=', $request->draw_id],
-                ['serial', '=', $request->serial]
+                ['serial', '=', $request->serial],
 
             ]
         )->get();
