@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Http\Controllers\Api\ApiController as ApiController;
 use Illuminate\Support\Str;
 
 class ProfileController extends Controller
@@ -85,7 +86,11 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $profile = Auth::User();
+        $district = ApiController::getDistrictLocation($profile->location);
+        $province = ApiController::getProvinceLocation($profile->location);
+        return view('user.profile.showprofile',compact('profile','district','province'));
+        
     }
 
     /**

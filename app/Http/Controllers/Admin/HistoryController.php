@@ -66,7 +66,7 @@ class HistoryController extends Controller
 
     public function userHistory($id)
     {
-        $lists = Lottery::where('u_id', '=', $id)->get();
+        $lists = Lottery::where('u_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
         // return $lists;
 
         return view('admin.history.userhistory', compact('lists', 'id'));
