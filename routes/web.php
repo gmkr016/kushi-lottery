@@ -1,4 +1,18 @@
 <?php
+
+use \Utils\Helper\AesHelper;
+
+// Route::get('/aes', function () {
+//     $data = "name: susant\n address: baluwatar";
+//     $key = "check";
+//     $blockSize = "256";
+
+//     $aes = new AesHelper($data, $key, $blockSize);
+//     $enc = $aes->encrypt();
+//     $aes->setData($enc);
+//     $dec = $aes->decrypt();
+//     return "encrypted = " . $enc . " \ndecrypted = " . $dec;
+// });
 Route::get('/testimg', 'Admin\LotteryCategoryController@testimg');
 /*
 |--------------------------------------------------------------------------
@@ -10,6 +24,7 @@ Route::get('/testimg', 'Admin\LotteryCategoryController@testimg');
 | contains the "web" middleware group. Now create something great!
 |
  */
+
 Route::get(
     'phpinfo',
     function () {

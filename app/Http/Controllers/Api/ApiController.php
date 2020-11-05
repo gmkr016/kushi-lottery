@@ -8,6 +8,7 @@ use App\Models\Lottery as Lottery;
 use Carbon\Carbon as Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use \Utils\Helper\AesHelper;
 
 class ApiController extends Controller
 {
@@ -86,6 +87,7 @@ class ApiController extends Controller
                     "drawDate" => $this->getDrawDate($index['categories']),
                     "totalTicket" => $this->totalTicket(),
                     "created_at" => $this->ticketIssued($lott->id),
+                    "encrypted_key" => $this->encrypted($newSerial . '' . $this->getDrawDate($index['categories']) . '' . $this->ticketIssued($lott->id), 'encrypt', "256")
 
                 ];
             } else {
@@ -93,6 +95,15 @@ class ApiController extends Controller
             }
         }
         return response()->json($msg);
+    }
+
+    /**
+     * encrypt lottery data
+     */
+    public function encrypted($data = null, $key = null, $blockSize = null)
+    {
+        $aes = new AesHelper($data, $key, $blockSize);
+        return $aes->encrypt();
     }
 
     /**
