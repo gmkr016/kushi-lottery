@@ -84,10 +84,13 @@
                         Lasted my coming uneasy marked so should. Gravity letters it amongst herself dearest an
                         windows by.</p>
                     <div class="btn-area">
-                        <a href="#" class="cmn-btn btn-md"><img
-                                src="{{ asset('storage/assets/images/partner/sp1.png') }}" alt="icon-image"></a>
-                        <a href="#" class="border-btn btn-md"><img
-                                src="{{ asset('storage/assets/images/partner/sp2.png') }}" alt="icon-image"></a>
+                         <a href="#" class="border-btn btn-md"><img
+                                    src="{{ asset('storage/assets/images/partner/sp2.png') }}" alt="icon-image" class="img-responsive"></a>
+                            <a href="#" class="border-btn btn-md"><img
+                                    src="{{ asset('storage/assets/images/partner/crupee.png') }}" alt="icon-image"></a>
+                            <a href="#" class="border-btn btn-md"><img
+                                    src="{{ asset('storage/assets/images/partner/fnd-470x121.png') }}"
+                                    alt="icon-image"></a>
                     </div>
                 </div>
             </div>
