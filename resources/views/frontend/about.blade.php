@@ -86,8 +86,7 @@
                     <div class="btn-area">
                          <a href="#" class="border-btn btn-md"><img
                                     src="{{ asset('storage/assets/images/partner/sp2.png') }}" alt="icon-image" class="img-responsive"></a>
-                            <a href="#" class="border-btn btn-md"><img
-                                    src="{{ asset('storage/assets/images/partner/crupee.png') }}" alt="icon-image"></a>
+
                             <a href="#" class="border-btn btn-md"><img
                                     src="{{ asset('storage/assets/images/partner/fnd-470x121.png') }}"
                                     alt="icon-image"></a>
