@@ -1,19 +1,19 @@
 <div class="header-wrapper">
                     <ul class="menu">
                         <li>
-                            <a href="{{url('/')}}" class="active">Home</a>
+                            <a href="{{url('/')}}" <?php echo $title == 'home'? 'class="active"':''; ?>>Home</a>
                         </li>
                         <!-- <li>
                             <a href="single-lottery.html">Lottery</a>
                         </li> -->
                         <li>
-                            <a href="{{ url('resultpage') }}">Results</a>
+                            <a href="{{ url('resultpage') }}" <?php echo $title == 'results'? 'class="active"':''; ?> >Results</a>
                         </li>
                         <li>
-                            <a href="{{ url('about') }}">About</a>
+                            <a href="{{ url('about') }}" <?php echo $title == 'about'? 'class="active"':''; ?> >About</a>
                         </li>
                         <li>
-                            <a href="{{url('faq')}}">Faq</a>
+                            <a href="{{url('faq')}}" <?php echo $title == 'faq'? 'class="active"':''; ?> >Faq</a>
                         </li>
                         <!-- <li>
                             <a href="#">Blog</a>
@@ -27,7 +27,7 @@
                             </ul>
                         </li> -->
                         <li>
-                            <a href="{{url('contact')}}">Contact</a>
+                            <a href="{{url('contact')}}" <?php echo $title == 'contact'? 'class="active"':''; ?> >Contact</a>
                         </li>
                     </ul>
                     <!-- <div class="right-tools">
