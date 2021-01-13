@@ -62,7 +62,6 @@
     top: 0;
 }
 
-
 /* menu css  */
 
 .header-bottom {
@@ -77,7 +76,6 @@
     display: block;
     color: #ffffff;
 }
-
 
 /* .site-title img {
     max-width: 56%;
@@ -128,11 +126,11 @@ li.menu_has_children:hover:after {
     -o-transition: all 0.3s;
 }
 
-.main-menu li.active>a {
+.main-menu li.active > a {
     color: rgb(19, 26, 62);
 }
 
-.header-section.menu-fixed .main-menu li.active>a {
+.header-section.menu-fixed .main-menu li.active > a {
     color: var(--main-color);
 }
 
@@ -145,7 +143,7 @@ li.menu_has_children:hover:after {
     color: var(--main-color);
 }
 
-.main-menu>li:last-child a {
+.main-menu > li:last-child a {
     padding-right: 0;
 }
 
@@ -169,7 +167,7 @@ li.menu_has_children:hover:after {
     border-top: 2px solid var(--main-color);
 }
 
-.main-menu li:hover>.sub-menu {
+.main-menu li:hover > .sub-menu {
     top: 100%;
     opacity: 1;
     visibility: visible;
@@ -230,7 +228,7 @@ li.menu_has_children:hover:after {
     margin-left: 25px;
 }
 
-.registration-login-area .text-btn+.text-btn {
+.registration-login-area .text-btn + .text-btn {
     margin-left: 10px;
 }
 
@@ -330,7 +328,6 @@ span.is-active:after {
     margin-left: 40px;
 }
 
-
 /* menu affix css */
 
 .animated {
@@ -370,9 +367,7 @@ span.is-active:after {
     }
 }
 
-
 /* header-section css end */
-
 
 /* banner-section css start */
 
@@ -507,9 +502,7 @@ span.is-active:after {
     margin-top: 45px;
 }
 
-
 /* banner-section css end */
-
 
 /* next-draw-section css start */
 
@@ -606,9 +599,7 @@ span.is-active:after {
     margin-top: 8px;
 }
 
-
 /* next-draw-section css end */
-
 
 /* step-section css start */
 
@@ -695,9 +686,7 @@ span.is-active:after {
     -o-transform: translateY(-50%);
 }
 
-
 /* step-section css end */
-
 
 /* free-lottery-result-section css start */
 
@@ -773,9 +762,7 @@ span.is-active:after {
     font-weight: 700;
 }
 
-
 /* free-lottery-result-section css end */
-
 
 /* next-jackpot-section css start */
 
@@ -860,9 +847,7 @@ span.is-active:after {
     margin-top: 30px;
 }
 
-
 /* next-jackpot-section css end */
-
 
 /* latest-winner-section css start */
 
@@ -979,9 +964,7 @@ span.is-active:after {
     color: var(--main-color);
 }
 
-
 /* latest-winner-section css end */
-
 
 /* stay-connected-section css start */
 
@@ -1091,9 +1074,7 @@ span.is-active:after {
     color: #ffffff;
 }
 
-
 /* stay-connected-section css end */
-
 
 /* choose-section css start */
 
@@ -1135,7 +1116,8 @@ span.is-active:after {
 }
 
 .choose-single-item:hover {
-    box-shadow: 0px 4px 7px 0px rgba(0, 0, 0, 0.15), 0px 4px 7px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 4px 7px 0px rgba(0, 0, 0, 0.15),
+        0px 4px 7px 0px rgba(0, 0, 0, 0.15);
     transform: translateY(-3px);
     -webkit-transform: translateY(-3px);
     -moz-transform: translateY(-3px);
@@ -1153,9 +1135,7 @@ span.is-active:after {
     -webkit-animation: zoomIn 400ms ease-in-out;
 }
 
-
 /* choose-section css end */
-
 
 /* counter-section css start */
 
@@ -1187,9 +1167,7 @@ span.is-active:after {
     color: var(--main-color);
 }
 
-
 /* counter-section css end */
-
 
 /* online-ticket-section css start */
 
@@ -1374,9 +1352,7 @@ span.is-active:after {
     margin-left: -18px;
 }
 
-
 /* online-ticket-section css end */
-
 
 /* testimonial-section css start */
 
@@ -1543,9 +1519,7 @@ span.is-active:after {
     -webkit-animation: fadeInUp 600ms ease;
 }
 
-
 /* testimonial-section css end */
-
 
 /* blog-section css start */
 
@@ -1636,13 +1610,11 @@ span.is-active:after {
     -o-border-radius: 4px;
 }
 
-.d-pagination .page-item+.page-item {
+.d-pagination .page-item + .page-item {
     margin-left: 10px;
 }
 
-
 /* blog-section css end */
-
 
 /* footer-section css start */
 
@@ -1693,7 +1665,7 @@ span.is-active:after {
     margin-top: 20px;
 }
 
-.footer-social-links li+li {
+.footer-social-links li + li {
     margin-left: 10px;
 }
 
@@ -1710,7 +1682,7 @@ span.is-active:after {
     margin-bottom: 30px;
 }
 
-.menu-widget ul li+li {
+.menu-widget ul li + li {
     margin-top: 5px;
 }
 
@@ -1772,9 +1744,7 @@ span.is-active:after {
     color: #ececec;
 }
 
-
 /* footer-section css end */
-
 
 /* breadcrumb-area css start */
 
@@ -1835,7 +1805,7 @@ span.is-active:after {
     display: none;
 }
 
-.page-list li+li {
+.page-list li + li {
     margin-left: 30px;
 }
 
@@ -1844,9 +1814,7 @@ span.is-active:after {
     font-weight: 400;
 }
 
-
 /* breadcrumb-area css end */
-
 
 /* about-section css start */
 
@@ -1902,9 +1870,7 @@ span.is-active:after {
     text-transform: capitalize;
 }
 
-
 /* about-section css end */
-
 
 /* brand-section css start */
 
@@ -1917,9 +1883,7 @@ span.is-active:after {
     text-align: center;
 }
 
-
 /* brand-section css end */
-
 
 /* team-section css start */
 
@@ -1995,7 +1959,7 @@ span.is-active:after {
     margin-top: 15px;
 }
 
-.team-single-item .content ul li+li {
+.team-single-item .content ul li + li {
     margin-left: 15px;
 }
 
@@ -2007,9 +1971,7 @@ span.is-active:after {
     color: var(--main-color);
 }
 
-
 /* team-section css end */
-
 
 /* winner-section css start */
 
@@ -2090,7 +2052,7 @@ span.is-active:after {
     margin-top: 10px;
 }
 
-.winner-single-item .content ul li+li {
+.winner-single-item .content ul li + li {
     margin-left: 15px;
 }
 
@@ -2102,9 +2064,7 @@ span.is-active:after {
     color: var(--main-color);
 }
 
-
 /* winner-section css end */
-
 
 /* collect-prize-section css start */
 
@@ -2145,9 +2105,7 @@ span.is-active:after {
     -webkit-animation: zoomIn 600ms ease;
 }
 
-
 /* collect-prize-section css end */
-
 
 /* map-section css start */
 
@@ -2166,9 +2124,7 @@ span.is-active:after {
     margin: 0 auto;
 }
 
-
 /* map-section css end */
-
 
 /* faq-section css start */
 
@@ -2180,9 +2136,7 @@ span.is-active:after {
     margin-top: 30px;
 }
 
-
 /* faq-section css end */
-
 
 /* blog-details-section css start */
 
@@ -2258,7 +2212,7 @@ blockquote p {
     display: none;
 }
 
-.social-share li+li {
+.social-share li + li {
     margin-left: 15px;
 }
 
@@ -2360,7 +2314,7 @@ blockquote p {
     box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.15);
 }
 
-.sidebar .widget+.widget {
+.sidebar .widget + .widget {
     margin-top: 30px;
 }
 
@@ -2393,7 +2347,7 @@ blockquote p {
     background-color: #ffffff;
 }
 
-.category-widget li+li {
+.category-widget li + li {
     margin-top: 10px;
 }
 
@@ -2411,7 +2365,7 @@ blockquote p {
     color: var(--main-color);
 }
 
-.small-post-list .small-post-item+.small-post-item {
+.small-post-list .small-post-item + .small-post-item {
     margin-top: 20px;
 }
 
@@ -2451,9 +2405,7 @@ blockquote p {
     padding: 7px;
 }
 
-
 /* blog-details-section css end */
-
 
 /* contact-us-section css start */
 
@@ -2475,7 +2427,7 @@ blockquote p {
     margin-bottom: 20px;
 }
 
-.address-list li+li {
+.address-list li + li {
     margin-top: 10px;
 }
 
@@ -2509,9 +2461,7 @@ blockquote p {
     color: var(--heading-color);
 }
 
-
 /* contact-us-section css end */
-
 
 /* map-section css start */
 
@@ -2519,9 +2469,7 @@ blockquote p {
     height: 700px;
 }
 
-
 /* map-section css end */
-
 
 /* login-block css start */
 
@@ -2589,9 +2537,7 @@ blockquote p {
     text-align: center;
 }
 
-
 /* login-block css end */
-
 
 /* registration-block css start */
 
@@ -2611,9 +2557,7 @@ blockquote p {
     text-align: left;
 }
 
-
 /* registration-block css end */
-
 
 /* faq-section css start */
 
@@ -2717,13 +2661,11 @@ blockquote p {
     border: none;
 }
 
-.lotten-accordion .card+.card {
+.lotten-accordion .card + .card {
     margin-top: 15px;
 }
 
-
 /* faq-section css end */
-
 
 /* error-section css start */
 
@@ -2739,9 +2681,7 @@ blockquote p {
     margin-top: 30px;
 }
 
-
 /* error-section css end */
-
 
 /* ====== scroll-to-top css ====== */
 
@@ -2771,7 +2711,6 @@ blockquote p {
     -o-transform: rotate(-45deg);
 }
 
-
 /* preloader css start */
 
 #preloader {
@@ -2794,9 +2733,7 @@ blockquote p {
     background-color: #363636;
 }
 
-
 /* preloader css end */
-
 
 /* .winnerSection{width: 100%; position: relative;} */
 
@@ -2885,15 +2822,36 @@ blockquote p {
 a.lotteryBuyMore,
 a.printTicket {
     display: inline-block;
-    background: -moz-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
+    background: -moz-linear-gradient(
+        59deg,
+        #e84a5f 0,
+        #ff487d 22%,
+        #fecea8 100%
+    );
     /* FF3.6+ */
-    background: -webkit-gradient( linear, 59deg, color-stop(0, E84A5F), color-stop(22%, FF487D), color-stop(100%, FECEA8));
+    background: -webkit-gradient(
+        linear,
+        59deg,
+        color-stop(0, E84A5F),
+        color-stop(22%, FF487D),
+        color-stop(100%, FECEA8)
+    );
     /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
+    background: -webkit-linear-gradient(
+        59deg,
+        #e84a5f 0,
+        #ff487d 22%,
+        #fecea8 100%
+    );
     /* Chrome10+,Safari5.1+ */
     background: -o-linear-gradient(59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* Opera 11.10+ */
-    background: -ms-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
+    background: -ms-linear-gradient(
+        59deg,
+        #e84a5f 0,
+        #ff487d 22%,
+        #fecea8 100%
+    );
     /* IE10+ */
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1');
     /* for IE */
@@ -2918,15 +2876,36 @@ a.lotteryBuyMore:hover {
 .lotteryTicketPriceTag {
     width: 142px;
     height: 140px;
-    background: -moz-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
+    background: -moz-linear-gradient(
+        59deg,
+        #e84a5f 0,
+        #ff487d 22%,
+        #fecea8 100%
+    );
     /* FF3.6+ */
-    background: -webkit-gradient( linear, 59deg, color-stop(0, E84A5F), color-stop(22%, FF487D), color-stop(100%, FECEA8));
+    background: -webkit-gradient(
+        linear,
+        59deg,
+        color-stop(0, E84A5F),
+        color-stop(22%, FF487D),
+        color-stop(100%, FECEA8)
+    );
     /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
+    background: -webkit-linear-gradient(
+        59deg,
+        #e84a5f 0,
+        #ff487d 22%,
+        #fecea8 100%
+    );
     /* Chrome10+,Safari5.1+ */
     background: -o-linear-gradient(59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
     /* Opera 11.10+ */
-    background: -ms-linear-gradient( 59deg, #e84a5f 0, #ff487d 22%, #fecea8 100%);
+    background: -ms-linear-gradient(
+        59deg,
+        #e84a5f 0,
+        #ff487d 22%,
+        #fecea8 100%
+    );
     /* IE10+ */
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1');
     /* for IE */

@@ -1,5 +1,57 @@
-{{-- login page nav --}}
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<div class="header-wrapper">
+                    <ul class="menu">
+                        <li>
+                            <a href="{{url('/')}}" class="active">Home</a>
+                        </li>
+                        <li>
+                            <a href="single-lottery.html">Lottery</a>
+                        </li>
+                        <li>
+                            <a href="result.html">Results</a>
+                        </li>
+                        <li>
+                            <a href="{{url('about') }}">About</a>
+                        </li>
+                        <li>
+                            <a href="faq.html">Faq</a>
+                        </li>
+                        <li>
+                            <a href="#">Blog</a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="blog.html">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="blog-details.html">Blog Details</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                    <!-- <div class="right-tools">
+                        <select class="select-bar">
+                            <option value="">BTC</option>
+                            <option value="">BDT</option>
+                            <option value="">USD</option>
+                        </select>
+                        <select class="select-bar">
+                            <option value="">EN</option>
+                            <option value="">IN</option>
+                            <option value="">BN</option>
+                        </select>
+                    </div> -->
+                    <div class="header-bar d-lg-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+
+
+<!-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -10,9 +62,9 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Right Side Of Navbar -->
+            // Right Side Of Navbar
             <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
+                // Authentication Links
                 @if(Auth::guard('web')->check())
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -59,4 +111,4 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->
