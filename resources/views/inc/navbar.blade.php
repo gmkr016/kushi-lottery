@@ -3,19 +3,19 @@
                         <li>
                             <a href="{{url('/')}}" class="active">Home</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="single-lottery.html">Lottery</a>
+                        </li> -->
+                        <li>
+                            <a href="{{ url('resultpage') }}">Results</a>
                         </li>
                         <li>
-                            <a href="result.html">Results</a>
+                            <a href="{{ url('about') }}">About</a>
                         </li>
                         <li>
-                            <a href="{{url('about') }}">About</a>
+                            <a href="{{url('faq')}}">Faq</a>
                         </li>
-                        <li>
-                            <a href="faq.html">Faq</a>
-                        </li>
-                        <li>
+                        <!-- <li>
                             <a href="#">Blog</a>
                             <ul class="submenu">
                                 <li>
@@ -25,9 +25,9 @@
                                     <a href="blog-details.html">Blog Details</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="{{url('contact')}}">Contact</a>
                         </li>
                     </ul>
                     <!-- <div class="right-tools">

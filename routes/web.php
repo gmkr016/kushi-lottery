@@ -39,6 +39,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/blog', 'HomeController@blog')->name('blog');
 Route::get('/contact', 'HomeController@contact')->name('contact');
+Route::get('/resultpage', 'HomeController@resultpage')->name('resultpage');
+Route::get('/faq', 'HomeController@faq')->name('faq');
 
 // Route::get();
 
@@ -91,7 +93,6 @@ Route::prefix('/admin')
     ->namespace('Admin')
     ->group(
         function () {
-
             Route::get('/home', 'HomeController@index')->name('home');
             Route::resource('categories', 'LotteryCategoryController');
             Route::get('recenthistory/{id}', 'HistoryController@recent');

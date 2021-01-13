@@ -6,7 +6,6 @@ use App\LotteryCategory as Lcat;
 
 class HomeController extends Controller
 {
-
     public function index()
     {
         $lcat = Lcat::all();
@@ -30,5 +29,16 @@ class HomeController extends Controller
     {
         $title = "contact";
         return view('frontend.contact')->with('title', $title);
+    }
+    public function resultpage()
+    {
+        $title = 'results';
+        return view('frontend.result')->with('title', $title);
+    }
+
+    public function faq()
+    {
+        $title = 'faq';
+        return view('frontend.faq')->with('title', $title);
     }
 }
