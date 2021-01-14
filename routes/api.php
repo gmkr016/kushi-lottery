@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Api\ApiController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -55,6 +56,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('getcategories', 'ApiController@getCategories');
     Route::post('postNumbers', 'ApiController@postNumbers');
     Route::get('getselectednumbersbyagent', 'ApiController@getSelectedNumbersByAgent');
+    // Route::get('currentTotalEarning', 'ApiController@currentTotalEarning');
 });
 
 Route::get(

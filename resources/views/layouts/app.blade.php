@@ -40,7 +40,7 @@
 </head>
 
 <body>
-    @include('inc.navbar')
+    <!-- @include('inc.navbar') -->
     <main class="container mt-4">
         @yield('content')
     </main>

@@ -14,7 +14,7 @@ class ApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ["except" => 'getSelectedNumbersByAgent']);
+        $this->middleware('auth:api', ["except" => ['getSelectedNumbersByAgent','currentTotalEarning','getAllFutureDraw']]);
     }
 
     public function getNumbers(Request $request)
@@ -77,7 +77,6 @@ class ApiController extends Controller
             $lott->fifth_number = $index['fifth'];
             $lott->sixth_number = $index['sixth'];
             if (response()->json($lott->save())) {
-
                 $msg = [
                     "response" => response()->json('success', 201),
                     "numbers" => [
@@ -171,24 +170,28 @@ class ApiController extends Controller
      *
      * @return Current_Draw_object
      */
+    public static function getAllFutureDraw()
+    {
+        $nowUnix = \Carbon\Carbon::now()->timestamp;
+        return  \App\LotteryCategory::where('draw_date', '>', $nowUnix)->orderBy('draw_date', 'asc')->get();
+    }
     public static function getCurrentDraw()
     {
         $nowUnix = \Carbon\Carbon::now()->timestamp;
-        $currentDraw = \App\LotteryCategory::where('draw_date', '>', $nowUnix)
-            ->orderBy('draw_date', 'desc')
+        return \App\LotteryCategory::where('draw_date', '>', $nowUnix)
+            ->orderBy('draw_date', 'asc')
             ->first();
-        return $currentDraw;
     }
 
     public static function currentTotalEarning()
     {
         $currentDraw = self::getCurrentDraw();
-        // return var_dump($currentDraw);
+        $saleCount = null;
         if ($currentDraw != null) {
             $saleCount = \App\Models\Lottery::where('cat_id', $currentDraw->id)->get();
             return count($saleCount) * 100;
         }
-        return;
+        return $saleCount;
     }
 
     public static function currentTotalEarningByUser()
@@ -227,11 +230,7 @@ class ApiController extends Controller
 
             ]
         )->get();
-        // $s = [...$getData, "draw_date" => $this->getDrawDate($request->draw_id)];
         $getData['draw_date'] = $this->getDrawDate($request->draw_id);
         return response()->json($getData);
     }
-
-    // $sales_data['totalTicket'] = $this->apiC->totalTicket();
-    // $sales_data['currentTotalTicketByAgent'] = $this->apiC->currentTotalEarningByUser();
 }

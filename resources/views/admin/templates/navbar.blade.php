@@ -54,9 +54,11 @@
         <div id="recenthistory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Upcoming Draws :</h6>
-                @foreach($recenthistory as $rs)
+                @if(isset($recenthistory))
+                 @foreach($recenthistory as $rs)
                 <a class="collapse-item" href="{{ url("admin/recenthistory/$rs->id") }}">{{ ucfirst($rs->title) }}</a>
                 @endforeach
+                @endif
             </div>
         </div>
     </li>
@@ -71,9 +73,11 @@
         <div id="archivehistory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Past Draw History:</h6>
+                @if(isset($archivehistory))
                 @foreach($archivehistory as $as)
                 <a class="collapse-item" href="{{ url("admin/archivehistory/$as->id") }}">{{ ucfirst($as->title) }}</a>
                 @endforeach
+                @endif
             </div>
         </div>
     </li>

@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\LotteryCategory as LottCat;
+use \App\LotteryCategory as LottCat;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use View;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,15 +16,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (class_exists("LottCat")) {
+        if (class_exists(LottCat::class)) {
             $currentDate = \Carbon\Carbon::now()->toDateTimeString(); // yyyy-mm-dd hh:mm:ss
             $unix_cd = strtotime($currentDate); //1561959211
             $recentCat = LottCat::where('draw_date', '>=', $unix_cd)->get();
             $archiveCat = LottCat::where('draw_date', '<', $unix_cd)->get();
             View::share('recenthistory', $recentCat);
             View::share('archivehistory', $archiveCat);
-            Schema::defaultStringLength(191);
         }
+        Schema::defaultStringLength(191);
     }
 
     /**

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('storage/assets/newcss/bootstrap-popover-x.min.css')}}">
     <link rel="stylesheet" href="{{ asset('storage/assets/newcss/main.css')}}">
     <link rel="stylesheet" href="{{ asset('storage/assets/newcss/responsive.css')}}">
-    <link rel="shortcut icon" href="{{ asset('storage/storage/assets/newimages/favicon.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('storage/assets/newimages/favicon.png')}}" type="image/x-icon">
     <title>Khushi Lottery || Nepal's No.1</title>
 
 
@@ -53,13 +53,14 @@
                                 <div class="log-reg-area">
                                     <span class="text">Ticket Sold :</span>
                                     <div class="time">
-                                       1000025</h6>
+                                       {{$totalSale/100}}</h6>
                                     </div>
                                 </div>
                                 <div class="next-draw">
                                     <span class="text">Next Draw :</span>
                                     <div class="time">
-                                        <h6 class="time-countdown" data-countdown="01/06/2022"></h6>
+
+                                        <h6 class="time-countdown" data-countdown={{$nextDraw}}></h6>
                                     </div>
                                 </div>
                             </div>
@@ -94,13 +95,13 @@
                             <div class="right">
                                 <ul class="links">
                                     <li>
-                                        <a href="#">About</a>
+                                        <a href="{{url('about')}}">About</a>
                                     </li>
                                     <li>
-                                        <a href="#">FAQs</a>
+                                        <a href="{{url('faq')}}">FAQs</a>
                                     </li>
                                     <li>
-                                        <a href="#">Contact</a>
+                                        <a href="{{url('contact')}}">Contact</a>
                                     </li>
                                     <li>
                                         <a href="#">Terms of Service</a>
