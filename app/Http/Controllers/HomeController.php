@@ -16,7 +16,11 @@ class HomeController extends Controller
     {
         $this->totalSale = Api::currentTotalEarning();
         $allFutureDraw = Api::getAllFutureDraw();
-        $nextDrawUnix = $allFutureDraw[1]->draw_date;
+        if ($allFutureDraw) {
+            $nextDrawUnix = $allFutureDraw[1]->draw_date;
+        } else {
+            $nextDrawUnix = null;
+        }
         $this->nextDraw = gmdate('m/d/Y', $nextDrawUnix);
         $this->lcat = Lcat::all();
     }

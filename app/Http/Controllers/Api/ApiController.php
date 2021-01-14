@@ -173,7 +173,11 @@ class ApiController extends Controller
     public static function getAllFutureDraw()
     {
         $nowUnix = \Carbon\Carbon::now()->timestamp;
-        return  \App\LotteryCategory::where('draw_date', '>', $nowUnix)->orderBy('draw_date', 'asc')->get();
+        $futureDraws =  \App\LotteryCategory::where('draw_date', '>', $nowUnix)->orderBy('draw_date', 'asc')->get();
+        if ($futureDraws->count() > 0) {
+            return $futureDraws;
+        }
+        return false;
     }
     public static function getCurrentDraw()
     {
