@@ -1,185 +1,315 @@
 @extends('frontend.templates.layout')
 @section('content')
-<!-- about-section start -->
-<section class="about-section section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="about-wrapper d-flex">
-                    <div class="thumb"><img src="{{ asset('storage/assets/images/about/1.jpg') }}" alt="about-image">
-                    </div>
-                    <div class="content">
-                        <h2 class="title">about us</h2>
-                        <p>In up so discovery my middleton eagerness dejection explained. Estimating excellence ye
-                            contrasted insensible as. Oh up unsatiable advantages decisively as at interested.
-                            Present suppose in esteems in demesne colonel it to. End horrible she landlord screened
-                            stanhill.</p>
-                        <p>Repeated offended you opinions off dissuade ask packages screened. She alteration
-                            everything sympathize impossible his get compliment. Collected few extremity suffering
-                            met had sportsman. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- about-section end -->
+<!-- ==========Breadcrumb-Section========== -->
+    <section class="breadcrumb-area">
+        <div class="container">
+            <div class="content">
+                <h2 class="title">
+                    About Us
+                </h2>
+                <ul class="breadcrumb-list extra-padding">
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
 
-<!-- brand-section start -->
-<div class="brand-section section-padding section-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="brand-slider">
-                    <div class="brand-single-slide">
-                        <div class="thumb"> <img src="{{ asset('storage/assets/images/brand/1.png') }}"
-                                alt="brand-image"></div>
-                    </div><!-- brand-single-slide end -->
-                    <div class="brand-single-slide">
-                        <div class="thumb"><img src="{{ asset('storage/assets/images/brand/5.png') }}"
-                                alt="brand-image"></div>
-                    </div><!-- brand-single-slide end -->
-                    <div class="brand-single-slide">
-                        <div class="thumb"><img src="{{ asset('storage/assets/images/brand/2.png') }}"
-                                alt="brand-image"></div>
-                    </div><!-- brand-single-slide end -->
-                    <div class="brand-single-slide">
-                        <div class="thumb"><img src="{{ asset('storage/assets/images/brand/3.png') }}"
-                                alt="brand-image"></div>
-                    </div><!-- brand-single-slide end -->
-                    <div class="brand-single-slide">
-                        <div class="thumb"><img src="{{ asset('storage/assets/images/brand/4.png') }}"
-                                alt="brand-image"></div>
-                    </div><!-- brand-single-slide end -->
-                    <div class="brand-single-slide">
-                        <div class="thumb"><img src="{{ asset('storage/assets/images/brand/5.png') }}"
-                                alt="brand-image"></div>
-                    </div><!-- brand-single-slide end -->
-                    <div class="brand-single-slide">
-                        <div class="thumb"><img src="{{ asset('storage/assets/images/brand/1.png') }}"
-                                alt="brand-image"></div>
-                    </div><!-- brand-single-slide end -->
-                    <div class="brand-single-slide">
-                        <div class="thumb"><img src="{{ asset('storage/assets/images/brand/2.png') }}"
-                                alt="brand-image"></div>
-                    </div><!-- brand-single-slide end -->
-                </div>
+                    <li>
+                        <a href="#">About Us</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-</div>
-<!-- brand-section end -->
+    </section>
+    <!-- ==========Breadcrumb-Section========== -->
 
-<!-- stay-connected-section start -->
-<section class="stay-connected-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="stay-connected-wrapper">
-                    <h2 class="title">Our Partner</h2>
-                    <p>One advanced diverted domestic repeated bringing you old. Possible procured her trifling
-                        laughter thoughts
-                        property she met way. Companions shy had solicitude favourable own. Which could saw guest
-                        man now heard but.
-                        Lasted my coming uneasy marked so should. Gravity letters it amongst herself dearest an
-                        windows by.</p>
-                    <div class="btn-area">
-                        <a href="#" class="cmn-btn btn-md"><img
-                                src="{{ asset('storage/assets/images/partner/sp1.png') }}" alt="icon-image"></a>
-                        <a href="#" class="border-btn btn-md"><img
-                                src="{{ asset('storage/assets/images/partner/sp2.png') }}" alt="icon-image"></a>
+    <!-- ==========About-counter-Section========== -->
+    <section class="about-counter">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="about-counter-image">
+                        <img src="{{ asset('storage/assets/newimages/about-counter') }}-bg.jpg" alt="">
+                    </div>
+                    <div class="counter-area">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                <div class="counter-area-inner">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="c-box">
+                                                <img class="icon" src="{{ asset('storage/assets/newimages/ac1.png') }}" alt="">
+                                                <h3 class="number">23</h3>
+                                                <p class="text">Winners Last Month</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="c-box">
+                                                <img class="icon" src="{{ asset('storage/assets/newimages/ac2.png') }}" alt="">
+                                                <h3 class="number">2837K</h3>
+                                                <p class="text">Tickets Sold</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="c-box">
+                                                <img class="icon" src="{{ asset('storage/assets/newimages/ac3.png') }}" alt="">
+                                                <h3 class="number">28387K</h3>
+                                                <p class="text">Payout to Winners</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- stay-connected-section end -->
+    </section>
+    <!-- ==========About-counter-Section========== -->
 
-<!-- team-section start -->
-<section class="team-section section-padding section-bg">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="section-header text-center">
-                    <h2 class="section-title">Our Management Team</h2>
-                    <p>No in he real went find mr. Wandered or strictly raillery stanhill as. Jennings appetite
-                        disposed me an at subjects an.</p>
+    <!-- ==========About-info-Section========== -->
+    <section class="about-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-image">
+                        <img src="{{ asset('storage/assets/newimages/about-left') }}.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 align-self-center">
+                    <div class="right-content">
+                        <div class="section-header">
+                            <h2 class="title">
+                                About us
+                            </h2>
+                            <p>
+                                We offer the possibility to play the world’s
+                                biggest lotteries online. Our site was designed with a lottery player in mind. We are
+                                lotto
+                                fans ourselves, therefore we know what it takes to satisfy one.
+                            </p>
+                            <p>
+                                Our team is build up with lottery enthusiasts, but also industry professionals. Our
+                                designers and developers ensure the smoothest lotto playing experience. Support is also
+                                a
+                                pillar of our operations. Our agents are always thriving to help.
+
+                            </p>
+                            <p>
+                                Your satisfaction is our goal!
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="team-single-item">
-                    <div class="thumb">
-                        <img src="{{ asset('storage/assets/images/team/1.png') }}" alt="team-image">
+    </section>
+    <!-- ==========About-info-Section========== -->
+
+    <!-- ==========Testimonial-Section========== -->
+    <section class="testimonial">
+        <div class="about-feature">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="a-f-box">
+                            <img src="{{ asset('storage/assets/newimages/af1.png') }}" alt="">
+                            <h4 class="title">100% Secure</h4>
+                            <p class="text">
+                                All transactions are protected by
+                                GeoTrust 128-bit SSL security layer.
+                            </p>
+                        </div>
                     </div>
-                    <div class="content">
-                        <h4 class="name">Kule Medina</h4>
-                        <span class="designation">Managing Director</span>
-                        <ul class="d-flex justify-content-center">
-                            <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        </ul>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="a-f-box">
+                            <img src="{{ asset('storage/assets/newimages/af2.png') }}" alt="">
+                            <h4 class="title">No Risk</h4>
+                            <p class="text">
+                                All transactions are protected by
+                                GeoTrust 128-bit SSL security layer.
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </div><!-- team-single-item end -->
-            <div class="col-lg-3 col-md-6">
-                <div class="team-single-item">
-                    <div class="thumb">
-                        <img src="{{ asset('storage/assets/images/team/2.png') }}" alt="team-image">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="a-f-box">
+                            <img src="{{ asset('storage/assets/newimages/af3.png') }}" alt="">
+                            <h4 class="title">Support</h4>
+                            <p class="text">
+                                All transactions are protected by
+                                GeoTrust 128-bit SSL security layer.
+                            </p>
+                        </div>
                     </div>
-                    <div class="content">
-                        <h4 class="name">Ann Zink</h4>
-                        <span class="designation">Web Developer</span>
-                        <ul class="d-flex justify-content-center">
-                            <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div><!-- team-single-item end -->
-            <div class="col-lg-3 col-md-6">
-                <div class="team-single-item">
-                    <div class="thumb">
-                        <img src="{{ asset('storage/assets/images/team/3.png') }}" alt="team-image">
-                    </div>
-                    <div class="content">
-                        <h4 class="name">Harold Glenn</h4>
-                        <span class="designation">App Developer</span>
-                        <ul class="d-flex justify-content-center">
-                            <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        </ul>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="a-f-box">
+                            <img src="{{ asset('storage/assets/newimages/af4.png') }}" alt="">
+                            <h4 class="title">Spam-Free</h4>
+                            <p class="text">
+                                All transactions are protected by
+                                GeoTrust 128-bit SSL security layer.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div><!-- team-single-item end -->
-            <div class="col-lg-3 col-md-6">
-                <div class="team-single-item">
-                    <div class="thumb">
-                        <img src="{{ asset('storage/assets/images/team/4.png') }}" alt="team-image">
-                    </div>
-                    <div class="content">
-                        <h4 class="name">Fahad Bin Faiz</h4>
-                        <span class="designation">Front-end engineer</span>
-                        <ul class="d-flex justify-content-center">
-                            <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div><!-- team-single-item end -->
+            </div>
         </div>
-    </div>
-</section>
-<!-- team-section end -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="about-testimonial">
+                        <img src="{{ asset('storage/assets/newimages/map.png') }}" alt="">
+                        <div class="client one">
+                            <div class="img" data-toggle="popover-x" data-target="#myPopover" data-placement="top"
+                                data-trigger="hover focus">
+                                <img src="{{ asset('storage/assets/newimages/testi1.png') }}" alt="">
+                            </div>
+                            <div id="myPopover" class="popover popover-default mypopover">
+                                <div class="arrow"></div>
+                                <div class="client-review">
+                                    <p class="top-text">Awesome Fantra!</p>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="bottom-text">“Ideas are easy. Implementation is hard.”</p>
+                                    <div class="client-info">
+                                        <h4 class="name">Flora Oliver</h4>
+                                        <p class="date">Jan 1, 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client two">
+                            <div class="img" data-toggle="popover-x" data-target="#myPopover2" data-placement="top"
+                                data-trigger="hover focus">
+                                <img src="{{ asset('storage/assets/newimages/testi2.png') }}" alt="">
+                            </div>
+                            <div id="myPopover2" class="popover popover-default mypopover">
+                                <div class="arrow"></div>
+                                <div class="client-review">
+                                    <p class="top-text">Awesome Fantra!</p>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="bottom-text">“Ideas are easy. Implementation is hard.”</p>
+                                    <div class="client-info">
+                                        <h4 class="name">Flora Oliver</h4>
+                                        <p class="date">Jan 1, 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client three">
+                            <div class="img" data-toggle="popover-x" data-target="#myPopover3" data-placement="top"
+                                data-trigger="hover focus">
+                                <img src="{{ asset('storage/assets/newimages/testi3.png') }}" alt="">
+                            </div>
+                            <div id="myPopover3" class="popover popover-default mypopover">
+                                <div class="arrow"></div>
+                                <div class="client-review">
+                                    <p class="top-text">Awesome Fantra!</p>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="bottom-text">“Ideas are easy. Implementation is hard.”</p>
+                                    <div class="client-info">
+                                        <h4 class="name">Flora Oliver</h4>
+                                        <p class="date">Jan 1, 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client four">
+                            <div class="img" data-toggle="popover-x" data-target="#myPopover4" data-placement="top"
+                                data-trigger="hover focus">
+                                <img src="{{ asset('storage/assets/newimages/testi4.png') }}" alt="">
+                            </div>
+                            <div id="myPopover4" class="popover popover-default mypopover">
+                                <div class="arrow"></div>
+                                <div class="client-review">
+                                    <p class="top-text">Awesome Fantra!</p>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="bottom-text">“Ideas are easy. Implementation is hard.”</p>
+                                    <div class="client-info">
+                                        <h4 class="name">Flora Oliver</h4>
+                                        <p class="date">Jan 1, 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client five">
+                            <div class="img" data-toggle="popover-x" data-target="#myPopover5" data-placement="top"
+                                data-trigger="hover focus">
+                                <img src="{{ asset('storage/assets/newimages/testi5.png') }}" alt="">
+                            </div>
+                            <div id="myPopover5" class="popover popover-default mypopover">
+                                <div class="arrow"></div>
+                                <div class="client-review">
+                                    <p class="top-text">Awesome Fantra!</p>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="bottom-text">“Ideas are easy. Implementation is hard.”</p>
+                                    <div class="client-info">
+                                        <h4 class="name">Flora Oliver</h4>
+                                        <p class="date">Jan 1, 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client six">
+                            <div class="img" data-toggle="popover-x" data-target="#myPopover6" data-placement="top"
+                                data-trigger="hover focus">
+                                <img src="{{ asset('storage/assets/newimages/testi6.png') }}" alt="">
+                            </div>
+                            <div id="myPopover6" class="popover popover-default mypopover">
+                                <div class="arrow"></div>
+                                <div class="client-review">
+                                    <p class="top-text">Awesome Fantra!</p>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="bottom-text">“Ideas are easy. Implementation is hard.”</p>
+                                    <div class="client-info">
+                                        <h4 class="name">Flora Oliver</h4>
+                                        <p class="date">Jan 1, 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Testimonial-Section========== -->
 
 @endsection

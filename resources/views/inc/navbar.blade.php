@@ -1,5 +1,43 @@
-{{-- login page nav --}}
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<div class="header-wrapper">
+                    <ul class="menu">
+                        <li>
+                            <a href="{{url('/')}}" <?php echo $title == 'home'? 'class="active"':''; ?>>Home</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('resultpage') }}" <?php echo $title == 'results'? 'class="active"':''; ?> >Results</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('about') }}" <?php echo $title == 'about'? 'class="active"':''; ?> >About</a>
+                        </li>
+                        <li>
+                            <a href="{{url('faq')}}" <?php echo $title == 'faq'? 'class="active"':''; ?> >Faq</a>
+                        </li>
+                        <li>
+                            <a href="{{url('contact')}}" <?php echo $title == 'contact'? 'class="active"':''; ?> >Contact</a>
+                        </li>
+                    </ul>
+                    <!-- <div class="right-tools">
+                        <select class="select-bar">
+                            <option value="">BTC</option>
+                            <option value="">BDT</option>
+                            <option value="">USD</option>
+                        </select>
+                        <select class="select-bar">
+                            <option value="">EN</option>
+                            <option value="">IN</option>
+                            <option value="">BN</option>
+                        </select>
+                    </div> -->
+                    <div class="header-bar d-lg-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+
+
+<!-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -10,9 +48,9 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Right Side Of Navbar -->
+            // Right Side Of Navbar
             <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
+                // Authentication Links
                 @if(Auth::guard('web')->check())
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -59,4 +97,4 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->

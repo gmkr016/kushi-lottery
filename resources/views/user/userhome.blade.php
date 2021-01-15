@@ -1,5 +1,6 @@
 @extends('user.templates.layout')
 @section('content')
+@php use App\Http\Controllers\Api\ApiController; @endphp
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -31,8 +32,10 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Earnings (Monthly)</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                        Earnings (Current Draw)</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ApiController::currentTotalEarning()}}
+                                    </div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-calendar fa-2x text-gray-300"></i>

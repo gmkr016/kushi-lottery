@@ -52,14 +52,15 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
 
                                             @foreach ($lists as $item)
                                             <tr role="row" class="odd">
-                                                <td class="sorting_1" style="vertical-align:middle">{{ $item->title }}
+                                                <td class="sorting_1" style="vertical-align:middle">
+                                                    {{ ucfirst($item->title) }}
                                                 </td>
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     <img src="{{ asset("storage/lottery_cat/$item->image") }}" alt=""
                                                         style="width:100px">
                                                 </td>
                                                 <td class="sorting_1" style="vertical-align:middle">
-                                                    {{ $item->draw_date }}
+                                                    {{ date('Y-m-d H:i:s', $item->draw_date) }}
                                                 </td>
                                                 {{-- how many total lotteries submitted from users --}}
                                                 <td class="sorting_1" style="vertical-align:middle">
@@ -69,8 +70,8 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                                     <a class="btn btn-primary"
                                                         href="{{ url("admin/categories/$item->id/edit") }}">Edit</a>
                                                     <a href="javascript:void()" class="btn btn-danger"
-                                                        onclick="event.preventDefault();document.querySelector('#item-delete').submit();">Delete</a>
-                                                    <form method='POST' id="item-delete"
+                                                        onclick="event.preventDefault();document.querySelector('#item{{$item->id}}-delete').submit();">Delete</a>
+                                                    <form method='POST' id="item{{$item->id}}-delete"
                                                         action='{{ url("admin/categories/$item->id") }}'>
                                                         @csrf
                                                         <input type="hidden" name="_method" value="DELETE">
@@ -97,13 +98,14 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12 col-md-5">
-                                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+                                <div class="col-sm-12 col-md-7">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"
+                                        role="status" aria-live="polite">
                                         Showing 1 to 10 of {{ count($lists) }} entries</div>
 
                                     {{ $lists->links() }}
                                 </div>
-                                <div class="col-sm-12 col-md-7">
+                                {{-- <div class="col-sm-12 col-md-7">
                                     <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                                         <ul class="pagination">
                                             <li class="paginate_button page-item previous disabled"
@@ -127,7 +129,7 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                                     class="page-link">Next</a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

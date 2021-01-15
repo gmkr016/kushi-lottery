@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Models\Lottery as Lottery;
+use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
+use App\Models\Lottery as Lottery;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Api\ApiController;
 
 class LotteryController extends Controller
 {
@@ -79,28 +82,41 @@ class LotteryController extends Controller
     // public function submit(ConfirmLottery $request)
     public function submit(Request $request)
     {
-        $lottery = new Lottery;
-        $lottery->cat_id = $request->lott_cat;
-        $lottery->first_number = $request->first;
-        $lottery->second_number = $request->second;
-        $lottery->third_number = $request->third;
-        $lottery->fourth_number = $request->fourth;
-        $lottery->fifth_number = $request->fifth;
-        $lottery->sixth_number = $request->sixth;
+        $message = array();
+        if (Auth::check()) {
+            $lottery = new Lottery;
+            $lottery->cat_id = $request->lott_cat;
+            $lottery->u_id = Auth::user()->id;
+            $lottery->serial = Uuid::generate(4);
+            $lottery->first_number = $request->first;
+            $lottery->second_number = $request->second;
+            $lottery->third_number = $request->third;
+            $lottery->fourth_number = $request->fourth;
+            $lottery->fifth_number = $request->fifth;
+            $lottery->sixth_number = $request->sixth;
 
-        $resdata = [
-            $request->first,
-            $request->second,
-            $request->third,
-            $request->fourth,
-            $request->fifth,
-            $request->sixth,
-        ];
-        if ($lottery->save()) {
-            // $message = trans('lottery.success.saved');
-            $message = response()->json(["msg" => $resdata]);
+            $resdata = [
+                $request->first,
+                $request->second,
+                $request->third,
+                $request->fourth,
+                $request->fifth,
+                $request->sixth,
+            ];
+            if ($lottery->save()) {
+                $currentDraw = ApiController::getCurrentDraw();
+                $drawWiseSale = ApiController::getDrawWiseSale();
+                var_dump($drawWiseSale);
+                // if ($drawWiseSale->has($currentDraw->title)) {
+                //     array_push($message, "true");
+                // }
+                // $message = trans('lottery.success.saved');
+                $message = response()->json(["msg" => $resdata]);
+            } else {
+                array_push($message, "Operation Failed");
+            }
         } else {
-            $message = "Operation Failed";
+            array_push($message, "you are not logged in");
         }
 
         return compact('message');
@@ -108,7 +124,7 @@ class LotteryController extends Controller
 
     public function lists()
     {
-        $lists = Lottery::paginate(10);
+        $lists = Lottery::orderBy('id', 'desc')->paginate(10);
 
         return view('user.lotterylists', compact('lists'));
     }
@@ -119,5 +135,37 @@ class LotteryController extends Controller
         if ($action) {
             return $this->lists();
         }
+    }
+
+    public function pracJson()
+    {
+        $lotteryNumbers = '{
+                                "first": {
+                                    "1": "1",
+                                    "2": "2",
+                                    "3": "3",
+                                    "4": "4",
+                                    "5": "5",
+                                    "6": "6"
+                                },
+                                "second": {
+                                    "1": "6",
+                                    "2": "2",
+                                    "3": "3",
+                                    "4": "4",
+                                    "5": "5",
+                                    "6": "6"
+                                },
+                                "third": {
+                                    "1": "1",
+                                    "2": "2",
+                                    "3": "3",
+                                    "4": "4",
+                                    "5": "5",
+                                    "6": "6"
+                                }
+                            }';
+        $lott = json_decode($lotteryNumbers);
+        return $lott->toArray();
     }
 }

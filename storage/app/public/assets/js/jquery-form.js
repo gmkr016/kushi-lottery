@@ -88,6 +88,7 @@ $(function() {
                         type: 'button',
                         onclick: 'myFunction(this)',
                         id: '4',
+                        class: 'btn btn-info',
                         value: 'Quick Pick'
                     })
                 )
@@ -147,7 +148,7 @@ $(function() {
                         return true;
                     },
                     error: function(response) {
-                        alert("you are not logged in");
+                        alert('Please Login to play');
                     }
                 });
             }

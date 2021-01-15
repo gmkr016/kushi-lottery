@@ -44,8 +44,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputDrawDate">Lottery Draw Date</label>
-                                    <input type="date" class="form-control" id="exampleInputDrawDate" name="draw_date"
-                                        value="{{ $cat->draw_date }}">
+                                    <input type="datetime-local" class="form-control" id="exampleInputDrawDate"
+                                        name="draw_date" value="{{ date('Y-m-d H:i:s', $cat->draw_date) }}">
                                     <small id="draw_dateHelp" class="form-text text-muted">when will be the draw</small>
                                 </div>
                                 <div class="form-group">

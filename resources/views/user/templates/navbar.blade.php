@@ -8,7 +8,14 @@
         </div> --}}
         <div class="sidebar-brand-text mx-3">{{ config('app.name') }} Admin </div>
     </a>
+    <div>
+        <div class="image-container">
+            <img src="{{ url('/storage/profiles/khusi-logo.png') }}
+            " id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail img-responsive img-fluid rounded-circle center" />
+           
+        </div>
 
+    </div>
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
@@ -48,9 +55,9 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    {{-- <div class="sidebar-heading">
         Addons
-    </div>
+    </div> --}}
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
