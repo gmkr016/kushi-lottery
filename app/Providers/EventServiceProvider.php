@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\TicketSold;
+use App\Listeners\EstPrizeUpdate;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -15,8 +17,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
+        // Registered::class => [
+        //     SendEmailVerificationNotification::class,
+        // ],
+        TicketSold::class=> [
+            EstPrizeUpdate::class,
         ],
     ];
 

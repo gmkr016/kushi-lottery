@@ -240,6 +240,7 @@ class ApiController extends Controller
 
     public static function getDrawWiseSale()
     {
+        set_time_limit(240);
         $lott = Lottery::all();
         $draw = array();
         foreach ($lott as $l) {

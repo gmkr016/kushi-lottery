@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Result;
 use Illuminate\Http\Request;
-
-// use \App\
 
 class ResultController extends Controller
 {
@@ -16,8 +14,7 @@ class ResultController extends Controller
      */
     public function index()
     {
-        // $results =
-        return view('admin.results.index');
+        //
     }
 
     /**
@@ -44,10 +41,10 @@ class ResultController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Result $result)
     {
         //
     }
@@ -55,10 +52,10 @@ class ResultController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Result $result)
     {
         //
     }
@@ -67,10 +64,10 @@ class ResultController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Result $result)
     {
         //
     }
@@ -78,10 +75,10 @@ class ResultController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Result $result)
     {
         //
     }

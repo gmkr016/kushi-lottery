@@ -1,8 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
-class LotteryTableSeeder extends Seeder
+class ResultSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +13,6 @@ class LotteryTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Lottery::class, 100000)->create();
+        //
     }
 }

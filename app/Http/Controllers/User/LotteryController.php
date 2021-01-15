@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Webpatser\Uuid\Uuid;
+use App\Events\TicketSold;
 use Illuminate\Http\Request;
 use App\Models\Lottery as Lottery;
 use App\Http\Controllers\Controller;
@@ -104,13 +105,7 @@ class LotteryController extends Controller
                 $request->sixth,
             ];
             if ($lottery->save()) {
-                $currentDraw = ApiController::getCurrentDraw();
-                $drawWiseSale = ApiController::getDrawWiseSale();
-                var_dump($drawWiseSale);
-                // if ($drawWiseSale->has($currentDraw->title)) {
-                //     array_push($message, "true");
-                // }
-                // $message = trans('lottery.success.saved');
+                TicketSold::dispatch($request->lott_cat);
                 $message = response()->json(["msg" => $resdata]);
             } else {
                 array_push($message, "Operation Failed");

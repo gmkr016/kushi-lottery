@@ -171,7 +171,7 @@
                                 <div class="color-area">
                                     <div class="top">
                                         <span>Next Draw</span>
-                                        <h6>Wed, Oct 28, 2020</h6>
+                                        <h6>{{$nextDraw}}</h6>
                                     </div>
                                     <div class="bottom">
                                         <span>Est. Jackpot </span>
