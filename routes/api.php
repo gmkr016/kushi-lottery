@@ -56,6 +56,11 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('getcategories', 'ApiController@getCategories');
     Route::post('postNumbers', 'ApiController@postNumbers');
     Route::get('getselectednumbersbyagent', 'ApiController@getSelectedNumbersByAgent');
+    Route::get(
+        'drawwisesale',
+        'ApiController@getDrawWiseSale'
+    );
+
     // Route::get('currentTotalEarning', 'ApiController@currentTotalEarning');
 });
 
@@ -105,23 +110,6 @@ Route::get(
         $na = array();
         foreach ($acv as $key => $value) {
             array_push($na, ["province" => $key, "ticketCount" => $value]);
-        }
-        return $na;
-    }
-);
-
-Route::get(
-    'drawwisesale',
-    function () {
-        $lott = \App\Models\Lottery::all();
-        $draw = array();
-        foreach ($lott as $l) {
-            array_push($draw, ApiController::getDraw($l->cat_id));
-        }
-        $acv = array_count_values($draw);
-        $na = array();
-        foreach ($acv as $key => $value) {
-            array_push($na, ["draw" => $key, "ticketCount" => $value]);
         }
         return $na;
     }

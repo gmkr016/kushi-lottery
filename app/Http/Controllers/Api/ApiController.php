@@ -237,4 +237,19 @@ class ApiController extends Controller
         $getData['draw_date'] = $this->getDrawDate($request->draw_id);
         return response()->json($getData);
     }
+
+    public static function getDrawWiseSale()
+    {
+        $lott = Lottery::all();
+        $draw = array();
+        foreach ($lott as $l) {
+            array_push($draw, self::getDraw($l->cat_id));
+        }
+        $acv = array_count_values($draw);
+        $na = array();
+        foreach ($acv as $key => $value) {
+            array_push($na, ["draw" => $key, "ticketCount" => $value]);
+        }
+        return $na;
+    }
 }

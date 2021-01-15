@@ -137,15 +137,16 @@
                     <div class="result-box">
                         <h4 class="box-header">Lottery Winning Numbers</h4>
                         <div class="result-list">
+                            @foreach($lcat->splice(0, 5)->sortByDesc('draw_date') as $cat)
                             <div class="single-list">
                                 <div class="light-area">
                                     <div class="light-area-top">
                                         <div class="left">
-                                            <h4>Powerball</h4>
+                                            <h4>{{$cat->title}}</h4>
                                         </div>
                                         <div class="right">
                                             <span>Draw took place on</span>
-                                            <h6>Saturday April 20, 2020</h6>
+                                            <h6>{{gmdate("l F j, Y", $cat->draw_date)}}</h6>
                                         </div>
                                     </div>
                                     <div class="light-area-bottom">
@@ -163,7 +164,7 @@
                                         </div>
                                         <div class="right">
                                             <span>Est. Jackpot</span>
-                                            <h6>$116 M Win BTC</h6>
+                                            <h6>{{$cat->estprize}} Win NPR </h6>
                                         </div>
                                     </div>
                                 </div>
@@ -174,92 +175,13 @@
                                     </div>
                                     <div class="bottom">
                                         <span>Est. Jackpot </span>
-                                        <h6>$116 M Win BTC</h6>
+                                        <h6>{{$cat->estprize}} Win NPR </h6>
                                     </div>
                                 </div>
                             </div>
-                            <div class="single-list">
-                                <div class="light-area">
-                                    <div class="light-area-top">
-                                        <div class="left">
-                                            <h4>Megamillions</h4>
-                                        </div>
-                                        <div class="right">
-                                            <span>Draw took place on</span>
-                                            <h6>Saturday April 20, 2020</h6>
-                                        </div>
-                                    </div>
-                                    <div class="light-area-bottom">
-                                        <div class="left">
-                                            <p>Winning Numbers:</p>
-                                            <div class="numbers">
-                                                <span>11</span>
-                                                <span>88</span>
-                                                <span>23</span>
-                                                <span>9</span>
-                                                <span>19</span>
-                                                <span>26</span>
-                                                <span>87</span>
-                                            </div>
-                                        </div>
-                                        <div class="right">
-                                            <span>Est. Jackpot</span>
-                                            <h6>$116 M Win BTC</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="color-area">
-                                    <div class="top">
-                                        <span>Next Draw</span>
-                                        <h6>Wed, Oct 28, 2020</h6>
-                                    </div>
-                                    <div class="bottom">
-                                        <span>Est. Jackpot </span>
-                                        <h6>$116 M Win BTC</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-list">
-                                <div class="light-area">
-                                    <div class="light-area-top">
-                                        <div class="left">
-                                            <h4>Euromillions</h4>
-                                        </div>
-                                        <div class="right">
-                                            <span>Draw took place on</span>
-                                            <h6>Saturday April 20, 2020</h6>
-                                        </div>
-                                    </div>
-                                    <div class="light-area-bottom">
-                                        <div class="left">
-                                            <p>Winning Numbers:</p>
-                                            <div class="numbers">
-                                                <span>11</span>
-                                                <span>88</span>
-                                                <span>23</span>
-                                                <span>9</span>
-                                                <span>19</span>
-                                                <span>26</span>
-                                                <span>87</span>
-                                            </div>
-                                        </div>
-                                        <div class="right">
-                                            <span>Est. Jackpot</span>
-                                            <h6>$116 M Win BTC</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="color-area">
-                                    <div class="top">
-                                        <span>Next Draw</span>
-                                        <h6>Wed, Oct 28, 2020</h6>
-                                    </div>
-                                    <div class="bottom">
-                                        <span>Est. Jackpot </span>
-                                        <h6>$116 M Win BTC</h6>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
+
                         </div>
                         <div class="text-center">
                             <a class="view-all" href="#">View All Result ></a>

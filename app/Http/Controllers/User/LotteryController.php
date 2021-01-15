@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Models\Lottery as Lottery;
+use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
+use App\Models\Lottery as Lottery;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Api\ApiController;
 
 class LotteryController extends Controller
 {
@@ -80,11 +82,12 @@ class LotteryController extends Controller
     // public function submit(ConfirmLottery $request)
     public function submit(Request $request)
     {
+        $message = array();
         if (Auth::check()) {
             $lottery = new Lottery;
             $lottery->cat_id = $request->lott_cat;
             $lottery->u_id = Auth::user()->id;
-            $lottery->serial = 111111;
+            $lottery->serial = Uuid::generate(4);
             $lottery->first_number = $request->first;
             $lottery->second_number = $request->second;
             $lottery->third_number = $request->third;
@@ -101,13 +104,19 @@ class LotteryController extends Controller
                 $request->sixth,
             ];
             if ($lottery->save()) {
+                $currentDraw = ApiController::getCurrentDraw();
+                $drawWiseSale = ApiController::getDrawWiseSale();
+                var_dump($drawWiseSale);
+                // if ($drawWiseSale->has($currentDraw->title)) {
+                //     array_push($message, "true");
+                // }
                 // $message = trans('lottery.success.saved');
                 $message = response()->json(["msg" => $resdata]);
             } else {
-                $message = "Operation Failed";
+                array_push($message, "Operation Failed");
             }
         } else {
-            $message = "you are not logged in";
+            array_push($message, "you are not logged in");
         }
 
         return compact('message');
