@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\LotteryCategory as Lcat;
+use App\Events\TicketSold;
 
+use App\LotteryCategory as Lcat;
 use \App\Http\Controllers\Api\ApiController as Api;
 
 class HomeController extends Controller
@@ -11,13 +12,15 @@ class HomeController extends Controller
     private $totalSale;
     private $nextDraw;
     private $lcat;
+    private $currentDraw;
 
     public function __construct()
     {
+        $this->currentDraw = Api::getCurrentDraw();
         $this->totalSale = Api::currentTotalEarning();
         $allFutureDraw = Api::getAllFutureDraw();
         if ($allFutureDraw) {
-            $nextDrawUnix = $allFutureDraw[1]->draw_date;
+            $nextDrawUnix = $allFutureDraw[1]->draw_date; // all future draw except recent one
         } else {
             $nextDrawUnix = null;
         }
@@ -26,7 +29,10 @@ class HomeController extends Controller
     }
     public function index()
     {
+        TicketSold::dispatch($this->currentDraw->id);
         $title = "home";
+
+        // dump($currentDraw->id);
         return view('frontend.index')->with(['title'=> $title,'lcat'=>$this->lcat, 'totalSale' => $this->totalSale, 'nextDraw'=>$this->nextDraw]);
     }
 

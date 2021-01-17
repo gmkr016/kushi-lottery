@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\TicketSold;
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Api\ApiController;
 
@@ -114,3 +115,7 @@ Route::get(
         return $na;
     }
 );
+
+Route::get('stest', function () {
+    return TicketSold::dispatch(6);
+});
