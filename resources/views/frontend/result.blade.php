@@ -36,43 +36,10 @@
                 </div>
             </div>
         </div>
+        <!-- ==========Results-Section========== -->
         <div class="check-number result-page">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="check-box">
-                            <h4 class="title">1. Select a Game</h4>
-                            <div class="form-area">
-                                <select>
-                                    <option value="#">Power Ball</option>
-                                    <option value="#">Megamillions</option>
-                                    <option value="#">Euromillions</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="check-box">
-                            <h4 class="title">2. Pick a Date</h4>
-                            <div class="form-area">
-                                <input type="date">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="check-box">
-                            <h4 class="title">3. Enter Your Number</h4>
-                            <div class="form-area input-round-wrapper">
-                                <input type="text" class="input-round">
-                                <input type="text" class="input-round">
-                                <input type="text" class="input-round">
-                                <input type="text" class="input-round">
-                                <input type="text" class="input-round">
-                                <input type="text" class="input-round">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('inc.check-number')
             </div>
         </div>
         <div class="lottery-result result-page">
@@ -107,7 +74,7 @@
                                         </div>
                                         <div class="right">
                                             <span>Est. Jackpot</span>
-                                            <h6>{{$cat->estprize}} Win NPR </h6>
+                                            <h6>@convert($cat->estprize) Win NPR </h6>
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +85,7 @@
                                     </div>
                                     <div class="bottom">
                                         <span>Est. Jackpot </span>
-                                        <h6>{{$cat->estprize}} Win NPR </h6>
+                                        <h6>@convert($cat->estprize) Win NPR </h6>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +100,7 @@
                 </div>
             </div>
         </div>
+
     </section>
-    <!-- ==========Results-Section========== -->
 
 @endsection

@@ -11,6 +11,6 @@ class LotteryTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Lottery::class, 100000)->create();
+        factory(App\Models\Lottery::class, 50000)->create();
     }
 }

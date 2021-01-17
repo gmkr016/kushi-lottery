@@ -7,9 +7,7 @@ use App\Models\Lottery as Lottery;
 
 class HistoryController extends Controller
 {
-
     public function recent($id) //parameter $id of category
-
     {
         $lc = Lottery::where('cat_id', '=', $id)->get(); // 9 items
         $cat = \App\LotteryCategory::findorFail($id);
@@ -33,7 +31,6 @@ class HistoryController extends Controller
     }
 
     public function archive($id) //parameter $id of category
-
     {
         $lc = Lottery::where('cat_id', '=', $id)->get(); // 9 items
         $cat = \App\LotteryCategory::findorFail($id);

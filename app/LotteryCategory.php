@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Result;
 
 class LotteryCategory extends Model
 {
@@ -10,6 +11,11 @@ class LotteryCategory extends Model
 
     public function lotteries()
     {
-        $this->hasMany('App\Models\Lottery', 'cat_id', 'id');
+        return $this->hasMany(Lottery::class, 'cat_id', 'id');
+    }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class, 'cat_id');
     }
 }

@@ -242,6 +242,7 @@ class ApiController extends Controller
     {
         set_time_limit(240);
         $lott = Lottery::all();
+
         $draw = array();
         foreach ($lott as $l) {
             array_push($draw, self::getDraw($l->cat_id));
@@ -251,6 +252,7 @@ class ApiController extends Controller
         foreach ($acv as $key => $value) {
             array_push($na, ["draw" => $key, "ticketCount" => $value]);
         }
+
         return $na;
     }
 }

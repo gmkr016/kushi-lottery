@@ -19,7 +19,7 @@ $factory->define(
         return [
             'name' => $faker->name,
             'email' => $faker->unique()->safeEmail,
-            'password' => '$2y$10$7WAQ7bDzwM1hv/dV/dt7AeszTxCyXJfG7WaUt6vr5Cc9jfj84yFpO', // secret
+            'password' => '$2y$10$7WAQ7bDzwM1hv/dV/dt7AeszTxCyXJfG7WaUt6vr5Cc9jfj84yFpO', // secret 123456
             'pan' => $faker->randomNumber(9),
             'cname' => $faker->company(),
             'location' => $faker->numberBetween($min = 1, $max = 64),

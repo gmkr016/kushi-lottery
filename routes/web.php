@@ -56,7 +56,7 @@ Route::prefix('/user')
             // Route::get('/home', 'HomeController@index')->name('home');
             //using user auth
             Route::get('/', 'DashboardController@index')->name('home');
-            Route::get('/home', 'DashboardController@index')->name('home');
+            // Route::get('/home', 'DashboardController@index')->name('home');
             Route::get('/lottery', 'LotteryController@index')->name('lotteryindex');
             Route::get('/lotterylists', 'LotteryController@lists')->name('lotterylists');
             Route::get('generate', 'LotteryController@generate');
@@ -95,6 +95,7 @@ Route::prefix('/admin')
         function () {
             Route::get('/home', 'HomeController@index')->name('home');
             Route::resource('categories', 'LotteryCategoryController');
+            Route::get('drawwisewinners/{draw_id}', 'ResultController@drawWiseResult')->name('dwr');
             Route::resource('results', 'ResultController');
             Route::get('recenthistory/{id}', 'HistoryController@recent');
             Route::get('archivehistory/{id}', 'HistoryController@archive');

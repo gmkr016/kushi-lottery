@@ -109,7 +109,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">All Results</h6>
 
-                <a class="collapse-item" href="{{route("admin.results.index")}}">Results</a>
+                <a class="collapse-item" href="{{route("admin.results.index")}}">See Draw-wise Results</a>
+                <a class="collapse-item" href="{{route("admin.results.create")}}">Declare Winning Numbers</a>
 
             </div>
         </div>

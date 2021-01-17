@@ -6,6 +6,7 @@ use \App\LotteryCategory as LottCat;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::directive('convert', function ($money) {
+            return "<?php echo number_format($money, 2); ?>";
+        });
+
         if (class_exists(LottCat::class)) {
             $currentDate = \Carbon\Carbon::now()->toDateTimeString(); // yyyy-mm-dd hh:mm:ss
             $unix_cd = strtotime($currentDate); //1561959211

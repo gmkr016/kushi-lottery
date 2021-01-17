@@ -21,10 +21,9 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">List Lottery Categories</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">List Lottery Draws</h6>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('admin.categories.create') }}" class="btn btn-info mb-2">Add+</a>
                     <div class="table-responsive">
                         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
@@ -41,7 +40,7 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" width="20%">Draw Date</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                    colspan="1" width="20%">Total Lottery Numbers Choosen</th>
+                                                    colspan="1" width="20%">Estimate Prize Money</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" width="20%">Action</th>
                                             </tr>
@@ -53,32 +52,29 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                             @foreach ($lists as $item)
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1" style="vertical-align:middle">
+                                                    <a href='{{ route("admin.dwr", ["draw_id"=> $item->id]) }}' title="See Winners">
                                                     {{ ucfirst($item->title) }}
+                                                    </a>
                                                 </td>
                                                 <td class="sorting_1" style="vertical-align:middle">
-                                                    <img src="{{ asset("storage/lottery_cat/$item->image") }}" alt=""
-                                                        style="width:100px">
+                                                    <img src='{{ asset("storage/lottery_cat/$item->image") }}' alt='{{$item->title}}' style='width:100px'>
                                                 </td>
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     {{ date('Y-m-d H:i:s', $item->draw_date) }}
                                                 </td>
                                                 {{-- how many total lotteries submitted from users --}}
                                                 <td class="sorting_1" style="vertical-align:middle">
-                                                    {{ LotteryC::lott_count($item->id) }}
+                                                    @convert($item->estprize)
                                                 </td>
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     <a class="btn btn-primary"
-                                                        href="{{ url("admin/categories/$item->id/edit") }}">Edit</a>
-                                                    <a href="javascript:void()" class="btn btn-danger"
-                                                        onclick="event.preventDefault();document.querySelector('#item{{$item->id}}-delete').submit();">Delete</a>
-                                                    <form method='POST' id="item{{$item->id}}-delete"
-                                                        action='{{ url("admin/categories/$item->id") }}'>
-                                                        @csrf
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                    </form>
+                                                        href="#">See Winners</a>
+                                                    <a
 
                                                 </td>
-                                            </tr> @endforeach @else <tr role="row" class="odd">
+                                            </tr>
+                                            @endforeach @else
+                                            <tr role="row" class="odd">
                                                 <td rowspan="4" class="sorting_1">No data to fetch</td>
                                             </tr>
                                             @endif

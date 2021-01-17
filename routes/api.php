@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Lottery;
+use App\LotteryCategory;
 use App\Events\TicketSold;
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Api\ApiController;
@@ -117,5 +119,7 @@ Route::get(
 );
 
 Route::get('stest', function () {
-    return TicketSold::dispatch(6);
+    $saleCount = \App\Models\Lottery::where('cat_id', 5)->get();
+
+    return count($saleCount) * 100;
 });

@@ -13,14 +13,15 @@ class HomeController extends Controller
     private $nextDraw;
     private $lcat;
     private $currentDraw;
+    private $allFutureDraw;
 
     public function __construct()
     {
         $this->currentDraw = Api::getCurrentDraw();
         $this->totalSale = Api::currentTotalEarning();
-        $allFutureDraw = Api::getAllFutureDraw();
-        if ($allFutureDraw) {
-            $nextDrawUnix = $allFutureDraw[1]->draw_date; // all future draw except recent one
+        $this->allFutureDraw = Api::getAllFutureDraw();
+        if ($this->allFutureDraw) {
+            $nextDrawUnix = $this->allFutureDraw[1]->draw_date; // all future draw except recent one
         } else {
             $nextDrawUnix = null;
         }
@@ -32,8 +33,16 @@ class HomeController extends Controller
         TicketSold::dispatch($this->currentDraw->id);
         $title = "home";
 
-        // dump($currentDraw->id);
-        return view('frontend.index')->with(['title'=> $title,'lcat'=>$this->lcat, 'totalSale' => $this->totalSale, 'nextDraw'=>$this->nextDraw]);
+        // dump($this->currentDraw->id);
+        return view('frontend.index')->with(
+            [
+                'title'=> $title,
+                'lcat'=>$this->lcat,
+                'totalSale' => $this->totalSale,
+                'nextDraw'=>$this->nextDraw ,
+                'allFutureDraw'=>$this->allFutureDraw,
+            ]
+        );
     }
 
     public function about()

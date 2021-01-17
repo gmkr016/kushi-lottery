@@ -1,6 +1,6 @@
 @extends('admin.templates.layout')
 @section('content')
-<?php 
+<?php
 $host = $_SERVER['HTTP_HOST'] ;
 $devHost = $_SERVER['HTTP_HOST']."/dev/public";
 ?>
@@ -14,7 +14,6 @@ $devHost = $_SERVER['HTTP_HOST']."/dev/public";
         {{-- dynamic --}}
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-
         <script type="text/javascript">
             window.onload = function () {
                         var host = "{{$host}}" ;
@@ -25,47 +24,48 @@ $devHost = $_SERVER['HTTP_HOST']."/dev/public";
                         fetch("http://"+host+ "/api/agentwisesale") // Call the fetch function passing the url of the API as a parameter
                             .then( response => response.json() )
                             .then(json => {
+                                $('.loading').hide();
                                 var datas = json;
                                 // pusing datas into label and data
-                                for(var i=0;i<datas.length;i++){ 
-                                    barLabels.push(datas[i].agent); 
+                                for(var i=0;i<datas.length;i++){
+                                    barLabels.push(datas[i].agent);
                                     barData.push(datas[i].ticketCount);
-                                    color.push(getRandomColor()); 
-                                } 
-                                    function getRandomColor(){ 
-                                        var letters='0123456789ABCDEF' .split(''); 
-                                        var color='#'; 
-                                        for(var i=0;i<6;i++){ 
-                                            color+=letters[Math.floor(Math.random()*16)]; 
-                                        } 
-                                        return color; 
-                                    } 
-                                    // creating chart chart using labels and data 
-                                    var chart=new Chart(ctx, { 
-                                        // The type of chart we want to create 
-                                        type: 'bar' , 
-                                        // The data for our dataset 
-                                    data: { 
-                                        labels: barLabels, 
-                                        datasets: [{ 
+                                    color.push(getRandomColor());
+                                }
+                                    function getRandomColor(){
+                                        var letters='0123456789ABCDEF' .split('');
+                                        var color='#';
+                                        for(var i=0;i<6;i++){
+                                            color+=letters[Math.floor(Math.random()*16)];
+                                        }
+                                        return color;
+                                    }
+                                    // creating chart chart using labels and data
+                                    var chart=new Chart(ctx, {
+                                        // The type of chart we want to create
+                                        type: 'bar' ,
+                                        // The data for our dataset
+                                    data: {
+                                        labels: barLabels,
+                                        datasets: [{
                                             label: 'Agent Ticket Sales of Last Draw' ,
-                                            backgroundColor: color, 
-                                            borderColor: 'rgb(255, 150, 132)' , 
-                                            fillColor:getRandomColor(), 
+                                            backgroundColor: color,
+                                            borderColor: 'rgb(255, 150, 132)' ,
+                                            fillColor:getRandomColor(),
                                             data: barData
-                                        }] 
-                                    }, 
-                                    //Configuration options go here 
-                                    options: {} 
+                                        }]
+                                    },
+                                    //Configuration options go here
+                                    options: {}
                                 });
-                                
+
                                 })
                                 .catch(function(error) {
                                 // This is where you run code if the server returns any errors
                                 console.log(error)
                                 }
                                 );
-                                }   
+                                }
         </script>
         <div class="container-fluid">
             <div class="card shadow mb-4">
@@ -74,7 +74,11 @@ $devHost = $_SERVER['HTTP_HOST']."/dev/public";
                     <h6 class="m-0 font-weight-bold text-primary">Agent Ticket Sales of Last Draw</h6>
                 </div>
                 <div class="card-body">
-                    <canvas id="myChart"></canvas>
+        <p class="loading">Data Loading...</p>
+
+                    <canvas id="myChart">
+
+                    </canvas>
                 </div>
             </div>
         </div>

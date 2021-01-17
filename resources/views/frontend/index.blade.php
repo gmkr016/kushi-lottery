@@ -113,6 +113,15 @@
         </div>
     </section>
     <!-- ==========Features-Section========== -->
+    <!-- ==========Check-Number-Section========== -->
+    <section class="check-number">
+        <img class="img-left" src="{{ asset('storage/assets/newimages/check-num-left.png') }}" alt="">
+        <img class="img-right" src="{{ asset('storage/assets/newimages/check-num-right.png') }}" alt="">
+            <div class="container">
+                @include('inc.check-number')
+            </div>
+    </section>
+    <!-- ==========Check-Number-Section========== -->
     <!-- ==========Lottery-Result-Section========== -->
     <section class="lottery-result">
         <img class="bg-image" src="{{ asset('storage/assets/newimages/result-background.jpg') }}" alt="">
@@ -164,7 +173,7 @@
                                         </div>
                                         <div class="right">
                                             <span>Est. Jackpot</span>
-                                            <h6>{{$cat->estprize}} Win NPR </h6>
+                                            <h6>@convert($cat->estprize) Win NPR </h6>
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +184,7 @@
                                     </div>
                                     <div class="bottom">
                                         <span>Est. Jackpot </span>
-                                        <h6>{{$cat->estprize}} Win NPR </h6>
+                                        <h6>@convert($cat->estprize) Win NPR </h6>
                                     </div>
                                 </div>
                             </div>
@@ -193,62 +202,5 @@
     </section>
     <!-- ==========Lottery-Result-Section========== -->
 
-    <!-- ==========Check-Number-Section========== -->
-    <section class="check-number">
-        <img class="img-left" src="{{ asset('storage/assets/newimages/check-num-left.png') }}" alt="">
-        <img class="img-right" src="{{ asset('storage/assets/newimages/check-num-right.png') }}" alt="">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-9">
-                    <div class="content">
-                        <div class="section-header">
-                            <h2 class="title">
-                                Check your numbers
-                            </h2>
-                            <p class="text">
-                                Are you holding on to a winning ticket? Here's an
-                                easy way to find out.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="check-box">
-                        <h4 class="title">1. Select a Game</h4>
-                        <div class="form-area">
-                            <select>
-                                <option value="#">Power Ball</option>
-                                <option value="#">Megamillions</option>
-                                <option value="#">Euromillions</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="check-box">
-                        <h4 class="title">2. Pick a Date</h4>
-                        <div class="form-area">
-                            <input type="date">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="check-box">
-                        <h4 class="title">3. Enter Your Number</h4>
-                        <div class="form-area input-round-wrapper">
-                            <input type="text" class="input-round">
-                            <input type="text" class="input-round">
-                            <input type="text" class="input-round">
-                            <input type="text" class="input-round">
-                            <input type="text" class="input-round">
-                            <input type="text" class="input-round">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ==========Check-Number-Section========== -->
+
 @endsection

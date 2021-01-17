@@ -16,6 +16,7 @@ class CreateResultsTable extends Migration
         Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cat_id');
+            $table->integer('winnerpos');
             $table->integer('first_number');
             $table->integer('second_number');
             $table->integer('third_number');

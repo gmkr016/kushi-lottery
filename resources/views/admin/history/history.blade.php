@@ -51,7 +51,9 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                             $totalTicket = 0;
                                             $totalPrice = 0;
                                              ?>
-                                            <?php use App\Http\Controllers\Admin\HistoryController; ?>
+                                            <?php use App\Http\Controllers\Admin\HistoryController;
+
+?>
                                             @if (!isset($msg) )
                                             @foreach($user as $u)
                                             @if(array_key_exists($u->id, $lc))

@@ -30,6 +30,8 @@ class EstPrizeUpdate
     {
         $row = LotteryCategory::find($event->lott_cat);
         $currentTotalEarning=ApiController::currentTotalEarning();
+        // $saleCount = \App\Models\Lottery::where('cat_id', $event->lott_cat)->get();
+        // $currentTotalEarning = count($saleCount) * 100;
         $row->estprize = intval($currentTotalEarning)*0.60 ;
         $row->save();
         Log::debug($row);

@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Lottery::class, function (Faker $faker) {
     return [
-        'cat_id' => $faker->numberBetween($min = 1, $max = 5),
-        'serial' => $faker->numberBetween($min = 1000, $max = 9000),
+        'cat_id' => $faker->numberBetween($min = 1, $max = 8),
+        'serial' => $faker->uuid(),
         'u_id' => $faker->numberBetween($min = 1, $max = 9),
         'first_number' => $faker->numberBetween($min = 1, $max = 45),
         'second_number' => $faker->numberBetween($min = 1, $max = 45),
