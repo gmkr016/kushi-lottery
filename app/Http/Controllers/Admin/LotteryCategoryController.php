@@ -88,7 +88,7 @@ class LotteryCategoryController extends Controller
     {
         if (!isset($field)) {
             return LotteryCategory::findorFail($id);
-            // return "Field is not set";
+        // return "Field is not set";
         } else {
             return LotteryCategory::findorFail($id, $field)->title;
         }
