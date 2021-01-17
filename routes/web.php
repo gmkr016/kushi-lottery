@@ -96,6 +96,7 @@ Route::prefix('/admin')
             Route::get('/home', 'HomeController@index')->name('home');
             Route::resource('categories', 'LotteryCategoryController');
             Route::get('drawwisewinners/{draw_id}', 'ResultController@drawWiseResult')->name('dwr');
+            Route::get('winnercheck', 'ResultController@winnersCheck');
             Route::resource('results', 'ResultController');
             Route::get('recenthistory/{id}', 'HistoryController@recent');
             Route::get('archivehistory/{id}', 'HistoryController@archive');

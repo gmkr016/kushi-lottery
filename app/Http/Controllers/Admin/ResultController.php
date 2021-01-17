@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Result;
 
+use App\Models\Lottery;
 use App\LotteryCategory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -89,6 +90,34 @@ class ResultController extends Controller
             }
         }
         return redirect()->route('admin.results.index');
+    }
+    public function winnersCheck()
+    {
+        $pickedBalls = Result::select('first_number', 'second_number', 'third_number', 'fourth_number', 'fifth_number', 'sixth_number')
+        ->where('cat_id', 6)
+        ->where('winnerpos', 'first')
+        ->first()->toArray();
+        $playerBalls= Lottery::select('first_number', 'second_number', 'third_number', 'fourth_number', 'fifth_number', 'sixth_number')
+        ->where('cat_id', 6)
+        ->get();
+
+        $results = [];
+        foreach ($playerBalls as $person => $balls) {
+            if (!isset($results[$person])) {
+                $results[$person] = 0;
+            }
+            foreach ($balls as $ball) {
+                if (in_array($ball, $pickedBalls)) {
+                    $results[$person]++;
+                }
+            }
+        }
+
+        foreach ($results as $name => $balls) {
+            if ($balls >= 2) {
+                echo $name . ' is a winner <br>';
+            }
+        }
     }
 
     /**

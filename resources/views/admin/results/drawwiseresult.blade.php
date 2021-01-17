@@ -39,9 +39,11 @@ use \App\Http\Controllers\Admin\HistoryController;
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" width="30%">Numbers</th>
                                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                    colspan="1" width="30%">Winning Position</th>
+                                                    colspan="1" width="20%">Winning Position</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                    colspan="1" width="10%">Winners</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                    colspan="1" width="20%">Purchased At</th>
+                                                    colspan="1" width="50%">Purchased At</th>
                                             </tr>
                                         </thead>
 
@@ -58,6 +60,7 @@ use \App\Http\Controllers\Admin\HistoryController;
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     {{ $result->winnerpos }}
                                                 </td>
+                                                <td class="sorting_1"></td>
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     {{ $result->created_at }}
                                                 </td>
