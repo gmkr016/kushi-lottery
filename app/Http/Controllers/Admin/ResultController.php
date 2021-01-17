@@ -101,6 +101,8 @@ class ResultController extends Controller
         ->where('cat_id', 6)
         ->get();
 
+        //ref: https://stackoverflow.com/questions/43690175/finding-lottery-winners
+
         $results = [];
         foreach ($playerBalls as $person => $balls) {
             if (!isset($results[$person])) {
@@ -114,7 +116,7 @@ class ResultController extends Controller
         }
 
         foreach ($results as $name => $balls) {
-            if ($balls >= 2) {
+            if ($balls >= 3) {
                 echo $name . ' is a winner <br>';
             }
         }
