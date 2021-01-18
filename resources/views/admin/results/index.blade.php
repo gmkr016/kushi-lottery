@@ -41,8 +41,7 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                                     colspan="1" width="20%">Draw Date</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" width="20%">Estimate Prize Money</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                    colspan="1" width="20%">Action</th>
+
                                             </tr>
                                         </thead>
 
@@ -66,12 +65,6 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     @convert($item->estprize)
                                                 </td>
-                                                <td class="sorting_1" style="vertical-align:middle">
-                                                    <a class="btn btn-primary"
-                                                        href="#">See Winners</a>
-                                                    <a
-
-                                                </td>
                                             </tr>
                                             @endforeach @else
                                             <tr role="row" class="odd">
@@ -87,7 +80,6 @@ use \App\Http\Controllers\User\LotteryController as LotteryC;
                                                 <th rowspan="1" colspan="1">Image</th>
                                                 <th rowspan="1" colspan="1">Draw Date</th>
                                                 <th rowspan="1" colspan="1">Total Lottery Numbers Choosen</th>
-                                                <th rowspan="1" colspan="1">Action</th>
                                             </tr>
                                         </tfoot>
                                     </table>
