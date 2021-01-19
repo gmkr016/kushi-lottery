@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\LotteryCategory;
 use Illuminate\Database\Eloquent\Model;
 
 class Lottery extends Model
@@ -25,6 +26,10 @@ class Lottery extends Model
     // 2 1 4 3
     // 1 4 3 2
 
+    public function lotteryCategory()
+    {
+        return $this->belongsTo(LotteryCategory::class, 'cat_id', 'id');
+    }
     public function scopeValidateNumbers($query, $data)
     {
         $length = count($data);
