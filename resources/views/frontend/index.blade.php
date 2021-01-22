@@ -12,6 +12,7 @@
                     <h1 class="banner-title">
                         Winning Number
                     </h1>
+                    <div class="prizeDisplay">
                     <div class="winningNumbers">
                         <span>11</span>
                         <span>88</span>
@@ -19,8 +20,58 @@
                         <span>9</span>
                         <span>19</span>
                         <span>26</span>
+                        <span class="plus">+</span>
                         <span>87</span>
+
+
                     </div>
+                    <div class="prizePool">
+                    	<div class="divisions-full">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Division</th>
+                                    <th>Prize Pool</th>
+                                    <th>Winners</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                                            <tr>
+                                    <td>Division 1</td>
+                                    <td>$6,313,686.72</td>
+                                    <td>6 winners of $1,052,281.12 each.</td>
+                                </tr>
+                                                            <tr>
+                                    <td>Division 2</td>
+                                    <td>$712,255.50</td>
+                                    <td>110 winners of $6,475.05 each.</td>
+                                </tr>
+                                                            <tr>
+                                    <td>Division 3</td>
+                                    <td>$1,078,023.10</td>
+                                    <td>1,337 winners of $806.30 each.</td>
+                                </tr>
+                                                            <tr>
+                                    <td>Division 4</td>
+                                    <td>$1,597,155.45</td>
+                                    <td>67,533 winners of $23.65 each.</td>
+                                </tr>
+                                                            <tr>
+                                    <td>Division 5</td>
+                                    <td>$2,358,933.60</td>
+                                    <td>173,451 winners of $13.60 each.</td>
+                                </tr>
+                                                            <tr>
+                                    <td>Division 6</td>
+                                    <td>$7,190,113.30</td>
+                                    <td>915,938 winners of $7.85 each.</td>
+                                </tr>
+                                                        </tbody>
+                        </table>
+                        
+                    </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -168,6 +219,7 @@
                                                 <span>9</span>
                                                 <span>19</span>
                                                 <span>26</span>
+                                                <span class="plus">+</span>
                                                 <span>87</span>
                                             </div>
                                         </div>

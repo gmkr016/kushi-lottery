@@ -69,6 +69,7 @@
                                                 <span>9</span>
                                                 <span>19</span>
                                                 <span>26</span>
+                                                <span class="plus">+</span>
                                                 <span>87</span>
                                             </div>
                                         </div>

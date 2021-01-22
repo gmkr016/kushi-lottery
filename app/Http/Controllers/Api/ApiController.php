@@ -14,7 +14,7 @@ class ApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ["except" => ['getSelectedNumbersByAgent','currentTotalEarning','getAllFutureDraw']]);
+        $this->middleware('auth:api', ["except" => ['getSelectedNumbersByAgent','currentTotalEarning','getAllFutureDraw', 'getDrawWiseSale']]);
     }
 
     public function getNumbers(Request $request)
