@@ -30,6 +30,11 @@ class Lottery extends Model
     {
         return $this->belongsTo(LotteryCategory::class, 'cat_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'u_id');
+    }
     public function scopeValidateNumbers($query, $data)
     {
         $length = count($data);

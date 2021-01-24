@@ -68,7 +68,7 @@
                                 </tr>
                                                         </tbody>
                         </table>
-                        
+
                     </div>
                     </div>
                 </div>
@@ -245,7 +245,7 @@
 
                         </div>
                         <div class="text-center">
-                            <a class="view-all" href="#">View All Result ></a>
+                            <a class="view-all" href="{{route('resultpage')}}">View All Result ></a>
                         </div>
                     </div>
                 </div>

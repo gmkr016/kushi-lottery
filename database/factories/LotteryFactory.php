@@ -9,7 +9,7 @@ $factory->define(App\Models\Lottery::class, function (Faker $faker) {
     return [
         'cat_id' => $faker->numberBetween($min = 1, $max = 8),
         'serial' => $faker->uuid(),
-        'u_id' => $faker->numberBetween($min = 1, $max = 9),
+        'u_id' => $faker->numberBetween($min = 1, $max = 18),
         'first_number' => $faker->numberBetween($min = 1, $max = 45),
         'second_number' => $faker->numberBetween($min = 1, $max = 45),
         'third_number' => $faker->numberBetween($min = 1, $max = 45),

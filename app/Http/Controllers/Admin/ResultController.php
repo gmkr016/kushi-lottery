@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Result;
+use App\User;
 
+use App\Models\Result;
 use App\Models\Lottery;
 use App\LotteryCategory;
 use Illuminate\Support\Str;
@@ -91,20 +92,17 @@ class ResultController extends Controller
         }
         return redirect()->route('admin.results.index');
     }
-    public function winnersCheck()
+    public function winnersCheck($draw_id=null, $forPosition=null)
     {
-        $pickedBalls = Result::select('first_number', 'second_number', 'third_number', 'fourth_number', 'fifth_number', 'sixth_number')
-        ->where('cat_id', 6)
-        ->where('winnerpos', 'first')
-        ->first()->toArray();
-        $playerBalls= Lottery::select('first_number', 'second_number', 'third_number', 'fourth_number', 'fifth_number', 'sixth_number')
-        ->where('cat_id', 6)
-        ->get()->toArray();
+        // dd(self::getWinnerBalls($draw_id, $forPosition));
+        $data = self::getWinnerBalls($draw_id, $forPosition);
+        $pickedBalls = $data['pickedBalls'];
+        $playerBallsForFirstWinner = $data['playerBalls'];
+        // dd($playerBallsForFirstWinner);
 
-        //ref: https://stackoverflow.com/questions/43690175/finding-lottery-winners
 
         $results = [];
-        foreach ($playerBalls as $person => $balls) {
+        foreach ($playerBallsForFirstWinner as $person => $balls) {
             if (!isset($results[$person])) {
                 $results[$person] = 0;
             }
@@ -114,6 +112,7 @@ class ResultController extends Controller
                 }
             }
         }
+        dd($results);
         $winner = 0;
         foreach ($results as $name => $balls) {
             if ($balls >= 5) {
@@ -121,7 +120,22 @@ class ResultController extends Controller
                 echo $name . ' is a winner <br>';
             }
         }
-        echo $winner. " are winners.";
+    }
+
+    public function getWinnerBalls($draw_id = null, $forPosition = null)
+    {
+        if ($draw_id != null) {
+            $pickedBalls = Result::select('first_number', 'second_number', 'third_number', 'fourth_number', 'fifth_number', 'sixth_number')
+        ->where('cat_id', $draw_id)
+        ->where('winnerpos', $forPosition)
+        ->first()->toArray();
+            $playerBalls= Lottery::select('first_number', 'second_number', 'third_number', 'fourth_number', 'fifth_number', 'sixth_number')
+        ->where('cat_id', $draw_id)
+        ->get()->toArray();
+
+            //ref: https://stackoverflow.com/questions/43690175/finding-lottery-winners
+        }
+        return ['pickedBalls'=>$pickedBalls, 'playerBalls'=>$playerBalls];
     }
 
     /**
@@ -173,7 +187,7 @@ class ResultController extends Controller
     {
         if ($draw_id !=null) {
             $results = LotteryCategory::find($draw_id)->results;
-            // dump($results);
+            // dd($results);
             return view('admin.results.drawwiseresult')->with(['results'=>$results, "draw_id"=>$draw_id]);
         }
         return null;

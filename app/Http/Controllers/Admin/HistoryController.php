@@ -10,7 +10,7 @@ class HistoryController extends Controller
     public function recent($id) //parameter $id of category
     {
         $lc = Lottery::where('cat_id', '=', $id)->get(); // 9 items
-        $cat = \App\LotteryCategory::findorFail($id);
+        $cat = \App\LotteryCategory::find($id);
         // return $draw_date;
         // return $lc;
         if (count($lc) > 0) {
