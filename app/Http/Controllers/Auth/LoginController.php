@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-use Auth;
+
 use App\Http\Controllers\Controller;
+use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -42,9 +43,9 @@ class LoginController extends Controller
         return view(
             'auth.login',
             [
-            'title' => 'Login',
-            'loginRoute' => 'login',
-            'forgotPasswordRoute' => 'password.request',
+                'title' => 'Login',
+                'loginRoute' => 'login',
+                'forgotPasswordRoute' => 'password.request',
             ]
         );
     }
@@ -53,8 +54,9 @@ class LoginController extends Controller
     {
         //logout the admin...
         Auth::logout();
+
         return redirect()
-        ->route('login')
-        ->with('status', 'User has been logged out!');
+            ->route('login')
+            ->with('status', 'User has been logged out!');
     }
 }

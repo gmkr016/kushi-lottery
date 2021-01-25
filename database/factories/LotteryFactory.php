@@ -1,20 +1,32 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Model;
-use Faker\Generator as Faker;
+use App\Models\Lottery;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(App\Models\Lottery::class, function (Faker $faker) {
-    return [
-        'cat_id' => $faker->numberBetween($min = 1, $max = 8),
-        'serial' => $faker->uuid(),
-        'u_id' => $faker->numberBetween($min = 1, $max = 18),
-        'first_number' => $faker->numberBetween($min = 1, $max = 45),
-        'second_number' => $faker->numberBetween($min = 1, $max = 45),
-        'third_number' => $faker->numberBetween($min = 1, $max = 45),
-        'fourth_number' => $faker->numberBetween($min = 1, $max = 45),
-        'fifth_number' => $faker->numberBetween($min = 1, $max = 45),
-        'sixth_number' => $faker->numberBetween($min = 1, $max = 45),
-    ];
-});
+class LotteryFactory extends Factory
+{
+    /**
+     * @var string
+     */
+    protected $model = Lottery::class;
+
+    /**
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'cat_id' => 2,
+            'serial' => $this->faker->numberBetween($min = 1000, $max = 9000),
+            'u_id' => $this->faker->numberBetween($min = 1, $max = 9),
+            'first_number' => $this->faker->numberBetween($min = 1, $max = 45),
+            'second_number' => $this->faker->numberBetween($min = 1, $max = 45),
+            'third_number' => $this->faker->numberBetween($min = 1, $max = 45),
+            'fourth_number' => $this->faker->numberBetween($min = 1, $max = 45),
+            'fifth_number' => $this->faker->numberBetween($min = 1, $max = 45),
+            'sixth_number' => $this->faker->numberBetween($min = 1, $max = 45),
+        ];
+    }
+}

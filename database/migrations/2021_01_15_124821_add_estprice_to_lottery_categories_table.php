@@ -14,7 +14,7 @@ class AddEstpriceToLotteryCategoriesTable extends Migration
     public function up()
     {
         Schema::table('lottery_categories', function (Blueprint $table) {
-            $table->string('estprize')->after('lott_count');
+            $table->string('est_prize')->after('lott_count');
         });
     }
 

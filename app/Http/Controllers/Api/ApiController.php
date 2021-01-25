@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DTO\LotteryData;
+use App\DTO\ResponseData;
 use App\Http\Controllers\Controller;
-use App\LotteryCategory;
+use App\Models\City;
+use App\Models\District;
 use App\Models\Lottery as Lottery;
+use App\Models\LotteryCategory;
+use App\Models\User;
 use Carbon\Carbon as Carbon;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use \Utils\Helper\AesHelper;
+use Utils\Helper\AesHelper;
 
 class ApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ["except" => ['getSelectedNumbersByAgent','currentTotalEarning','getAllFutureDraw', 'getDrawWiseSale']]);
+        $this->middleware('auth:api', ['except' => ['getSelectedNumbersByAgent', 'currentTotalEarning', 'getAllFutureDraw']]);
     }
 
     public function getNumbers(Request $request)
@@ -35,34 +42,98 @@ class ApiController extends Controller
             return response()->json($request->arr);
         }
     }
+
     public function me()
     {
         return response()->json(auth()->user());
     }
 
-    // get categories list for api
+    /**
+     * Get Categories/Game Week
+     *
+     * @response {
+     *
+     * }
+     *
+     * @return JsonResponse
+     */
     public function getCategories()
     {
         $cat = LotteryCategory::select('id', 'title')->get();
-        return response()->json($cat);
+
+        return response()->success(['categories' => $cat]);
     }
 
     public function totalTicket()
     {
-        return Lottery::count();
+        return response()->success(['count' => Lottery::query()->count()]);
     }
 
     private function ticketIssued($recentlyAddedLottoId)
     {
-        $issuDate = new Carbon(Lottery::find($recentlyAddedLottoId)->created_at);
-        return $issuDate->toDateTimeString();
+        $issueDate = new Carbon(Lottery::find($recentlyAddedLottoId)->created_at);
+
+        return response()->success(['issueDate' => $issueDate->toDateTimeString()]);
     }
 
     private function getLastSerial()
     {
-        return DB::table('lotteries')->latest('serial')->first()->serial;
+        $serial = DB::table('lotteries')->latest('serial')->first()->serial;
+
+        return response()->success(['serial' => $serial]);
     }
-    public function postNumbers(Request $request)
+
+    public function postNumberss(Request $request)
+    {
+        $newSerial = ($this->getLastSerial()) + 1;
+        foreach ($request->get('lotteryNumbers') as $index) {
+            $lotteryData = LotteryData::from([
+                'serial' => $newSerial,
+                'cat_id' => $index['categories'],
+                'u_id' => auth('api')->id(),
+                'first_number' => $index['first'],
+                'second_number' => $index['second'],
+                'third_number' => $index['third'],
+                'fourth_number' => $index['fourth'],
+                'fifth_number' => $index['fifth'],
+                'sixth_number' => $index['sixth'],
+            ]);
+            $lott = Lottery::query()->create($lotteryData->toArray());
+            if ($lott->count()) {
+                $msg = [
+                    'numbers' => [
+                        $index,
+                    ],
+                    'serial_number' => $newSerial,
+                    'drawDate' => $this->getDrawDate($index['categories']),
+                    'totalTicket' => $this->totalTicket(),
+                    'created_at' => $lott['created_at'],
+                    'encrypted_key' => $this->encrypted($newSerial.''.$this->getDrawDate($index['categories']).''.$this->ticketIssued($lott->id), 'encrypt', '256'),
+
+                ];
+
+                return new ResponseData(data: $msg);
+            }
+        }
+        $msg = ['response' => response()->json('failed', 501)];
+
+        return new ResponseData(data: 'failed', code: 501);
+    }
+
+    /**
+     * Create Lottery
+     *
+     * @bodyParam lotteryNumbers array required
+     *
+     * @response {
+     *     "status":200
+     * }
+     *
+     * @authenticated
+     *
+     * @throws Exception
+     */
+    public function postNumbers(Request $request): JsonResponse|ResponseData
     {
         $newSerial = ($this->getLastSerial()) + 1;
         foreach ($request->lotteryNumbers as $index) {
@@ -78,30 +149,34 @@ class ApiController extends Controller
             $lott->sixth_number = $index['sixth'];
             if (response()->json($lott->save())) {
                 $msg = [
-                    "response" => response()->json('success', 201),
-                    "numbers" => [
+                    'response' => response()->json('success', 201),
+                    'numbers' => [
                         $index,
                     ],
-                    "serial_number" => $newSerial,
-                    "drawDate" => $this->getDrawDate($index['categories']),
-                    "totalTicket" => $this->totalTicket(),
-                    "created_at" => $this->ticketIssued($lott->id),
-                    "encrypted_key" => $this->encrypted($newSerial . '' . $this->getDrawDate($index['categories']) . '' . $this->ticketIssued($lott->id), 'encrypt', "256")
+                    'serial_number' => $newSerial,
+                    'drawDate' => $this->getDrawDate($index['categories']),
+                    'totalTicket' => $this->totalTicket(),
+                    'created_at' => $this->ticketIssued($lott->id),
+                    'encrypted_key' => $this->encrypted($newSerial.''.$this->getDrawDate($index['categories']).''.$this->ticketIssued($lott->id), 'encrypt', '256'),
 
                 ];
             } else {
-                $msg = ["response" => response()->json('failed', 501)];
+                $msg = ['response' => response()->json('failed', 501)];
             }
         }
+
         return response()->json($msg);
     }
 
     /**
      * encrypt lottery data
+     *
+     * @throws Exception
      */
-    public function encrypted($data = null, $key = null, $blockSize = null)
+    public function encrypted($data = null, $key = null, $blockSize = null): string
     {
         $aes = new AesHelper($data, $key, $blockSize);
+
         return $aes->encrypt();
     }
 
@@ -110,7 +185,7 @@ class ApiController extends Controller
      */
     public static function getUserName($id)
     {
-        return \App\User::find($id)->name;
+        return User::find($id)->name;
     }
 
     /**
@@ -118,30 +193,27 @@ class ApiController extends Controller
      */
     public static function getDraw($cat_id)
     {
-        return \App\LotteryCategory::find($cat_id)->title;
+        return LotteryCategory::find($cat_id)->title;
     }
 
-    private function getDrawDate($lott_cat)
+    private function getDrawDate($lott_cat): string
     {
-        $draw_date = \App\LotteryCategory::find($lott_cat)->draw_date;
+        $draw_date = LotteryCategory::find($lott_cat)->draw_date;
+
         return date('Y-m-d', $draw_date);
     }
 
-    /**
-     * Get user's location code
-     *
-     * @param  user_id
-     * @return location_code
-     */
     public static function getDistrictLocation($u_id)
     {
-        $city_id = \App\User::find($u_id)->location;
+        $city_id = User::find($u_id)->location;
+
         return self::getDistrict($city_id);
     }
 
     public static function getProvinceLocation($u_id)
     {
-        $city_id = \App\User::find($u_id)->location;
+        $city_id = User::find($u_id)->location;
+
         return self::getProvince($city_id);
     }
 
@@ -150,8 +222,9 @@ class ApiController extends Controller
      */
     public static function getDistrict($city_id)
     {
-        $district_id = \App\City::find($city_id)->district_id;
-        return \App\District::find($district_id)->district;
+        $district_id = City::find($city_id)->district_id;
+
+        return District::find($district_id)->district;
     }
 
     // private static function getDistrictName($district_id)
@@ -161,28 +234,33 @@ class ApiController extends Controller
 
     public static function getProvince($city_id)
     {
-        $province_id = \App\City::find($city_id)->province_id;
-        return \App\Province::find($province_id)->province;
+        $province_id = City::find($city_id)->province_id;
+
+        return \App\Models\Province::find($province_id)->province;
         // return self::getProvinceName($district_id);
     }
+
     /**
      * Get Current Draw Object
      *
-     * @return Current_Draw_object
+     * @return false
      */
     public static function getAllFutureDraw()
     {
         $nowUnix = \Carbon\Carbon::now()->timestamp;
-        $futureDraws =  \App\LotteryCategory::where('draw_date', '>', $nowUnix)->orderBy('draw_date', 'asc')->get();
+        $futureDraws = LotteryCategory::where('draw_date', '>', $nowUnix)->orderBy('draw_date', 'asc')->get();
         if ($futureDraws->count() > 0) {
             return $futureDraws;
         }
+
         return false;
     }
+
     public static function getCurrentDraw()
     {
         $nowUnix = \Carbon\Carbon::now()->timestamp;
-        return \App\LotteryCategory::where('draw_date', '>', $nowUnix)
+
+        return LotteryCategory::where('draw_date', '>', $nowUnix)
             ->orderBy('draw_date', 'asc')
             ->first();
     }
@@ -192,9 +270,11 @@ class ApiController extends Controller
         $currentDraw = self::getCurrentDraw();
         $saleCount = null;
         if ($currentDraw != null) {
-            $saleCount = \App\Models\Lottery::where('cat_id', $currentDraw->id)->get();
+            $saleCount = Lottery::where('cat_id', $currentDraw->id)->get();
+
             return count($saleCount) * 100;
         }
+
         return $saleCount;
     }
 
@@ -202,16 +282,19 @@ class ApiController extends Controller
     {
         $currentDraw = self::getCurrentDraw();
         $user = auth('api')->user();
+
         return $user->id;
-        $ticketSold = \App\Models\Lottery::where('cat_id', $currentDraw->id)
+        $ticketSold = Lottery::where('cat_id', $currentDraw->id)
             ->where('u_id', $user->id)
             ->get();
+
         return count($ticketSold);
     }
 
     public static function totalEarning()
     {
-        $saleCount = \App\Models\Lottery::count();
+        $saleCount = Lottery::count();
+
         return $saleCount * 100;
     }
 
@@ -221,6 +304,7 @@ class ApiController extends Controller
         $salesInfo['cu_totalTicketRev'] = $salesInfo['cu_totalTicketSold'] * 100;
         $salesInfo['totalRev'] = self::totalEarning();
         $salesInfo['c_totalEarning'] = self::currentTotalEarning();
+
         return $salesInfo;
     }
 
@@ -235,22 +319,21 @@ class ApiController extends Controller
             ]
         )->get();
         $getData['draw_date'] = $this->getDrawDate($request->draw_id);
+
         return response()->json($getData);
     }
 
     public static function getDrawWiseSale()
     {
-        set_time_limit(240);
         $lott = Lottery::all();
-
-        $draw = array();
+        $draw = [];
         foreach ($lott as $l) {
             array_push($draw, self::getDraw($l->cat_id));
         }
         $acv = array_count_values($draw);
-        $na = array();
+        $na = [];
         foreach ($acv as $key => $value) {
-            array_push($na, ["draw" => $key, "ticketCount" => $value]);
+            array_push($na, ['draw' => $key, 'ticketCount' => $value]);
         }
 
         return $na;

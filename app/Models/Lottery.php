@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use App\LotteryCategory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Lottery extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['cat_id', 'serial', 'first_number', 'second_number', 'third_number', 'fourth_number', 'fifth_number', 'sixth_number'];
     //     1 2 3
     //     2 3 1
@@ -26,15 +28,6 @@ class Lottery extends Model
     // 2 1 4 3
     // 1 4 3 2
 
-    public function lotteryCategory()
-    {
-        return $this->belongsTo(LotteryCategory::class, 'cat_id', 'id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('App\User', 'u_id');
-    }
     public function scopeValidateNumbers($query, $data)
     {
         $length = count($data);

@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
-use App\City;
-
 
 class RegisterController extends Controller
 {
@@ -46,11 +45,11 @@ class RegisterController extends Controller
 
     /**
      * Get full address
-     * 
+     *
      * @parameter city_id
-     * @return    var
+     *
+     * @return var
      */
-
 
     /**
      * Show the application registration form.
@@ -60,13 +59,14 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $addrs = City::all();
+
         // return $addrs;
         return view('auth.register', compact('addrs'));
     }
+
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -82,7 +82,7 @@ class RegisterController extends Controller
                 'cname' => 'required',
                 'location' => 'required',
                 'contact' => 'required|numeric|min:10',
-                'photo' => 'required|image'
+                'photo' => 'required|image',
             ]
         );
     }
@@ -90,8 +90,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
@@ -126,7 +125,7 @@ class RegisterController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => $request->password,
-                'password_confirmation' => $request->password_confirmation
+                'password_confirmation' => $request->password_confirmation,
             ]
         )->validate();
         if ($request->hasFile('photo')) {
@@ -140,15 +139,14 @@ class RegisterController extends Controller
             //get just extension
             $extension = $request->file('photo')->getClientOriginalExtension();
 
-
             //file name to store
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
 
             //upload photo
 
             $path = $request->file('photo')->storeAs('public/profiles', $fileNameToStore);
         } else {
-            $fileNameToStore = "noimage.jpg";
+            $fileNameToStore = 'noimage.jpg';
         }
         event(
             new Registered(
@@ -163,7 +161,7 @@ class RegisterController extends Controller
                             'photo' => $fileNameToStore,
                             'name' => $request->name,
                             'email' => $request->email,
-                            'password' => $request->password
+                            'password' => $request->password,
                         ]
                     )
             )

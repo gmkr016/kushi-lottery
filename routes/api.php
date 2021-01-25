@@ -1,21 +1,8 @@
 <?php
 
-use App\Models\Lottery;
-use App\LotteryCategory;
-use App\Events\TicketSold;
+use App\Http\Controllers\Api\ApiController;
 use Illuminate\Http\Request;
-use \App\Http\Controllers\Api\ApiController;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
- */
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')
     ->get(
@@ -71,15 +58,16 @@ Route::get(
     'agentwisesale',
     function () {
         $lott = \App\Models\Lottery::all();
-        $data = array();
+        $data = [];
         foreach ($lott as $l) {
             array_push($data, ApiController::getUserName($l->u_id));
         }
         $acv = array_count_values($data);
-        $na = array();
+        $na = [];
         foreach ($acv as $key => $value) {
-            array_push($na, ["agent" => $key, "ticketCount" => $value]);
+            array_push($na, ['agent' => $key, 'ticketCount' => $value]);
         }
+
         return $na;
     }
 );
@@ -88,15 +76,16 @@ Route::get(
     'districtwisesale',
     function () {
         $lott = \App\Models\Lottery::all();
-        $district = array();
+        $district = [];
         foreach ($lott as $l) {
-            array_push($district, ApiController::getDistrictLocation($l->u_id));
+            $district[] = ApiController::getDistrictLocation($l->u_id);
         }
         $acv = array_count_values($district);
-        $na = array();
+        $na = [];
         foreach ($acv as $key => $value) {
-            array_push($na, ["district" => $key, "ticketCount" => $value]);
+            $na[] = ['district' => $key, 'ticketCount' => $value];
         }
+
         return $na;
     }
 );
@@ -105,21 +94,16 @@ Route::get(
     'provincewisesale',
     function () {
         $lott = \App\Models\Lottery::all();
-        $province = array();
+        $province = [];
         foreach ($lott as $l) {
-            array_push($province, ApiController::getProvinceLocation($l->u_id));
+            $province[] = ApiController::getProvinceLocation($l->u_id);
         }
         $acv = array_count_values($province);
-        $na = array();
+        $na = [];
         foreach ($acv as $key => $value) {
-            array_push($na, ["province" => $key, "ticketCount" => $value]);
+            $na[] = ['province' => $key, 'ticketCount' => $value];
         }
+
         return $na;
     }
 );
-
-Route::get('stest', function () {
-    $saleCount = \App\Models\Lottery::where('cat_id', 5)->get();
-
-    return count($saleCount) * 100;
-});

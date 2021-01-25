@@ -6,6 +6,6 @@ class Helper
 {
     public static function displayName()
     {
-        return "Laravel Framework";
+        return 'Laravel Framework';
     }
 }

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use App\Http\Controllers\Api\ApiController;
 
 class AuthController extends Controller
 {
@@ -13,7 +11,8 @@ class AuthController extends Controller
      *
      * @return void
      */
-    var $apiC;
+    public $apiC;
+
     public function __construct()
     {
         $this->apiC = new ApiController();
@@ -30,12 +29,13 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
         // dd(auth()->attempt($credentials));
         try {
-            if (!$token = auth('api')->attempt($credentials)) {
+            if (! $token = auth('api')->attempt($credentials)) {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
         } catch (JWTException $e) {
             return response()->json(['error' => 'could not create token'], 500);
         }
+
         return $this->respondWithToken($token);
     }
 
@@ -74,8 +74,7 @@ class AuthController extends Controller
     /**
      * Get the token array structure.
      *
-     * @param  string $token
-     *
+     * @param  string  $token
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithToken($token)
@@ -84,13 +83,14 @@ class AuthController extends Controller
         $user_data['id'] = $user->id;
         $user_data['name'] = $user->name;
         $user_data['email'] = $user->email;
-        $user_data['location'] = $user->location; // city id, 
+        $user_data['location'] = $user->location; // city id,
+
         return response()->json(
             [
                 'access_token' => $token,
                 'token_type' => 'bearer',
                 'expires_in' => auth('api')->factory()->getTTL() * 60,
-                'user' => $user_data
+                'user' => $user_data,
             ]
         );
     }

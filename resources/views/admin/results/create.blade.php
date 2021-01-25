@@ -31,9 +31,11 @@
                                 draw_date
                                 lott_count
                             --}}
+                            @if($allFutureDraw)
                             <form method="POST" action="{{route('admin.results.store')}}"
                                 enctype="multipart/form-data">
                                 @csrf
+
                                 <div class="form-group">
                                     <label for="exampleInputTitle">Category Title</label>
                                     <select class="form-control" name="category">
@@ -137,6 +139,10 @@
                                 </div>
                                 <input type="submit" class="btn btn-info" name="submit" value="Submit" />
                             </form>
+
+                            @else
+                                <h2>First Create Draws</h2>
+                            @endif
                         </div>
                     </div>
 

@@ -15,7 +15,7 @@ class ChartController extends Controller
         return view('admin.charts.agentWiseSale');
     }
 
-    /** 
+    /**
      * Get District Wise Sale
      */
     public function districtWiseSale()

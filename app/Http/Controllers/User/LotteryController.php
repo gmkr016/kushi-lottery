@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
-use Webpatser\Uuid\Uuid;
-use App\Events\TicketSold;
-use Illuminate\Http\Request;
-use App\Models\Lottery as Lottery;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Controller;
+use App\Models\Lottery as Lottery;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class LotteryController extends Controller
 {
@@ -20,6 +19,7 @@ class LotteryController extends Controller
     public static function lott_count($cat_id)
     {
         $list = Lottery::where('cat_id', '=', $cat_id)->get();
+
         // return "yes";
         return $list->count();
     }
@@ -27,7 +27,8 @@ class LotteryController extends Controller
     public function index()
     {
         $numbers = config('lottery.numbers');
-        $cat = \App\LotteryCategory::all();
+        $cat = \App\Models\LotteryCategory::all();
+
         return view('user.generatelottery', compact('numbers', 'cat'));
 
         // return view('lottery', compact('numbers'));
@@ -36,6 +37,7 @@ class LotteryController extends Controller
     public function generate()
     {
         $data = $this->_generateThreeNumbers();
+
         return $data;
     }
 
@@ -61,7 +63,7 @@ class LotteryController extends Controller
         $input = [$first, $second, $third, $fourth, $fifth, $sixth];
         $result = Lottery::validateNumbers($input)->first();
         // if there's already sequence recreate from top
-        if (!empty($result)) {
+        if (! empty($result)) {
             $data = $this->_generateThreeNumbers();
         }
 
@@ -83,12 +85,12 @@ class LotteryController extends Controller
     // public function submit(ConfirmLottery $request)
     public function submit(Request $request)
     {
-        $message = array();
+        $message = [];
         if (Auth::check()) {
             $lottery = new Lottery;
             $lottery->cat_id = $request->lott_cat;
             $lottery->u_id = Auth::user()->id;
-            $lottery->serial = Uuid::generate(4);
+            $lottery->serial = Str::uuid();
             $lottery->first_number = $request->first;
             $lottery->second_number = $request->second;
             $lottery->third_number = $request->third;
@@ -105,13 +107,19 @@ class LotteryController extends Controller
                 $request->sixth,
             ];
             if ($lottery->save()) {
-                TicketSold::dispatch($request->lott_cat);
-                $message = response()->json(["msg" => $resdata]);
+                $currentDraw = ApiController::getCurrentDraw();
+                $drawWiseSale = ApiController::getDrawWiseSale();
+                var_dump($drawWiseSale);
+                // if ($drawWiseSale->has($currentDraw->title)) {
+                //     array_push($message, "true");
+                // }
+                // $message = trans('lottery.success.saved');
+                $message = response()->json(['msg' => $resdata]);
             } else {
-                array_push($message, "Operation Failed");
+                array_push($message, 'Operation Failed');
             }
         } else {
-            array_push($message, "you are not logged in");
+            array_push($message, 'you are not logged in');
         }
 
         return compact('message');
@@ -161,6 +169,7 @@ class LotteryController extends Controller
                                 }
                             }';
         $lott = json_decode($lotteryNumbers);
+
         return $lott->toArray();
     }
 }

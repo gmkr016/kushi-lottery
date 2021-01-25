@@ -37,6 +37,12 @@
                                 <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="id" value="$cat->id">
                                 <div class="form-group">
+                                    <label for="exampleInputEstPrice">Estimated Prize</label>
+                                    <input type="number" class="form-control" id="exampleInputEstPrize"
+                                           aria-describedby="titleHelp" placeholder="Enter Estimated Prize" name="est_prize"
+                                           value="{{ $cat->est_prize }}">
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputTitle">Category Title</label>
                                     <input type="text" class="form-control" id="exampleInputTitle"
                                         aria-describedby="titleHelp" placeholder="Enter Title" name="title"

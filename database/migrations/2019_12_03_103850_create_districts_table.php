@@ -23,6 +23,7 @@ class CreateDistrictsTable extends Migration
             }
         );
     }
+
     /**
      * Reverse the migrations.
      *

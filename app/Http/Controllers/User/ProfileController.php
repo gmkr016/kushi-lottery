@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ApiController as ApiController;
 use App\Http\Controllers\Controller;
 use Auth;
-use App\Http\Controllers\Api\ApiController as ApiController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ProfileController extends Controller
@@ -34,7 +34,6 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,27 +53,26 @@ class ProfileController extends Controller
             //get just extension
             $extension = $request->file('image')->getClientOriginalExtension();
 
-
             //file name to store
-            $fileNameToStore = Str::kebab(Auth::user()->name) . '_' . time() . '.' . $extension;
+            $fileNameToStore = Str::kebab(Auth::user()->name).'_'.time().'.'.$extension;
 
             //upload image
 
             $path = $request->file('image')->storeAs('public/profiles', $fileNameToStore);
         } else {
-            $fileNameToStore = "noimage.jpg";
+            $fileNameToStore = 'noimage.jpg';
         }
 
-        $profile = new \App\UserDetail();
+        $profile = new \App\Models\UserDetail();
         $profile->u_id = Auth::id();
         $profile->address = $address;
         $profile->phone = $phone;
         $profile->dob = $dob;
         $profile->image = $fileNameToStore;
         if ($profile->save()) {
-            return "True";
+            return 'True';
         } else {
-            return "False";
+            return 'False';
         }
     }
 
@@ -89,8 +87,9 @@ class ProfileController extends Controller
         $profile = Auth::User();
         $district = ApiController::getDistrictLocation($profile->location);
         $province = ApiController::getProvinceLocation($profile->location);
-        return view('user.profile.showprofile',compact('profile','district','province'));
-        
+
+        return view('user.profile.showprofile', compact('profile', 'district', 'province'));
+
     }
 
     /**
@@ -107,7 +106,6 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

@@ -159,6 +159,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \Modules\Auth\Providers\ModuleServiceProvider::class,
+        \Modules\Game\Providers\ModuleServiceProvider::class,
+        \Modules\Statistics\Providers\ModuleServiceProvider::class,
 
     ],
 

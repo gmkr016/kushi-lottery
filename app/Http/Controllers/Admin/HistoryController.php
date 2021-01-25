@@ -10,18 +10,19 @@ class HistoryController extends Controller
     public function recent($id) //parameter $id of category
     {
         $lc = Lottery::where('cat_id', '=', $id)->get(); // 9 items
-        $cat = \App\LotteryCategory::find($id);
+        $cat = \App\Models\LotteryCategory::findorFail($id);
         // return $draw_date;
         // return $lc;
         if (count($lc) > 0) {
-            $user = \App\User::all();
-            $count = array();
+            $user = \App\Models\User::all();
+            $count = [];
 
             // return $user;
             foreach ($lc as $l) {
                 array_push($count, $l->u_id);
             }
             $lc = array_count_values($count);
+
             // return $user;
             // return $lc;
             return view('admin.history.history')->with(compact('lc', 'user', 'cat'));
@@ -33,16 +34,17 @@ class HistoryController extends Controller
     public function archive($id) //parameter $id of category
     {
         $lc = Lottery::where('cat_id', '=', $id)->get(); // 9 items
-        $cat = \App\LotteryCategory::findorFail($id);
+        $cat = \App\Models\LotteryCategory::findorFail($id);
         if (count($lc) > 0) {
-            $user = \App\User::all();
-            $count = array();
+            $user = \App\Models\User::all();
+            $count = [];
 
             // return $user;
             foreach ($lc as $l) {
                 array_push($count, $l->u_id);
             }
             $lc = array_count_values($count);
+
             // return $user;
             // return $lc;
             return view('admin.history.history')->with(compact('lc', 'user', 'cat'));
@@ -53,12 +55,12 @@ class HistoryController extends Controller
 
     public static function getUname($id)
     {
-        return \App\User::find($id)->name;
+        return \App\Models\User::find($id)->name;
     }
 
     public static function getDrawdate($id)
     {
-        return \App\LotteryCategory::find($id)->draw_date;
+        return \App\Models\LotteryCategory::find($id)->draw_date;
     }
 
     public function userHistory($id)

@@ -60,7 +60,7 @@ use \App\Http\Controllers\Admin\HistoryController;
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     {{ $result->winnerpos }}
                                                 </td>
-                                                <td class="sorting_1"></td>
+                                                <td class="sorting_1">{{$result->noswinners}} winners !!!</td>
                                                 <td class="sorting_1" style="vertical-align:middle">
                                                     {{ $result->created_at }}
                                                 </td>

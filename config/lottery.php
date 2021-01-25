@@ -1,12 +1,13 @@
 <?php
 /**
  * Lottery Config
+ *
  * @author Rej Mediodia
  */
 
- return [
+return [
     'numbers' => [
         'min' => '1',
-        'max' => '35'
-    ]
- ];
+        'max' => '35',
+    ],
+];

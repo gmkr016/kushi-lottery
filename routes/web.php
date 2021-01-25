@@ -1,6 +1,9 @@
 <?php
 
-use \Utils\Helper\AesHelper;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rules\Enum;
+use Modules\Game\Enums\EnumIdentificationType;
+use Utils\Helper\AesHelper;
 
 // Route::get('/aes', function () {
 //     $data = "name: susant\n address: baluwatar";
@@ -14,6 +17,9 @@ use \Utils\Helper\AesHelper;
 //     return "encrypted = " . $enc . " \ndecrypted = " . $dec;
 // });
 Route::get('/testimg', 'Admin\LotteryCategoryController@testimg');
+Route::get('test', function () {
+    dd(new Enum(EnumIdentificationType::class));
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,9 +37,6 @@ Route::get(
         phpinfo();
     }
 );
-
-
-
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
@@ -56,7 +59,7 @@ Route::prefix('/user')
             // Route::get('/home', 'HomeController@index')->name('home');
             //using user auth
             Route::get('/', 'DashboardController@index')->name('home');
-            // Route::get('/home', 'DashboardController@index')->name('home');
+            Route::get('/home', 'DashboardController@index')->name('home');
             Route::get('/lottery', 'LotteryController@index')->name('lotteryindex');
             Route::get('/lotterylists', 'LotteryController@lists')->name('lotterylists');
             Route::get('generate', 'LotteryController@generate');
@@ -95,8 +98,6 @@ Route::prefix('/admin')
         function () {
             Route::get('/home', 'HomeController@index')->name('home');
             Route::resource('categories', 'LotteryCategoryController');
-            Route::get('drawwisewinners/{draw_id}', 'ResultController@drawWiseResult')->name('dwr');
-            Route::get('winnercheck/{draw_id}/{forPosition}', 'ResultController@winnersCheck')->whereNumber('draw_id')->whereAlpha('forPosition');
             Route::resource('results', 'ResultController');
             Route::get('recenthistory/{id}', 'HistoryController@recent');
             Route::get('archivehistory/{id}', 'HistoryController@archive');
@@ -105,7 +106,6 @@ Route::prefix('/admin')
             Route::get('districtsale', 'ChartController@districtWiseSale')->name('districtwisesale');
             Route::get('provincesale', 'ChartController@provinceWiseSale')->name('provincewisesale');
             Route::get('drawsale', 'ChartController@drawWiseSale')->name('drawwisesale');
-
 
             //using admin auth
 
@@ -128,7 +128,6 @@ Route::prefix('/admin')
         }
     );
 Auth::routes();
-
 
 // Route::get('provincedb', function () {
 //     if (($handle = fopen(public_path() . '/province.csv', 'r')) !== FALSE) {

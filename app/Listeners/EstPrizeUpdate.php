@@ -2,11 +2,9 @@
 
 namespace App\Listeners;
 
+use App\Http\Controllers\Api\ApiController;
 use App\LotteryCategory;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Queue\InteractsWithQueue;
-use App\Http\Controllers\Api\ApiController;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class EstPrizeUpdate
 {
@@ -29,11 +27,9 @@ class EstPrizeUpdate
     public function handle($event)
     {
         $row = LotteryCategory::find($event->lott_cat);
-        $currentTotalEarning=ApiController::currentTotalEarning();
-        // $saleCount = \App\Models\Lottery::where('cat_id', $event->lott_cat)->get();
-        // $currentTotalEarning = count($saleCount) * 100;
-        $row->estprize = intval($currentTotalEarning)*0.60 ;
+        $currentTotalEarning = ApiController::currentTotalEarning();
+        $row->estprize = intval($currentTotalEarning) * 0.60;
         $row->save();
-        Log::debug($row);
+        // Log::debug($row);
     }
 }

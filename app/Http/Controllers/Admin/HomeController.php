@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use \App\Http\Controllers\Controller;
-use \App\LotteryCategory as LottCat;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {

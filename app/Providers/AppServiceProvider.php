@@ -2,27 +2,23 @@
 
 namespace App\Providers;
 
-use \App\LotteryCategory as LottCat;
+use App\Models\LotteryCategory as LottCat;
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        Blade::directive('convert', function ($money) {
-            return "<?php echo number_format($money, 2); ?>";
-        });
-
-        if (class_exists(LottCat::class)) {
-            $currentDate = \Carbon\Carbon::now()->toDateTimeString(); // yyyy-mm-dd hh:mm:ss
+        if (Schema::hasTable('lottery_categories') && class_exists(LottCat::class)) {
+            $currentDate = Carbon::now()->toDateTimeString(); // yyyy-mm-dd hh:mm:ss
             $unix_cd = strtotime($currentDate); //1561959211
             $recentCat = LottCat::where('draw_date', '>=', $unix_cd)->get();
             $archiveCat = LottCat::where('draw_date', '<', $unix_cd)->get();
@@ -30,15 +26,29 @@ class AppServiceProvider extends ServiceProvider
             View::share('archivehistory', $archiveCat);
         }
         Schema::defaultStringLength(191);
+        $this->makeMicros();
     }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
+    private function makeMicros(): void
     {
-        //
+        Response::macro('success', function ($payloads) {
+            $code = Arr::has($payloads, ['code']) ? $payloads['code'] : 200;
+
+            return Response::json([
+                'status' => true,
+                'data' => $payloads['data'],
+                'code' => $code,
+            ]);
+        });
+
+        Response::macro('fail', function ($payloads) {
+            $code = (! Arr::has($payloads, ['code']) || $payloads['code'] == 0) ? 400 : $payloads['code'];
+
+            return Response::json([
+                'status' => false,
+                'data' => $payloads['data'],
+                'code' => $code,
+            ]);
+        });
     }
 }

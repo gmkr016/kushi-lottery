@@ -32,11 +32,12 @@ class ConfirmLottery extends FormRequest
     {
         $result = Lottery::validateNumbers($input)->first();
 
-        if (!empty($result)) {
+        if (! empty($result)) {
             throw new Exception(trans('lottery.error.exists', [
                 'date' => $result->created_at->format('M d Y h:i:s A'),
             ]));
         }
+
         return true;
     }
 
@@ -53,6 +54,7 @@ class ConfirmLottery extends FormRequest
                 }
             }
         }
+
         // if there is no repetitive number allow
         return true;
         // it is the same setup as this
@@ -87,6 +89,7 @@ class ConfirmLottery extends FormRequest
     public function messages()
     {
         $validation = trans('lottery.validation.required');
+
         return [
             'first.required' => $validation,
             'second.required' => $validation,
