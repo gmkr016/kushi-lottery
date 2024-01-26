@@ -62,7 +62,7 @@ class CreateAdmin extends Command
                 }
             } else {
                 try {
-                    Admin::query()->where(['name' => $name, 'email' => $email, 'password' => Hash::make($password)])->first();
+                    Admin::query()->create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
                 } catch (\Exception $exception) {
                     error("You have error:\n{$exception->getMessage()}");
                 }
