@@ -3,17 +3,19 @@
 namespace Modules\Statistics\Controllers\Api\Agent;
 
 use App\Http\Controllers\Controller;
-use Modules\Game\Services\Interfaces\IGameService;
+use Illuminate\Http\Response;
+use Modules\Statistics\Services\Interfaces\InterfaceStatisticService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class StatisticsController extends Controller
 {
-    public function __construct(protected IGameService $gameService)
+    public function __construct(protected InterfaceStatisticService $statisticService)
     {
     }
 
-    public function getCurrentGameStatistics()
+    public function getCurrentGameStatistics(): JsonResponse
     {
-        $game = $this->gameService->getLatestWithSalesCount();
+        $game = $this->statisticService->getGamesStatistics();
 
         return response()->success(['data' => $game]);
     }

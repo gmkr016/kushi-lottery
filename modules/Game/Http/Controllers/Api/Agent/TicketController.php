@@ -2,17 +2,17 @@
 
 namespace Modules\Game\Http\Controllers\Api\Agent;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Modules\Game\DTO\TicketData;
 use Modules\Game\Http\Requests\Agent\CreateTicketRequest;
 use Modules\Game\Models\Ticket;
-use Modules\Game\Services\Interfaces\ILotteryNumberService;
-use Modules\Game\Services\Interfaces\ITicketService;
+use Modules\Game\Services\Interfaces\InterfaceLotteryNumberService;
+use Modules\Game\Services\Interfaces\InterfaceTicketService;
 
 class TicketController
 {
-    public function __construct(protected ITicketService $ticketService, protected ILotteryNumberService $lotteryNumberService)
+    public function __construct(protected InterfaceTicketService $ticketService, protected InterfaceLotteryNumberService $lotteryNumberService)
     {
     }
 
@@ -22,14 +22,15 @@ class TicketController
         DB::beginTransaction();
         try {
             $ticketData = TicketData::from($validated);
-            $lotteryNumbersWithType = $this->lotteryNumberService->prepareRowArray($validated['lotteryNumbers']);
-            $this->ticketService->create($ticketData)->createManyLotteryNumbers($lotteryNumbersWithType);
+            $lotteryNumbersRowWithType = $this->lotteryNumberService->prepareRowArray($validated['lotteryNumbers']);
+            $this->ticketService->create($ticketData)->createManyLotteryNumbers($lotteryNumbersRowWithType);
             DB::commit();
 
             return response()->success(['data' => $this->ticketService->getTicketModel()]);
 
         } catch (\Exception $exception) {
             DB::rollBack();
+            Log::error(sprintf('class: %s, method: %s, message: %s', __CLASS__, __METHOD__, $exception->getMessage()));
 
             return response()->fail(['data' => $exception->getMessage()]);
         }

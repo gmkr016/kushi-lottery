@@ -2,14 +2,15 @@
 
 namespace Modules\Game\Services;
 
+use Modules\Game\DTO\LotteryNumberData;
 use Modules\Game\DTO\TicketData;
 use Modules\Game\Models\Ticket;
-use Modules\Game\Services\Interfaces\ILotteryNumberService;
-use Modules\Game\Services\Interfaces\ITicketService;
+use Modules\Game\Services\Interfaces\InterfaceLotteryNumberService;
+use Modules\Game\Services\Interfaces\InterfaceTicketService;
 
-class TicketService implements ITicketService
+class TicketService implements InterfaceTicketService
 {
-    public function __construct(private ?Ticket $ticket)
+    public function __construct(private ?Ticket $ticket, protected InterfaceLotteryNumberService $lotteryNumberService)
     {
 
     }
@@ -30,10 +31,12 @@ class TicketService implements ITicketService
         return $this;
     }
 
-    public function createManyLotteryNumbers(array $lotteryNumbers): static
+    public function createManyLotteryNumbers(array $lotteryNumbersRowWithType): static
     {
-        $this->ticket->lotteryNumbers()->createMany($lotteryNumbers);
-
+        array_walk($lotteryNumbersRowWithType, function ($rowWithType) {
+            $lotteryNumberData = LotteryNumberData::from($rowWithType + ['ticketId' => $this->ticket->getAttribute('id')]);
+            $this->lotteryNumberService->create($lotteryNumberData);
+        });
         $this->ticket->load('lotteryNumbers');
 
         return $this;

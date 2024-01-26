@@ -65,7 +65,7 @@ class Game extends Model
     public function scopeWithCounts($query)
     {
         return $query
-            ->select('games.id as GameId', 'games.title as gameName', DB::raw('COUNT(DISTINCT t.id) as totalTicketSold'), DB::raw('COUNT(ln.numbers) as totalNumberSold'))
+            ->select('games.id as gameId', 'games.title as gameName', DB::raw('COUNT(DISTINCT t.id) as totalTicketSold'), DB::raw('COUNT(ln.id) as totalNumberSold'))
             ->join('tickets as t', 'games.id', '=', 't.gameId')
             ->join('lottery_numbers as ln', 't.id', '=', 'ln.ticketId')
             ->groupBy('games.id', 'games.title');

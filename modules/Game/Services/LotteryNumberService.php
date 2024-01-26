@@ -5,14 +5,14 @@ namespace Modules\Game\Services;
 use Illuminate\Support\Arr;
 use Modules\Game\DTO\LotteryNumberData;
 use Modules\Game\Models\LotteryNumber;
-use Modules\Game\Services\Interfaces\ILotteryNumberService;
+use Modules\Game\Services\Interfaces\InterfaceLotteryNumberService;
 use Spatie\LaravelData\Data;
 
-class LotteryNumberService implements ILotteryNumberService
+class LotteryNumberService implements InterfaceLotteryNumberService
 {
     public function create(LotteryNumberData $numberData): Data
     {
-        $row = LotteryNumber::query()->create($numberData->toArray())->toArray();
+        $row = LotteryNumber::query()->create($numberData->toArray());
 
         return LotteryNumberData::from($row);
     }

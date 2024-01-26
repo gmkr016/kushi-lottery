@@ -5,7 +5,7 @@ namespace Modules\Game\Services\Interfaces;
 use Modules\Game\DTO\LotteryNumberData;
 use Spatie\LaravelData\Data;
 
-interface ILotteryNumberService
+interface InterfaceLotteryNumberService
 {
     public function create(LotteryNumberData $numberData): Data;
 

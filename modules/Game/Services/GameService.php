@@ -3,11 +3,12 @@
 namespace Modules\Game\Services;
 
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Collection;
 use Modules\Game\DTO\GameData;
 use Modules\Game\Models\Game;
-use Modules\Game\Services\Interfaces\IGameService;
+use Modules\Game\Services\Interfaces\InterfaceGameService;
 
-class GameService implements IGameService
+class GameService implements InterfaceGameService
 {
     public function get(array $columns = ['*'], int $pageSize = 10): Paginator
     {
@@ -16,10 +17,10 @@ class GameService implements IGameService
             ->paginate($pageSize);
     }
 
-    public function getLatestWithSalesCount()
+    public function getLatestWithSalesCount(): array
     {
         return Game::withCounts()
-            ->get();
+            ->get()->toArray();
     }
 
     public function create(GameData $data): array

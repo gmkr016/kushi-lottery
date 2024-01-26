@@ -15,9 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained();
             $table->string('title');
-            $table->timestamp('startDate', 2);
-            $table->timestamp('endDate', 2);
-            $table->timestamp('drawDate', 2);
+            $table->timestamp('startDate', 2)->nullable();
+            $table->timestamp('endDate', 2)->nullable();
+            $table->timestamp('drawDate', 2)->nullable();
             $table->timestamp('createdAt', 2)->nullable();
             $table->timestamp('updatedAt', 2)->nullable();
             $table->softDeletes('deletedAt')->nullable();

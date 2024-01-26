@@ -4,18 +4,18 @@ namespace Modules\Game\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Game\Services\GameService;
-use Modules\Game\Services\Interfaces\IGameService;
-use Modules\Game\Services\Interfaces\ILotteryNumberService;
-use Modules\Game\Services\Interfaces\ITicketService;
+use Modules\Game\Services\Interfaces\InterfaceGameService;
+use Modules\Game\Services\Interfaces\InterfaceLotteryNumberService;
+use Modules\Game\Services\Interfaces\InterfaceTicketService;
 use Modules\Game\Services\LotteryNumberService;
 use Modules\Game\Services\TicketService;
 
 class ModuleServiceProvider extends ServiceProvider
 {
     public array $singletons = [
-        IGameService::class => GameService::class,
-        ITicketService::class => TicketService::class,
-        ILotteryNumberService::class => LotteryNumberService::class,
+        InterfaceGameService::class => GameService::class,
+        InterfaceTicketService::class => TicketService::class,
+        InterfaceLotteryNumberService::class => LotteryNumberService::class,
     ];
 
     public function register(): void
