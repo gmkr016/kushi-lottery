@@ -11,6 +11,7 @@ class GameData extends Data
         public string|null|Optional $id,
         public string|null|Optional $user_id,
         public string $title,
+        public int $prizeMoney,
         public string $startDate,
         public string $endDate,
         public string $drawDate,

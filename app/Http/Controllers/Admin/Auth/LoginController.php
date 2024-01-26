@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use Auth;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /**
-     * Show the login form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showLoginForm()
+    public function showLoginForm(): \Illuminate\Foundation\Application|View|Factory|Application
     {
         return view(
             'auth.login',
@@ -25,17 +24,12 @@ class LoginController extends Controller
         );
     }
 
-    /**
-     * Login the admin.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $this->validator($request);
 
         if (Auth::guard('admin')->attempt($request->only('email', 'password'), $request->filled('remember'))) {
-            //Authentication passed...
+
             return redirect()
                 ->intended(route('admin.home'))
                 ->with('status', 'You are Logged in as Admin!');
@@ -48,7 +42,7 @@ class LoginController extends Controller
     /**
      * Logout the admin.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function logout()
     {
@@ -81,7 +75,7 @@ class LoginController extends Controller
     /**
      * Redirect back after a failed login.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     private function loginFailed()
     {

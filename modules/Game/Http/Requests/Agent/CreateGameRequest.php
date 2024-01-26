@@ -14,6 +14,7 @@ class CreateGameRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'prizeMoney' => ['required', 'integer', 'gt:0'],
             'title' => ['required', 'string'],
             'startDate' => ['required', 'date'],
             'endDate' => ['required', 'date'],

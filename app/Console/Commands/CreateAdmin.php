@@ -47,8 +47,8 @@ class CreateAdmin extends Command
         $password = password(
             label: 'Password',
             placeholder: 'password',
-
             required: 'The password is required');
+        $password = Hash::make($password);
         $confirm = confirm(
             label: 'Is everything okay?');
         if ($confirm) {
@@ -56,13 +56,13 @@ class CreateAdmin extends Command
             if ($admin) {
                 $updatePasswordConfirm = confirm('Admin already exists. Do you want to update existing admin password?');
                 if ($updatePasswordConfirm) {
-                    $admin->password = Hash::make($password);
+                    $admin->password = $password;
                     $admin->save();
                     info('Existing admin password updated.');
                 }
             } else {
                 try {
-                    Admin::query()->create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
+                    Admin::query()->create(['name' => $name, 'email' => $email, 'password' => $password]);
                 } catch (\Exception $exception) {
                     error("You have error:\n{$exception->getMessage()}");
                 }

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\LotteryCategory as LottCat;
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Schema;
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
             View::share('archivehistory', $archiveCat);
         }
         Schema::defaultStringLength(191);
+        Paginator::useBootstrapFour();
         $this->makeMicros();
     }
 

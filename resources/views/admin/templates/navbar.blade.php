@@ -7,7 +7,8 @@
             <i class="fas fa-laugh-wink"></i>
         </div> --}}
         <div class="sidebar-brand-text mx-3"><i class="fas fa-smile" style="font-size:40px; vertical-align: middle"></i>
-            Admin </div>
+            Admin
+        </div>
     </a>
 
     <!-- Divider -->
@@ -24,30 +25,48 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading">
-        Category
-    </div>
+    {{--    <div class="sidebar-heading">--}}
+    {{--        Category--}}
+    {{--    </div>--}}
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-            aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGames" aria-expanded="true"
+           aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Lottery Category</span>
+            <span>Games</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseGames" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 {{-- <h6 class="collapse-header">category</h6> --}}
-                <a class="collapse-item" href="{{route('admin.categories.create')}}">Add</a>
-                <a class="collapse-item" href="{{route('admin.categories.index')}}">List</a>
+                <a class="collapse-item" href="{{route('admin.games.create')}}">Add</a>
+                <a class="collapse-item" href="{{route('admin.games.index')}}">List</a>
+            </div>
+        </div>
+    </li>
+    {{--Agents--}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAgents" aria-expanded="true"
+           aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Agents</span>
+        </a>
+        <div id="collapseAgents" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                {{-- <h6 class="collapse-header">category</h6> --}}
+                <a class="collapse-item" href="#">Add</a>
+                <a class="collapse-item" href="#">View</a>
             </div>
         </div>
     </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#recenthistory" aria-expanded="true"
-            aria-controls="recenthistory">
+           aria-controls="recenthistory">
             <i class="fas fa-fw fa-history"></i>
             <span>Recent History</span>
         </a>
@@ -55,9 +74,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Upcoming Draws :</h6>
                 @if(isset($recenthistory))
-                 @foreach($recenthistory as $rs)
-                <a class="collapse-item" href="{{ url("admin/recenthistory/$rs->id") }}">{{ ucfirst($rs->title) }}</a>
-                @endforeach
+                    @foreach($recenthistory as $rs)
+                        <a class="collapse-item"
+                           href="{{ url("admin/recenthistory/$rs->id") }}">{{ ucfirst($rs->title) }}</a>
+                    @endforeach
                 @endif
             </div>
         </div>
@@ -66,7 +86,7 @@
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#archivehistory" aria-expanded="true"
-            aria-controls="archivehistory">
+           aria-controls="archivehistory">
             <i class="fas fa-fw fa-history"></i>
             <span>Archive History</span>
         </a>
@@ -74,9 +94,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Past Draw History:</h6>
                 @if(isset($archivehistory))
-                @foreach($archivehistory as $as)
-                <a class="collapse-item" href="{{ url("admin/archivehistory/$as->id") }}">{{ ucfirst($as->title) }}</a>
-                @endforeach
+                    @foreach($archivehistory as $as)
+                        <a class="collapse-item"
+                           href="{{ url("admin/archivehistory/$as->id") }}">{{ ucfirst($as->title) }}</a>
+                    @endforeach
                 @endif
             </div>
         </div>
@@ -84,7 +105,7 @@
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#charts" aria-expanded="true"
-            aria-controls="archivehistory">
+           aria-controls="archivehistory">
             <i class="fas fa-chart-bar"></i>
             <span>Charts</span>
         </a>
@@ -101,7 +122,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#results" aria-expanded="true"
-            aria-controls="archivehistory">
+           aria-controls="archivehistory">
             <i class="fas fa-chart-bar"></i>
             <span>Results</span>
         </a>

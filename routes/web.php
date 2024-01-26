@@ -1,9 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rules\Enum;
 use Modules\Game\Enums\EnumIdentificationType;
-use Utils\Helper\AesHelper;
 
 // Route::get('/aes', function () {
 //     $data = "name: susant\n address: baluwatar";
@@ -16,7 +16,7 @@ use Utils\Helper\AesHelper;
 //     $dec = $aes->decrypt();
 //     return "encrypted = " . $enc . " \ndecrypted = " . $dec;
 // });
-Route::get('/testimg', 'Admin\LotteryCategoryController@testimg');
+//Route::get('/testimg', 'Admin\LotteryCategoryController@testimg');
 Route::get('test', function () {
     dd(new Enum(EnumIdentificationType::class));
 });
@@ -94,10 +94,11 @@ Route::prefix('/user')
 Route::prefix('/admin')
     ->name('admin.')
     ->namespace('Admin')
+    ->middleware('auth:admin')
     ->group(
         function () {
             Route::get('/home', 'HomeController@index')->name('home');
-            Route::resource('categories', 'LotteryCategoryController');
+            Route::resource('games', 'GameController');
             Route::resource('results', 'ResultController');
             Route::get('recenthistory/{id}', 'HistoryController@recent');
             Route::get('archivehistory/{id}', 'HistoryController@archive');
@@ -113,9 +114,7 @@ Route::prefix('/admin')
                 ->group(
                     function () {
                         //Login Routes
-                        Route::get('/', 'LoginController@showLoginForm')->name('login');
-                        Route::get('/login', 'LoginController@showLoginForm')->name('login');
-                        Route::post('/login', 'LoginController@login');
+
                         Route::post('/logout', 'LoginController@logout')->name('logout');
                         //Forgot Password Routes
                         Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -127,6 +126,15 @@ Route::prefix('/admin')
                 );
         }
     );
+Route::prefix('/admin')
+    ->name('admin.')
+    ->namespace('Admin\\Auth')
+    ->group(function () {
+        Route::get('/', 'LoginController@showLoginForm')->name('login');
+        Route::get('/login', 'LoginController@showLoginForm')->name('login');
+        Route::post('/login', 'LoginController@login');
+    });
+
 Auth::routes();
 
 // Route::get('provincedb', function () {
