@@ -5,39 +5,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rules\Enum;
 use Modules\Game\Enums\EnumIdentificationType;
 
-// Route::get('/aes', function () {
-//     $data = "name: susant\n address: baluwatar";
-//     $key = "check";
-//     $blockSize = "256";
-
-//     $aes = new AesHelper($data, $key, $blockSize);
-//     $enc = $aes->encrypt();
-//     $aes->setData($enc);
-//     $dec = $aes->decrypt();
-//     return "encrypted = " . $enc . " \ndecrypted = " . $dec;
-// });
-//Route::get('/testimg', 'Admin\LotteryCategoryController@testimg');
-Route::get('test', function () {
-    dd(new Enum(EnumIdentificationType::class));
-});
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
-
-Route::get(
-    'phpinfo',
-    function () {
-        phpinfo();
-    }
-);
-
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/blog', 'HomeController@blog')->name('blog');
@@ -99,6 +66,8 @@ Route::prefix('/admin')
         function () {
             Route::get('/home', 'HomeController@index')->name('home');
             Route::resource('games', 'GameController');
+            Route::resource('agents', 'AgentController');
+            Route::resource('tickets', 'TicketController');
             Route::resource('results', 'ResultController');
             Route::get('recenthistory/{id}', 'HistoryController@recent');
             Route::get('archivehistory/{id}', 'HistoryController@archive');

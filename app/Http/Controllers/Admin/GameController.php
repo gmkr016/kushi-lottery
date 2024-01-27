@@ -17,7 +17,7 @@ class GameController extends Controller
     {
     }
 
-    public function index()
+    public function index(): View|\Illuminate\Foundation\Application|Factory|Application
     {
         $lists = $this->gameService->get(withLotteryNumberCount: true);
 
@@ -40,14 +40,9 @@ class GameController extends Controller
         }
     }
 
-    public static function show($id, $field = null)
+    public static function show(Game $game, $field = null)
     {
-        if (! isset($field)) {
-            return Game::findorFail($id);
-            // return "Field is not set";
-        } else {
-            return Game::findorFail($id, $field)->title;
-        }
+        return $game;
     }
 
     public function edit(Game $game): View|Factory|Application

@@ -2,6 +2,7 @@
 
 namespace Modules\Game\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -46,5 +47,10 @@ class Ticket extends Model
     public function lotteryNumbers(): HasMany
     {
         return $this->hasMany(LotteryNumber::class, 'ticketId');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

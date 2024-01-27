@@ -1,5 +1,6 @@
+@php use Illuminate\Support\Arr; @endphp
 @php
-    @endphp
+        @endphp
 @extends('admin.templates.layout')
 @section('content')
     <div id="content-wrapper" class="d-flex flex-column">
@@ -14,7 +15,7 @@
                     <div class="card-header py-3 ">
                         <div class="row align-items-center">
                             <div class="col-6 ">
-                                <h6 class="m-0 font-weight-bold text-primary">List Agents</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Tickets sales from {{$user['name']}}</h6>
                             </div>
                             <div class="col-6">
                                 {{--                                <a href="#" class="btn btn-info mb-2  float-right">Register new agent</a>--}}
@@ -46,61 +47,36 @@
                                         <thead>
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%"> Name
+                                                colspan="1" width="20%"> Identification Type
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%">Email
+                                                colspan="1" width="20%">Identification Number
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%">Registered At
+                                                colspan="1" width="20%">Sold At
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%">Total Lottery Numbers Choosen
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%">Action
+                                                colspan="1" width="20%">Lottery Numbers
                                             </th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        @if (count($lists->items()) )
+                                        @if (count($lists) )
 
                                             @foreach ($lists as $item)
                                                 <tr role="row" class="odd">
                                                     <td class="sorting_1" style="vertical-align:middle">
-                                                        {{ ucfirst($item->name) }}
+                                                        {{ ucfirst($item['identificationType']->value) }}
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
-                                                        {{ $item->email }}
+                                                        {{ $item['identificationNumber'] }}
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
-                                                        {{ $item->created_at->format('Y-m-d') }}
+                                                        {{ $item['soldAt']->format('Y-m-d') }}
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
-                                                        {{ $item?->tickets_count }}
-                                                    </td>
-                                                    <td class="sorting_1" style="vertical-align:middle">
-
-                                                        @if(true)
-                                                            <a class="btn btn-primary"
-                                                               href="{{ route("admin.tickets.index", ['user' => $item->id]) }}">
-                                                                View Ticket Sales
-                                                            </a>
-                                                        @endif
-
-                                                        <a
-                                                            href="javascript:void(0);"
-                                                            class="btn btn-danger"
-                                                            onclick="event.preventDefault();document.querySelector('#item{{$item->id}}-delete').submit();">
-                                                            Delete
-                                                        </a>
-                                                        <form method='POST' id="item{{$item->id}}-delete"
-                                                              action='{{ route("admin.games.destroy",$item->id) }}'>
-                                                            @csrf
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                        </form>
-
+                                                        {{\Illuminate\Support\Arr::join($item['numbers'], ',')}}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -114,21 +90,20 @@
 
                                         <tfoot>
                                         <tr>
-                                            <th rowspan="1" colspan="1">Name</th>
-                                            <th rowspan="1" colspan="1">Email</th>
-                                            <th rowspan="1">Registered At</th>
-                                            <th rowspan="1" colspan="1">Total Lottery Numbers Chosen</th>
-                                            <th rowspan="1" colspan="1">Action</th>
+                                            <th rowspan="1" colspan="1">Identification Type</th>
+                                            <th rowspan="1" colspan="1">Identification Number</th>
+                                            <th rowspan="1">Sold At</th>
+                                            <th rowspan="1" colspan="1">Lottery Numbers</th>
                                         </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-7">
-                                    {{$lists->links()}}
-                                </div>
-                            </div>
+{{--                            <div class="row">--}}
+{{--                                <div class="col-sm-12 col-md-7">--}}
+{{--                                    {{$lists->links()}}--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>
