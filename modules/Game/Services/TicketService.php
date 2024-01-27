@@ -42,10 +42,10 @@ class TicketService implements InterfaceTicketService
         return $this;
     }
 
-    public function getTicketModel(bool $withNumbers = false): Ticket
+    public function getTicketModel(bool $withLotteryNumbers = false): Ticket
     {
-        if ($withNumbers) {
-            $this->ticket->load('lotteryNumbers');
+        if ($withLotteryNumbers) {
+            $this->ticket->getRelationValue('lotteryNumbers');
         }
 
         return $this->ticket;
