@@ -15,8 +15,7 @@
         "laravel/ui": "^4.2",
         "ovac/idoc": "^1.6",
         "simplesoftwareio/simple-qrcode": "~4",
-        "spatie/laravel-data": "^3.9",
-      "ext-http": "*"
+        "spatie/laravel-data": "^3.9"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3",
