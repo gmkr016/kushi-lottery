@@ -1,6 +1,5 @@
 @php
-    use \App\Http\Controllers\User\LotteryController as LotteryC;
-@endphp
+        @endphp
 @extends('admin.templates.layout')
 @section('content')
     <div id="content-wrapper" class="d-flex flex-column">
@@ -33,9 +32,16 @@
 
                     </div>
                     <div class="card-body">
-                        @if(session()->has('success'))
-                            <div class="text-green">{{session()->get('success')}}</div>
-                        @endif
+                        @session('success')
+                        <div class="text-white font-weight-bold p-2 bg-gradient-success mb-2">{{$value}}</div>
+                        @endsession
+                        @session('errors')
+                        <div class="text-white font-weight-bold p-2 bg-gradient-danger mb-2">
+                            @foreach($errors->all() as $error)
+                                {{$error}}
+                            @endforeach
+                        </div>
+                        @endsession
 
                         <div class="table-responsive">
                             <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">

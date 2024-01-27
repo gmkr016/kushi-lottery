@@ -60,9 +60,9 @@ class GameController extends Controller
         try {
             Game::query()->update($gameData->all());
 
-            return redirect()->route('admin.games.index')->with('success', 'Updated');
+            return redirect()->route('admin.games.index')->with('success', 'Update successful.');
         } catch (\Exception $exception) {
-            return redirect()->route('admin.games.index')->withInput()->withErrors('Error');
+            return redirect()->route('admin.games.index')->withInput()->withErrors(['errors' => 'Update fail.']);
         }
     }
 
