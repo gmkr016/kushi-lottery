@@ -18,11 +18,11 @@ class CreateTicketRequest extends FormRequest
     {
         return [
             'gameId' => ['required', 'exists:games,id', 'string'],
-            'identificationType' => [Rule::in(EnumIdentificationType::toArray())],
+            'identificationType' => ['in:citizenship,license'],
             'identificationNumber' => ['required', 'string'],
             'lotteryNumbers' => ['array', 'required'],
             'lotteryNumbers.*.numbers' => ['array', 'required', 'size:6'],
-            'lotteryNumbers.*.type' => [Rule::in(EnumNumbersType::toArray())],
+            'lotteryNumbers.*.type' => ['in:auto,manual'],
         ];
     }
 }

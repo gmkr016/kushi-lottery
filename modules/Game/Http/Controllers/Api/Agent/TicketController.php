@@ -25,8 +25,9 @@ class TicketController
             $lotteryNumbersRowWithType = $this->lotteryNumberService->prepareRowArray($validated['lotteryNumbers']);
             $this->ticketService->create($ticketData)->createManyLotteryNumbers($lotteryNumbersRowWithType);
             DB::commit();
-
-            return response()->success(['data' => $this->ticketService->getTicketModel()]);
+            $responseData['data'] = $this->ticketService->getTicketModel();
+            $responseData['data']['infoText'] = 'Evening 6:00 PM by ARANIKO TELEVISION';
+            return response()->success($responseData);
 
         } catch (\Exception $exception) {
             DB::rollBack();

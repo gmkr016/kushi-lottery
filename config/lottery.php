@@ -8,6 +8,6 @@
 return [
     'numbers' => [
         'min' => '1',
-        'max' => '35',
+        'max' => '45',
     ],
 ];
