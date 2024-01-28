@@ -2,7 +2,10 @@
 
 namespace Modules\Game\Services;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Game\DTO\GameData;
 use Modules\Game\Models\Game;
 use Modules\Game\Services\Interfaces\InterfaceGameService;
@@ -23,6 +26,20 @@ class GameService implements InterfaceGameService
             ->get()->toArray();
     }
 
+    public function getSalesCount(Game|Model $game): int
+    {
+        return $game->tickets()->count();
+    }
+
+    public function getCurrentGame(): Model|Builder|null
+    {
+        return Game::query()
+            ->whereDate('startDate', '<=', Carbon::now())
+            ->whereDate('endDate', '>=', Carbon::now())
+            ->orderBy('createdAt', 'desc')
+            ->first();
+    }
+
     public function create(GameData $data): array
     {
         return Game::query()->create($data->toArray())->toArray();
@@ -30,6 +47,6 @@ class GameService implements InterfaceGameService
 
     public function countTotalLotteryNumber(): int
     {
-        //        return Game::query()->withCount('lotteryNumbers')->
+        return 1;
     }
 }
