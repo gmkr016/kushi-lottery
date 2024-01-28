@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rules\Enum;
 use Modules\Game\Enums\EnumIdentificationType;
+use Modules\Game\Models\Ticket;
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
@@ -11,7 +12,7 @@ Route::get('/blog', 'HomeController@blog')->name('blog');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/resultpage', 'HomeController@resultpage')->name('resultpage');
 Route::get('/faq', 'HomeController@faq')->name('faq');
-
+Route::get('/view/{ticket}/ticket', 'HomeController@viewTicket');
 // Route::get();
 
 // Route::get('/lottery', 'LotteryController@index');

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Api\ApiController as Api;
 use App\Models\LotteryCategory as Lcat;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Modules\Game\Models\Ticket;
 
 class HomeController extends Controller
 {
@@ -66,5 +70,11 @@ class HomeController extends Controller
         $title = 'faq';
 
         return view('frontend.faq')->with(['title' => $title, 'totalSale' => $this->totalSale, 'nextDraw' => $this->nextDraw]);
+    }
+
+    public function viewTicket(Ticket $ticket): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        $title = 'View Ticket';
+        return view('frontend.view-ticket')->with('ticket', $ticket);
     }
 }

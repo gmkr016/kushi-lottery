@@ -2,6 +2,7 @@
 
 namespace Modules\Game\Http\Controllers\Api\Agent;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Modules\Game\DTO\TicketData;
@@ -26,7 +27,8 @@ class TicketController
             $this->ticketService->create($ticketData)->createManyLotteryNumbers($lotteryNumbersRowWithType);
             DB::commit();
             $responseData['data'] = $this->ticketService->getTicketModel();
-            $responseData['data']['infoText'] = 'Evening 6:00 PM by ARANIKO TELEVISION';
+            $responseData['data']['infoText'] = config('lottery.ticketInfoText');
+            $responseData['data']['dueDate'] = Carbon::now()->addYear()->format('Y-m-d');
             return response()->success($responseData);
 
         } catch (\Exception $exception) {
