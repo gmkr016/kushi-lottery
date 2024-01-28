@@ -5,7 +5,7 @@
         <div class="container">
             <div class="content">
                 <h2 class="title">
-                    FAQ
+                    Ticket Information
                 </h2>
                 <ul class="breadcrumb-list extra-padding">
                     <li>
@@ -15,7 +15,7 @@
                     </li>
 
                     <li>
-                        <a href="#">FAQ</a>
+                        <a href="#">View Ticket</a>
                     </li>
                 </ul>
             </div>
@@ -23,8 +23,21 @@
     </section>
     <!-- ==========Breadcrumb-Section========== -->
 
+    <!-- ==========About-counter-Section========== -->
+    <section class="about-counter">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="info-counter-image">
+                        <img src="{{ asset('storage/assets/newimages/family-lotto.png') }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========About-counter-Section========== -->
     <!-- ==========faq-Section========== -->
-    <section class="faq">
+    <section style="margin-top: 1px" class="faq">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
