@@ -11,7 +11,7 @@
                             <span class="text">Ticket Sold :</span>
                             <div class="time">
                                 <h6>
-                                    {{$totalSale}}
+                                    {{$totalSale ?? ''}}
                                 </h6>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                             <span class="text">Draw At</span>
                             <div class="time">
 
-                                <h6 class="time-countdown" data-countdown={{$game->endDate}}></h6>
+                                <h6 class="time-countdown" data-countdown={{$game?->endDate}}></h6>
                             </div>
                         </div>
                     </div>

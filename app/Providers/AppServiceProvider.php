@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Paginator::useBootstrapFour();
         $this->makeMicros();
+	\Debugbar::disable();
     }
 
     private function makeMicros(): void
