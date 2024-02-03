@@ -10,23 +10,21 @@ use Modules\Game\Services\Interfaces\InterfaceTicketService;
 
 class TicketService implements InterfaceTicketService
 {
-    public function __construct(private ?Ticket $ticket, protected InterfaceLotteryNumberService $lotteryNumberService)
+    public function __construct(protected ?Ticket $ticket, protected InterfaceLotteryNumberService $lotteryNumberService)
     {
 
     }
 
-    public function show(Ticket $ticket, array $columns = ['*'], $pageSize = 10): static
+    public function show(Ticket $ticket, array $columns = ['*']): array
     {
-        $this->ticket = $ticket;
-
-        return $this;
+        return $ticket->only($columns);
     }
 
     public function create(TicketData $ticketData): static
     {
-        $ticket = $this->ticket
+        $this->ticket = (new Ticket)
             ->forceFill($ticketData->toArray());
-        $ticket->save();
+        $this->ticket->save();
 
         return $this;
     }
@@ -42,17 +40,13 @@ class TicketService implements InterfaceTicketService
         return $this;
     }
 
-    public function getTicketModel(bool $withLotteryNumbers = false): Ticket
+    public function getTicketModel(Ticket $ticket, bool $withLotteryNumbers = false): Ticket
     {
         if ($withLotteryNumbers) {
-            $this->ticket->load('lotteryNumbers');
+            $ticket->load('lotteryNumbers');
         }
 
-        return $this->ticket;
+        return $ticket;
     }
 
-    public function setTicketModel(Ticket $ticket): void
-    {
-        $this->ticket = $ticket;
-    }
 }

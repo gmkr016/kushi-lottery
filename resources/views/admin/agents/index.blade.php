@@ -55,7 +55,7 @@
                                                 colspan="1" width="20%">Registered At
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%">Total Lottery Numbers Choosen
+                                                colspan="1" width="20%">Total Ticket Sold
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" width="20%">Action
@@ -82,7 +82,7 @@
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
 
-                                                        @if(true)
+                                                        @if($item?->lottery_numbers_count)
                                                             <a class="btn btn-primary"
                                                                href="{{ route("admin.tickets.index", ['user' => $item->id]) }}">
                                                                 View Ticket Sales
@@ -117,7 +117,7 @@
                                             <th rowspan="1" colspan="1">Name</th>
                                             <th rowspan="1" colspan="1">Email</th>
                                             <th rowspan="1">Registered At</th>
-                                            <th rowspan="1" colspan="1">Total Lottery Numbers Chosen</th>
+                                            <th rowspan="1" colspan="1">Total Ticket Sold</th>
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
                                         </tfoot>

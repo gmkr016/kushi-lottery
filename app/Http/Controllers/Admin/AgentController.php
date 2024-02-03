@@ -11,7 +11,7 @@ class AgentController extends Controller
     {
         $lists = User::query()
             ->select(['id', 'name', 'email', 'created_at'])
-            ->withCount('tickets')
+            ->withCount(['tickets', 'lotteryNumbers'])
             ->paginate(10);
 
         return view('admin.agents.index')->with('lists', $lists);

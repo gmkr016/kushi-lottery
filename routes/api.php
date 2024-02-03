@@ -4,35 +4,9 @@ use App\Http\Controllers\Api\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
-Route::group(
-    [
-        'prefix' => 'auth',
-        'namespace' => 'Api',
-    ],
-    function () {
-        Route::get(
-            'test',
-            function () {
-                return response()->json(
-                    [
-                        'id' => 'test',
-                        'name' => 'susant',
-                    ]
-                );
-            }
-        );
-        Route::post('login', 'AuthController@login');
-        Route::post('logout', 'AuthController@logout');
-        Route::post('refresh', 'AuthController@refresh');
-    }
-);
 Route::group(['namespace' => 'Api'], function () {
     Route::post('getNumbers', 'ApiController@getNumbers'); // for rajan api
     Route::post('getnumber', 'ApiController@getnumber'); // for susant api test
-    // Route::get('getnumbers', function($params){
-    //     return response()->json($params);
-    // });
     Route::get('me', 'ApiController@me');
     Route::get('getcurrentdraw', 'Apicontroller@getCurrentDraw');
     Route::get('getcurrentsalesinfo', 'ApiController@getCurrentSalesInfo');
