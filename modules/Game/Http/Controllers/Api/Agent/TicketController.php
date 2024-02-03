@@ -42,8 +42,8 @@ class TicketController
     public function show(Ticket $ticket)
     {
         try {
-            $this->ticketService->setTicketModel($ticket);
-            $response = $this->ticketService->getTicketModel(true);
+//            $this->ticketService->setTicketModel($ticket);
+            $response = $ticket->load('lotteryNumbers');
 
             return response()->success(['data' => $response]);
         } catch (\Exception $exception) {
