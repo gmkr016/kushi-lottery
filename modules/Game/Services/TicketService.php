@@ -45,7 +45,7 @@ class TicketService implements InterfaceTicketService
     public function getTicketModel(bool $withLotteryNumbers = false): Ticket
     {
         if ($withLotteryNumbers) {
-            $this->ticket->getRelationValue('lotteryNumbers');
+            $this->ticket->load('lotteryNumbers');
         }
 
         return $this->ticket;

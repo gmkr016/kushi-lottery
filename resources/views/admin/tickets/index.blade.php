@@ -76,7 +76,10 @@
                                                         {{ $item['soldAt']->format('Y-m-d') }}
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
-                                                        {{\Illuminate\Support\Arr::join($item['numbers'], ',')}}
+							@foreach($item['numbers'] as $number)
+	                                                     {{\Illuminate\Support\Arr::join($number->only(['first', 'second','third', 'fourth', 'fifth', 'sixth']), ',')}}
+							</br>
+							@endforeach
                                                     </td>
                                                 </tr>
                                             @endforeach

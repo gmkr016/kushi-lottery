@@ -10,7 +10,7 @@ use Modules\Game\Services\Interfaces\InterfaceGameService;
 
 class HeaderTop extends Component
 {
-    public function __construct(protected InterfaceGameService $gameService, public Game $game, public int $totalSale = 1)
+    public function __construct(protected InterfaceGameService $gameService, public Game|null $game, public int $totalSale = 0)
     {
         //
     }
