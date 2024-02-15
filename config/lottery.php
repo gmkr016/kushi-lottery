@@ -6,6 +6,7 @@
  */
 
 return [
+    'ticketPrice' => 100, // in rupee
     'numbers' => [
         'min' => '1',
         'max' => '45',

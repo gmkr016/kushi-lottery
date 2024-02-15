@@ -20,93 +20,7 @@
             </div>
 
             <!-- Content Row -->
-            <div class="row">
-
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-6 col-md-6 mb-4">
-                    <div class="card border-left-primary shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Earnings (Current Draw)</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        Rs. {{ApiController::currentTotalEarning()}}
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-6 col-md-6 mb-4">
-                    <div class="card border-left-success shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Earnings (All Draw)</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        Rs. {{ApiController::totalEarning()}}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Earnings (Monthly) Card Example -->
-                {{-- <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-info shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                    </div>
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-auto">
-                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="progress progress-sm mr-2">
-                                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
-                <!-- Pending Requests Card Example -->
-                {{-- <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-warning shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                        Pending Requests</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-            </div>
+            <x-gross-sale></x-gross-sale>
 
             <!-- Content Row -->
 
@@ -152,45 +66,47 @@
                                                     .then(json => {
                                                         var datas = json;
                                                         // pusing datas into label and data
-                                                        for(var i=0;i<datas.length;i++){ 
-                                                            barLabels.push(datas[i].draw); 
+                                                        for (var i = 0; i < datas.length; i++) {
+                                                            barLabels.push(datas[i].draw);
                                                             barData.push(datas[i].ticketCount);
-                                                            color.push(getRandomColor()); 
-                                                        } 
-                                                            function getRandomColor(){ 
-                                                                var letters='0123456789ABCDEF' .split(''); 
-                                                                var color='#'; 
-                                                                for(var i=0;i<6;i++){ 
-                                                                    color+=letters[Math.floor(Math.random()*16)]; 
-                                                                } 
-                                                                return color; 
-                                                            } 
-                                                            // creating chart chart using labels and data 
-                                                            var chart=new Chart(ctx, { 
-                                                                // The type of chart we want to create 
-                                                                type: 'pie' , 
-                                                                // The data for our dataset 
-                                                            data: { 
-                                                                labels: barLabels, 
-                                                                datasets: [{ 
+                                                            color.push(getRandomColor());
+                                                        }
+
+                                                        function getRandomColor() {
+                                                            var letters = '0123456789ABCDEF'.split('');
+                                                            var color = '#';
+                                                            for (var i = 0; i < 6; i++) {
+                                                                color += letters[Math.floor(Math.random() * 16)];
+                                                            }
+                                                            return color;
+                                                        }
+
+                                                        // creating chart chart using labels and data
+                                                        var chart = new Chart(ctx, {
+                                                            // The type of chart we want to create
+                                                            type: 'pie',
+                                                            // The data for our dataset
+                                                            data: {
+                                                                labels: barLabels,
+                                                                datasets: [{
                                                                     label: 'Draws Ticket Sales ' ,
-                                                                    backgroundColor: color, 
-                                                                    borderColor: 'rgb(255, 150, 132)' , 
-                                                                    fillColor:getRandomColor(), 
+                                                                    backgroundColor: color,
+                                                                    borderColor: 'rgb(255, 150, 132)',
+                                                                    fillColor: getRandomColor(),
                                                                     data: barData
-                                                                }] 
-                                                            }, 
-                                                            //Configuration options go here 
-                                                            options: {} 
+                                                                }]
+                                                            },
+                                                            //Configuration options go here
+                                                            options: {}
                                                         });
-                                                        
+
                                                         })
                                                         .catch(function(error) {
                                                         // This is where you run code if the server returns any errors
                                                         console.log(error)
                                                         }
                                                         );
-                                                        }   
+                            }
                         </script>
                         {{-- Pie chart script ends --}}
 

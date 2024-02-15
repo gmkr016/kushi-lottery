@@ -3,6 +3,8 @@
 namespace Modules\Game\Models;
 
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Contracts\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +20,9 @@ use Illuminate\Support\Facades\DB;
  * show off @method
  *
  * @method static Builder withCounts()
+ * @method static Builder getGames(string $constraint = null, Carbon $timestamp = null)
+ * @method static Builder getGameBetween(Carbon $startDate, Carbon $endDate)
+ * @method static Builder findGameByStartAndEndDate(Carbon $startDate, Carbon $endDate)
  */
 class Game extends Model
 {
@@ -77,5 +82,26 @@ class Game extends Model
             ->join('tickets as t', 'games.id', '=', 't.gameId')
             ->join('lottery_numbers as ln', 't.id', '=', 'ln.ticketId')
             ->groupBy('games.id', 'games.title');
+    }
+
+    public function scopeGetGames(Builder $query, string $constraint = null, Carbon $timestamp = null): Builder
+    {
+        $query->
+        when(
+            ($constraint && $timestamp),
+            fn(Builder $query) => $query->where('startDate', $constraint, $timestamp),
+            fn(Builder $query) => $query->orderBy('startDate', 'desc')
+        );
+        return $query;
+    }
+
+    public function scopeGetGameBetween(Builder $query, Carbon $startDate, Carbon $endDate): Builder
+    {
+        return $query->whereBetween('startDate', [$startDate, $endDate]);
+    }
+
+    public static function scopeFindGameByStartAndEndDate(Builder $query, Carbon $startDate, Carbon $endDate): Builder
+    {
+        return $query->where('startDate', $startDate)->where('endDate', $endDate);
     }
 }

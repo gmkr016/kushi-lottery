@@ -4,5 +4,7 @@ namespace Modules\Statistics\Services\Interfaces;
 
 interface InterfaceStatisticService
 {
-    public function getGamesStatistics(): array;
+    public function grossSaleByCurrentGame(): array;
+
+    public function grossSale(): array;
 }

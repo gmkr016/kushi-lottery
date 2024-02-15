@@ -14,4 +14,6 @@ interface InterfaceTicketService
     public function createManyLotteryNumbers(array $lotteryNumbersRowWithType);
 
     public function getTicketModel(Ticket $ticket, bool $withLotteryNumbers = false): Ticket;
+
+    public function totalCount():int;
 }

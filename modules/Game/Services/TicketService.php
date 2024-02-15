@@ -49,4 +49,8 @@ class TicketService implements InterfaceTicketService
         return $ticket;
     }
 
+    public function totalCount(): int
+    {
+        return $this->ticket->newQuery()->count();
+    }
 }

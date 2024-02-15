@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\Rules\Enum;
-use Modules\Game\Enums\EnumIdentificationType;
+use Modules\Game\Models\Game;
 use Modules\Game\Models\Ticket;
+use Modules\Game\Services\TicketService;
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
@@ -44,9 +44,6 @@ Route::prefix('/admin')
             Route::resource('agents', 'AgentController');
             Route::resource('tickets', 'TicketController');
             Route::resource('results', 'ResultController');
-            Route::get('recenthistory/{id}', 'HistoryController@recent');
-            Route::get('archivehistory/{id}', 'HistoryController@archive');
-            Route::get('userhistory/{id}', 'HistoryController@userHistory');
             Route::get('agentsale', 'ChartController@agentWiseSale')->name('agentwisesale');
             Route::get('districtsale', 'ChartController@districtWiseSale')->name('districtwisesale');
             Route::get('provincesale', 'ChartController@provinceWiseSale')->name('provincewisesale');
@@ -77,5 +74,17 @@ Route::prefix('/admin')
         Route::get('/login', 'LoginController@showLoginForm')->name('login');
         Route::post('/login', 'LoginController@login');
     });
+
+Route::get('test', function () {
+    try {
+        $gameService = new \Modules\Game\Services\GameService();
+        $lotteryNumberService = new \Modules\Game\Services\LotteryNumberService();
+        $ticketService = new TicketService((new Ticket()), $lotteryNumberService);
+        $statService = new \Modules\Statistics\Services\StatisticService($gameService, $ticketService);
+        return $statService->grossSale();
+    } catch (Exception $exception) {
+        return $exception->getMessage();
+    }
+});
 
 Auth::routes();

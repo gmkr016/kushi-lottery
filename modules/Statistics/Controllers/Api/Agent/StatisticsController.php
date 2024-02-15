@@ -3,7 +3,8 @@
 namespace Modules\Statistics\Controllers\Api\Agent;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Response;
+use Carbon\Carbon;
+use Modules\Game\Models\Game;
 use Modules\Statistics\Services\Interfaces\InterfaceStatisticService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -13,10 +14,8 @@ class StatisticsController extends Controller
     {
     }
 
-    public function getCurrentGameStatistics(): JsonResponse
+    public function getCurrentGameSales(): JsonResponse
     {
-        $game = $this->statisticService->getGamesStatistics();
-
-        return response()->success(['data' => $game]);
+        return response()->success(['data' => null]);
     }
 }

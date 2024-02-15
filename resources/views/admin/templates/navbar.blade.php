@@ -63,63 +63,6 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#recenthistory" aria-expanded="true"
-           aria-controls="recenthistory">
-            <i class="fas fa-fw fa-history"></i>
-            <span>Recent History</span>
-        </a>
-        <div id="recenthistory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Upcoming Draws :</h6>
-                @if(isset($recenthistory))
-                    @foreach($recenthistory as $rs)
-                        <a class="collapse-item"
-                           href="{{ url("admin/recenthistory/$rs->id") }}">{{ ucfirst($rs->title) }}</a>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#archivehistory" aria-expanded="true"
-           aria-controls="archivehistory">
-            <i class="fas fa-fw fa-history"></i>
-            <span>Archive History</span>
-        </a>
-        <div id="archivehistory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Past Draw History:</h6>
-                @if(isset($archivehistory))
-                    @foreach($archivehistory as $as)
-                        <a class="collapse-item"
-                           href="{{ url("admin/archivehistory/$as->id") }}">{{ ucfirst($as->title) }}</a>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#charts" aria-expanded="true"
-           aria-controls="archivehistory">
-            <i class="fas fa-chart-bar"></i>
-            <span>Charts</span>
-        </a>
-        <div id="charts" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">All Charts</h6>
-
-                <a class="collapse-item" href="{{route("admin.agentwisesale")}}">Agent Sales</a>
-                <a class="collapse-item" href="{{route("admin.districtwisesale")}}">District Sales</a>
-                <a class="collapse-item" href="{{route("admin.provincewisesale")}}">Province Sales</a>
-                <a class="collapse-item" href="{{route("admin.drawwisesale")}}">Total Sales</a>
-            </div>
-        </div>
-    </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#results" aria-expanded="true"
            aria-controls="archivehistory">

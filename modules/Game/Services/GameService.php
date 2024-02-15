@@ -26,17 +26,17 @@ class GameService implements InterfaceGameService
             ->get()->toArray();
     }
 
-    public function getSalesCount(Game|Model $game): int
+    public function getSalesCount(?Model $game = null): int
     {
-        return $game->tickets()->count();
+        if ($game) {
+            return $game->tickets()->count();
+        }
+        return Game::query()->tickets()->count();
     }
 
     public function getCurrentGame(): Model|Builder|null
     {
-        return Game::query()
-            ->whereDate('startDate', '<=', Carbon::now())
-            ->whereDate('endDate', '>=', Carbon::now())
-            ->orderBy('createdAt', 'desc')
+        return Game::getGames('<=', Carbon::now())
             ->first();
     }
 
@@ -47,6 +47,12 @@ class GameService implements InterfaceGameService
 
     public function countTotalLotteryNumber(): int
     {
-        return 1;
+        $grossSale = 0;
+        $currentGame = $this->getCurrentGame();
+        if ($currentGame) {
+            $ticketSale = $currentGame->tickets()->count();
+            $grossSale = config('lottery.ticketSale') * 100;
+        }
+        return $grossSale;
     }
 }
