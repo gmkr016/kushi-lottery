@@ -12,7 +12,7 @@ class GameFactory extends Factory
     {
         $usersArray = User::query()->pluck('id')->toArray();
 
-        $startDate = Carbon::instance($this->faker->dateTimeBetween('-6 months', '-1 month'));
+        $startDate = Carbon::instance($this->faker->dateTimeBetween('-6 months', '+1 months'));
         $endDate = (clone $startDate)->addDays(7);
         return [
             'user_id' => $this->faker->randomElement($usersArray),
