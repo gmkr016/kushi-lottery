@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Game\Game;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -62,8 +64,8 @@ class User extends Authenticatable
         return $this->getKey();
     }
 
-    public function getJWTCustomClaims()
+    public function games(): HasMany
     {
-        return [];
+        return $this->hasMany(Game::class);
     }
 }

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained();
             $table->string('title');
-            $table->unsignedInteger('prizeMoney');
             $table->timestamp('startDate', 2)->nullable();
             $table->timestamp('endDate', 2)->nullable();
             $table->timestamp('drawDate', 2)->nullable();

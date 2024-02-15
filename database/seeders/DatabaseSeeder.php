@@ -3,17 +3,20 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Game\Database\Seeders\GameSeeder;
+use Modules\Game\Database\Seeders\LotteryNumberSeeder;
+use Modules\Game\Database\Seeders\TicketSeeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
-        $this->call(UsersSeeder::class);
-        $this->call(LotterySeeder::class);
+        $this
+            ->call([
+                UsersSeeder::class,
+                GameSeeder::class,
+                TicketSeeder::class,
+                LotteryNumberSeeder::class
+            ]);
     }
 }
