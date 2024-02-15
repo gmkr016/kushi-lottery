@@ -22,7 +22,7 @@ class LoginController extends Controller
     {
         $token = $request->user()
             ->createToken(
-                $request->get('email'),
+                $request->get('deviceId'),
                 ['games:index', 'games:store', 'games:show', 'tickets:store', 'tickets:show']
             )->plainTextToken;
         $user = UserData::from($request->user());
