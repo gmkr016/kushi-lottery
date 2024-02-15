@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\StatisticController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Modules\Game\Models\Ticket;
@@ -43,6 +44,7 @@ Route::prefix('/admin')
             Route::resource('agents', 'AgentController');
             Route::resource('tickets', 'TicketController');
             Route::resource('results', 'ResultController');
+            Route::get('statistics/listTickets', [StatisticController::class,'listTickets'])->name('statistics.listTickets');
             Route::get('agentsale', 'ChartController@agentWiseSale')->name('agentwisesale');
             Route::get('districtsale', 'ChartController@districtWiseSale')->name('districtwisesale');
             Route::get('provincesale', 'ChartController@provinceWiseSale')->name('provincewisesale');

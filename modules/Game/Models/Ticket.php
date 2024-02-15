@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -15,11 +16,11 @@ class Ticket extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 
-    const CREATED_AT = 'createdAt';
+    const string CREATED_AT = 'createdAt';
 
-    const UPDATED_AT = 'updatedAt';
+    const string UPDATED_AT = 'updatedAt';
 
-    const DELETED_AT = 'deletedAt';
+    const string DELETED_AT = 'deletedAt';
 
     public static $snakeAttributes = false;
 
@@ -51,8 +52,13 @@ class Ticket extends Model
         return $this->hasMany(LotteryNumber::class, 'ticketId');
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function game(): BelongsTo
+    {
+        return $this->belongsTo(Game::class, 'gameId', 'id');
     }
 }

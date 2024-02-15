@@ -2,6 +2,7 @@
 
 namespace Modules\Statistics\Services;
 
+use Illuminate\Contracts\Pagination\Paginator;
 use Modules\Game\Services\Interfaces\InterfaceGameService;
 use Modules\Game\Services\Interfaces\InterfaceTicketService;
 use Modules\Statistics\Services\Interfaces\InterfaceStatisticService;
@@ -30,5 +31,10 @@ class StatisticService implements InterfaceStatisticService
         $grossSale = config('lottery.ticketPrice') * $grossCount;
 
         return ['grossSale' => $grossSale];
+    }
+
+    public function listTicketsWithLotteryNumberCount(array $columns = ['*']): Paginator
+    {
+        return $this->ticketService->listTicketsWithLotteryNumberCountByGame($columns);
     }
 }

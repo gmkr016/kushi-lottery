@@ -2,6 +2,7 @@
 
 namespace Modules\Game\Services;
 
+use Illuminate\Contracts\Pagination\Paginator;
 use Modules\Game\DTO\LotteryNumberData;
 use Modules\Game\DTO\TicketData;
 use Modules\Game\Models\Ticket;
@@ -58,5 +59,14 @@ class TicketService implements InterfaceTicketService
     {
         $this->ticket = $ticket;
         return $this;
+    }
+
+    public function listTicketsWithLotteryNumberCountByGame(array $columns =['*'], int $page = 10): Paginator
+    {
+        return Ticket::query()
+            ->select($columns)
+            ->with(['game' => fn($query) => $query->select(['id', 'title', 'startDate', 'endDate', 'drawDate'])])
+            ->withCount('lotteryNumbers')
+            ->simplePaginate($page);
     }
 }
