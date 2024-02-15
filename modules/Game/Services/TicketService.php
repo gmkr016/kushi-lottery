@@ -53,4 +53,10 @@ class TicketService implements InterfaceTicketService
     {
         return $this->ticket->newQuery()->count();
     }
+
+    public function setTicketModel(Ticket $ticket): static
+    {
+        $this->ticket = $ticket;
+        return $this;
+    }
 }

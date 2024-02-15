@@ -43,11 +43,10 @@ class TicketController
     public function show(Ticket $ticket)
     {
         try {
-            $response = $this->ticketService->getTicketModel($ticket);
-
+            $response = $this->ticketService->setTicketModel($ticket)->getTicketModel();
             return response()->success(['data' => $response]);
         } catch (\Exception $exception) {
-            return response()->success(['data' => $exception->getMessage()]);
+            return response()->fail(['data' => $exception->getMessage()]);
         }
     }
 }
