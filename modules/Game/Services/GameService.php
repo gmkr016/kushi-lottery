@@ -31,12 +31,13 @@ class GameService implements InterfaceGameService
         if ($game) {
             return $game->tickets()->count();
         }
+
         return Game::query()->tickets()->count();
     }
 
     public function getCurrentGame(): Model|Builder|null
     {
-        return Game::getGames('<=', Carbon::now())
+        return Game::getGamesByStartDate(constraint: '<=', startDate: Carbon::now())
             ->first();
     }
 
@@ -53,6 +54,7 @@ class GameService implements InterfaceGameService
             $ticketSale = $currentGame->tickets()->count();
             $grossSale = config('lottery.ticketSale') * 100;
         }
+
         return $grossSale;
     }
 }

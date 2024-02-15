@@ -20,6 +20,7 @@ class StatisticService implements InterfaceStatisticService
             $ticketSale = $currentGame->tickets()->count();
             $grossSale = config('lottery.ticketPrice') * $ticketSale;
         }
+
         return ['grossCurrentSale' => $grossSale];
     }
 
@@ -27,6 +28,7 @@ class StatisticService implements InterfaceStatisticService
     {
         $grossCount = $this->ticketService->totalCount();
         $grossSale = config('lottery.ticketPrice') * $grossCount;
+
         return ['grossSale' => $grossSale];
     }
 }

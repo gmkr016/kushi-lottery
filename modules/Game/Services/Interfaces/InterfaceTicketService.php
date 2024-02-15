@@ -7,7 +7,7 @@ use Modules\Game\Models\Ticket;
 
 interface InterfaceTicketService
 {
-    public function show(Ticket $ticket, array $columns = ['*']):array;
+    public function show(Ticket $ticket, array $columns = ['*']): array;
 
     public function create(TicketData $ticketData): static;
 
@@ -15,5 +15,5 @@ interface InterfaceTicketService
 
     public function getTicketModel(Ticket $ticket, bool $withLotteryNumbers = false): Ticket;
 
-    public function totalCount():int;
+    public function totalCount(): int;
 }

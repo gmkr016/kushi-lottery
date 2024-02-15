@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
                 UsersSeeder::class,
                 GameSeeder::class,
                 TicketSeeder::class,
-                LotteryNumberSeeder::class
+                LotteryNumberSeeder::class,
             ]);
     }
 }

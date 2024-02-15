@@ -29,6 +29,7 @@ class TicketController
             $responseData['data'] = $this->ticketService->getTicketModel();
             $responseData['data']['infoText'] = config('lottery.ticketInfoText');
             $responseData['data']['dueDate'] = Carbon::now()->addYear()->format('Y-m-d');
+
             return response()->success($responseData);
 
         } catch (\Exception $exception) {

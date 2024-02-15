@@ -8,9 +8,8 @@ use Modules\Game\Models\Game;
 
 class TicketFactory extends Factory
 {
-
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function definition()
     {
@@ -21,7 +20,7 @@ class TicketFactory extends Factory
             'user_id' => $randomRow['user_id'],
             'gameId' => $randomRow['id'],
             'identificationType' => $this->faker->randomElement(EnumIdentificationType::toArray()),
-            'identificationNumber' => $this->faker->randomDigitNotNull
+            'identificationNumber' => $this->faker->randomDigitNotNull,
         ];
     }
 }

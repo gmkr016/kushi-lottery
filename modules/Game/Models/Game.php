@@ -4,7 +4,6 @@ namespace Modules\Game\Models;
 
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Contracts\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,7 +19,7 @@ use Illuminate\Support\Facades\DB;
  * show off @method
  *
  * @method static Builder withCounts()
- * @method static Builder getGames(string $constraint = null, Carbon $timestamp = null)
+ * @method static Builder getGamesByStartDate(string $constraint = null, Carbon $startDate = null)
  * @method static Builder getGameBetween(Carbon $startDate, Carbon $endDate)
  * @method static Builder findGameByStartAndEndDate(Carbon $startDate, Carbon $endDate)
  */
@@ -53,7 +52,7 @@ class Game extends Model
         parent::boot();
 
         static::creating(function (Game $model) {
-            if (!$model->user_id) {
+            if (! $model->user_id) {
                 $model->user_id = Auth::id();
             }
 
@@ -65,6 +64,7 @@ class Game extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'gameId');
@@ -84,14 +84,15 @@ class Game extends Model
             ->groupBy('games.id', 'games.title');
     }
 
-    public function scopeGetGames(Builder $query, string $constraint = null, Carbon $timestamp = null): Builder
+    public function scopeGetGamesByStartDate(Builder $query, ?string $constraint = null, ?Carbon $startDate = null): Builder
     {
         $query->
         when(
-            ($constraint && $timestamp),
-            fn(Builder $query) => $query->where('startDate', $constraint, $timestamp),
-            fn(Builder $query) => $query->orderBy('startDate', 'desc')
+            ($constraint && $startDate),
+            fn (Builder $query) => $query->where('startDate', $constraint, $startDate),
+            fn (Builder $query) => $query->orderBy('startDate', 'desc')
         );
+
         return $query;
     }
 
@@ -102,6 +103,8 @@ class Game extends Model
 
     public static function scopeFindGameByStartAndEndDate(Builder $query, Carbon $startDate, Carbon $endDate): Builder
     {
-        return $query->where('startDate', $startDate)->where('endDate', $endDate);
+        return $query
+            ->where('startDate', $startDate)
+            ->where('endDate', $endDate);
     }
 }

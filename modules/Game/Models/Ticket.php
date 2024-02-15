@@ -38,9 +38,10 @@ class Ticket extends Model
         parent::boot();
 
         static::creating(function (Ticket $model) {
-            if (!$model->user_id) {
+            if (! $model->user_id) {
                 $model->user_id = Auth::id();
             }
+
             return true;
         });
     }

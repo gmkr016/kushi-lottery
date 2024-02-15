@@ -3,9 +3,6 @@
 namespace Modules\Game\Http\Requests\Agent;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Modules\Game\Enums\EnumIdentificationType;
-use Modules\Game\Enums\EnumNumbersType;
 
 class CreateTicketRequest extends FormRequest
 {

@@ -10,7 +10,7 @@ use Modules\Game\Services\Interfaces\InterfaceGameService;
 
 class HeaderTop extends Component
 {
-    public function __construct(protected InterfaceGameService $gameService, public Game|null $game, public int $totalSale = 0)
+    public function __construct(protected InterfaceGameService $gameService, public ?Game $game, public int $totalSale = 0)
     {
         //
     }
@@ -18,14 +18,15 @@ class HeaderTop extends Component
     public function getCurrentDraw(): void
     {
         $this->game = $this->gameService->getCurrentGame();
-        if (null != $this->game) {
+        if ($this->game != null) {
             $this->totalSale = $this->gameService->getSalesCount($this->game);
-        };
+        }
     }
 
     public function render(): View|Closure|string
     {
         $this->getCurrentDraw();
+
         return view('components.header-top');
     }
 }

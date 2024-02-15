@@ -14,12 +14,13 @@ class GameFactory extends Factory
 
         $startDate = Carbon::instance($this->faker->dateTimeBetween('-6 months', '+1 months'));
         $endDate = (clone $startDate)->addDays(7);
+
         return [
             'user_id' => $this->faker->randomElement($usersArray),
-            'title' => sprintf("GameWeek-%s", $this->faker->unique()->randomNumber(2)),
+            'title' => sprintf('GameWeek-%s', $this->faker->unique()->randomNumber(2)),
             'startDate' => $startDate,
             'endDate' => $endDate,
-            'drawDate' => $endDate
+            'drawDate' => $endDate,
         ];
     }
 }

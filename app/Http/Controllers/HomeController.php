@@ -74,8 +74,8 @@ class HomeController extends Controller
         $title = 'View Ticket';
         $data = $ticket
             ->load([
-                'user' => fn($query) => $query->select(['name', 'id', 'location']),
-                'lotteryNumbers' => fn($query) => $query->select(['id', 'ticketId', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth'])
+                'user' => fn ($query) => $query->select(['name', 'id', 'location']),
+                'lotteryNumbers' => fn ($query) => $query->select(['id', 'ticketId', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth']),
             ])
             ->only(['id', 'identificationType', 'identificationNumber', 'createdAt', 'user', 'lotteryNumbers']);
 

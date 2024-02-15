@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Modules\Game\Models\Game;
 use Modules\Game\Models\Ticket;
 use Modules\Game\Services\TicketService;
 
@@ -81,6 +80,7 @@ Route::get('test', function () {
         $lotteryNumberService = new \Modules\Game\Services\LotteryNumberService();
         $ticketService = new TicketService((new Ticket()), $lotteryNumberService);
         $statService = new \Modules\Statistics\Services\StatisticService($gameService, $ticketService);
+
         return $statService->grossSale();
     } catch (Exception $exception) {
         return $exception->getMessage();

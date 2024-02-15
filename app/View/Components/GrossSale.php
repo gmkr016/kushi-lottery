@@ -20,6 +20,7 @@ class GrossSale extends Component
         $data['grossCurrentSale'] = $response['grossCurrentSale'];
         $response = $this->statisticService->grossSale();
         $data['grossSale'] = $response['grossSale'];
+
         return view('components.gross-sale', $data);
     }
 }

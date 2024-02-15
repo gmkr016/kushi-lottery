@@ -6,7 +6,6 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Game\DTO\GameData;
-use Modules\Game\Models\Game;
 
 interface InterfaceGameService
 {
@@ -15,6 +14,7 @@ interface InterfaceGameService
     public function getSalesCount(?Model $game = null): int;
 
     public function getCurrentGame(): Model|Builder|null;
+
     public function getLatestWithSalesCount(): array;
 
     public function countTotalLotteryNumber(): int;

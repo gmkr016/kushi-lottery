@@ -3,8 +3,6 @@
 namespace Modules\Statistics\Controllers\Api\Agent;
 
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-use Modules\Game\Models\Game;
 use Modules\Statistics\Services\Interfaces\InterfaceStatisticService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
