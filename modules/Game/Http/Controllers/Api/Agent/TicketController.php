@@ -2,6 +2,7 @@
 
 namespace Modules\Game\Http\Controllers\Api\Agent;
 
+use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -11,7 +12,7 @@ use Modules\Game\Models\Ticket;
 use Modules\Game\Services\Interfaces\InterfaceLotteryNumberService;
 use Modules\Game\Services\Interfaces\InterfaceTicketService;
 
-class TicketController
+class TicketController extends Controller
 {
     public function __construct(protected InterfaceTicketService $ticketService, protected InterfaceLotteryNumberService $lotteryNumberService)
     {

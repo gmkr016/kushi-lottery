@@ -5,10 +5,12 @@ namespace Modules\Game\Services;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Game\DTO\GameData;
 use Modules\Game\Models\Game;
 use Modules\Game\Services\Interfaces\InterfaceGameService;
+use Ramsey\Uuid\Uuid;
 
 class GameService implements InterfaceGameService
 {
@@ -17,6 +19,7 @@ class GameService implements InterfaceGameService
         return Game::query()
             ->select($columns)
             ->when($withLotteryNumberCount, fn ($query) => $query->withCount('lotteryNumbers'))
+            ->orderBy('drawDate', 'desc')
             ->paginate($pageSize);
     }
 
@@ -56,5 +59,10 @@ class GameService implements InterfaceGameService
         }
 
         return $grossSale;
+    }
+
+    public function findById(string $gameId): GameData
+    {
+        return GameData::from(Game::query()->find($gameId));
     }
 }

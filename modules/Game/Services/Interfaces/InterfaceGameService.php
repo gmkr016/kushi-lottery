@@ -10,6 +10,7 @@ use Modules\Game\DTO\GameData;
 interface InterfaceGameService
 {
     public function get(array $columns = ['*'], int $pageSize = 10, bool $withLotteryNumberCount = false): Paginator;
+    public function findById(string $gameId): GameData;
 
     public function getSalesCount(?Model $game = null): int;
 

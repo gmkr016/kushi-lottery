@@ -7,6 +7,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Modules\Game\DTO\GameData;
 use Modules\Game\Models\Game;
 use Modules\Game\Services\Interfaces\InterfaceGameService;
@@ -39,7 +40,11 @@ class GameController extends Controller
             return $exception->getMessage();
         }
     }
-
+    public function storeLottery(Request $request)
+    {
+        $gameId = $request->get('gameId');
+        return $this->gameService->findById($gameId);
+    }
     public static function show(Game $game, $field = null)
     {
         return $game;

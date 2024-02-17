@@ -2,6 +2,7 @@
 
 namespace Modules\Game\Http\Controllers\Api\Agent;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Modules\Game\DTO\GameData;
@@ -9,7 +10,7 @@ use Modules\Game\Http\Requests\Agent\CreateGameRequest;
 use Modules\Game\Services\Interfaces\InterfaceGameService;
 use Symfony\Component\HttpFoundation\Response;
 
-class GameController
+class GameController extends Controller
 {
     public function __construct(protected InterfaceGameService $gameService)
     {

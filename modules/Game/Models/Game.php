@@ -42,9 +42,9 @@ class Game extends Model
     public static $snakeAttributes = false;
 
     protected $casts = [
-        'startDate' => 'date',
-        'endDate' => 'date',
-        'drawDate' => 'date',
+        'startDate' => 'datetime',
+        'endDate' => 'datetime',
+        'drawDate' => 'datetime',
     ];
 
     protected static function boot(): void

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\StatisticController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,7 @@ Route::prefix('/admin')
             Route::resource('agents', 'AgentController');
             Route::resource('tickets', 'TicketController');
             Route::resource('results', 'ResultController');
+            Route::post('games/storeLottery', [GameController::class, 'storeLottery'])->name('games.storeLottery');
             Route::get('statistics/listTickets', [StatisticController::class,'listTickets'])->name('statistics.listTickets');
             Route::get('agentsale', 'ChartController@agentWiseSale')->name('agentwisesale');
             Route::get('districtsale', 'ChartController@districtWiseSale')->name('districtwisesale');
@@ -79,6 +81,8 @@ Route::prefix('/admin')
 Route::get('test', function () {
     try {
         $gameService = new \Modules\Game\Services\GameService();
+        $currentGame = $gameService->getCurrentGame()->first();
+        return $currentGame->load(['lotteryNumbers' => fn($query) => $query->select(['first', 'second', 'third', 'fourth', 'fifth', 'sixth'])]);
         $lotteryNumberService = new \Modules\Game\Services\LotteryNumberService();
         $ticketService = new TicketService((new Ticket()), $lotteryNumberService);
         $statService = new \Modules\Statistics\Services\StatisticService($gameService, $ticketService);

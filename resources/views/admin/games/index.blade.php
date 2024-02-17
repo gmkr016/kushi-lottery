@@ -1,23 +1,11 @@
-@php
-        @endphp
 @extends('admin.templates.layout')
 @section('content')
     <div id="content-wrapper" class="d-flex flex-column">
 
         <!-- Main Content -->
         <div id="content">
-
             @include('admin.templates.top-nav')
             <div class="container-fluid">
-
-                <!-- Page Heading -->
-                {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">List Lottery Categories</h1>
-
-                </div> --}}
-
-                {{-- Content row --}}
-
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 ">
                         <div class="row align-items-center">
@@ -61,10 +49,10 @@
                                                 colspan="1" width="20%">Draw Date
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%">Total Lottery Numbers Choosen
+                                                colspan="1" width="15%">Total Lottery Numbers Choosen
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%">Action
+                                                colspan="1" width="25%">Action
                                             </th>
                                         </tr>
                                         </thead>
@@ -78,16 +66,21 @@
                                                         {{ ucfirst($item->title) }}
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
-                                                        {{ date('Y-m-d H:i:s', $item->draw_date) }}
+                                                        {{ $item->drawDate }}
                                                     </td>
                                                     {{-- how many total lotteries submitted from users --}}
                                                     <td class="sorting_1" style="vertical-align:middle">
                                                         {{ $item->lottery_numbers_count }}
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
+                                                        @if($item->drawDate->gte(\Carbon\Carbon::now()))
+                                                            <a href="javascript:void(0)"
+                                                               onclick="setWinningNumbers(this, '{{$item->id}}')"
+                                                               class="btn btn-warning">Set Winning Number</a>
+                                                        @endif
                                                         <a class="btn btn-primary"
                                                            href="{{ route("admin.games.edit",$item->id) }}">Edit</a>
-                                                        <a href="javascript:void()" class="btn btn-danger"
+                                                        <a href="javascript:void(0)" class="btn btn-danger"
                                                            onclick="event.preventDefault();document.querySelector('#item{{$item->id}}-delete').submit();">Delete</a>
                                                         <form method='POST' id="item{{$item->id}}-delete"
                                                               action='{{ route("admin.games.destroy",$item->id) }}'>
@@ -125,11 +118,31 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
         </div>
     </div>
-
+    <form class="input-group my-3 d-none" method="post" action="{{route('admin.games.storeLottery')}}" id="winningNumbersWrapper">
+        @csrf
+        <input type="hidden" name="gameId" id="gameId">
+        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="first">
+        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="second">
+        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="third">
+        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="fourth">
+        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="fifth">
+        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="sixth">
+        <button class="btn btn-outline-primary" type="submit">Submit</button>
+    </form>
 @endsection
+@push('scripts')
+    <script>
+        const setWinningNumbers = (el, gameId) => {
+            const winningNumbersWrapperEl = document.getElementById('winningNumbersWrapper')
+            const clone = winningNumbersWrapperEl.cloneNode(true)
+
+            const gameIdEl = clone.querySelector('#gameId')
+            gameIdEl.value = gameId
+            clone.classList.remove('d-none')
+            el.parentElement.append(clone)
+        }
+    </script>
+@endpush
