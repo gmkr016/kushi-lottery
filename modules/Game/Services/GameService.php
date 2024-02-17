@@ -20,6 +20,7 @@ class GameService implements InterfaceGameService
             ->select($columns)
             ->when($withLotteryNumberCount, fn ($query) => $query->withCount('lotteryNumbers'))
             ->orderBy('drawDate', 'desc')
+            ->with(['lottery'])
             ->paginate($pageSize);
     }
 
@@ -61,8 +62,11 @@ class GameService implements InterfaceGameService
         return $grossSale;
     }
 
-    public function findById(string $gameId): GameData
+    public function findById(string $gameId): ?GameData
     {
-        return GameData::from(Game::query()->find($gameId));
+        if($game = Game::query()->find($gameId)){
+            return GameData::from($game);
+        }
+        return null;
     }
 }

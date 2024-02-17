@@ -73,7 +73,7 @@
                                                         {{ $item->lottery_numbers_count }}
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
-                                                        @if($item->drawDate->gte(\Carbon\Carbon::now()))
+                                                        @if(is_null($item->lottery) && $item->drawDate->gte(\Carbon\Carbon::now()))
                                                             <a href="javascript:void(0)"
                                                                onclick="setWinningNumbers(this, '{{$item->id}}')"
                                                                class="btn btn-warning">Set Winning Number</a>
@@ -124,12 +124,12 @@
     <form class="input-group my-3 d-none" method="post" action="{{route('admin.games.storeLottery')}}" id="winningNumbersWrapper">
         @csrf
         <input type="hidden" name="gameId" id="gameId">
-        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="first">
-        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="second">
-        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="third">
-        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="fourth">
-        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="fifth">
-        <input type="number" min="1" name="winningNumber[]" value="3" max="45" class="form-control" id="sixth">
+        <input type="number" min="1" name="winningNumbers[]" value="3" max="45" class="form-control" id="first">
+        <input type="number" min="1" name="winningNumbers[]" value="3" max="45" class="form-control" id="second">
+        <input type="number" min="1" name="winningNumbers[]" value="3" max="45" class="form-control" id="third">
+        <input type="number" min="1" name="winningNumbers[]" value="3" max="45" class="form-control" id="fourth">
+        <input type="number" min="1" name="winningNumbers[]" value="3" max="45" class="form-control" id="fifth">
+        <input type="number" min="1" name="winningNumbers[]" value="3" max="45" class="form-control" id="sixth">
         <button class="btn btn-outline-primary" type="submit">Submit</button>
     </form>
 @endsection

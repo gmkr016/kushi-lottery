@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,6 +74,11 @@ class Game extends Model
     public function lotteryNumbers(): HasManyThrough
     {
         return $this->hasManyThrough(LotteryNumber::class, Ticket::class, 'gameId', 'ticketId');
+    }
+
+    public function lottery(): HasOne
+    {
+        return $this->hasOne(Lottery::class, 'gameId', 'id');
     }
 
     public function scopeWithCounts($query)

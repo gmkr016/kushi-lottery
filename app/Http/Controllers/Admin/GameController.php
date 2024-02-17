@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Game\DTO\GameData;
 use Modules\Game\Models\Game;
+use Modules\Game\Models\Lottery;
 use Modules\Game\Services\Interfaces\InterfaceGameService;
 
 class GameController extends Controller
@@ -43,7 +44,17 @@ class GameController extends Controller
     public function storeLottery(Request $request)
     {
         $gameId = $request->get('gameId');
-        return $this->gameService->findById($gameId);
+        if ($game = $this->gameService->findById($gameId)) {
+            $winningNumbers = $request->get('winningNumbers');
+            $attributes = collect(['first', 'second', 'third', 'fourth', 'fifth', 'sixth'])
+                ->combine($winningNumbers)
+                ->merge(['gameId' => $game->id])
+                ->toArray();
+
+            Lottery::query()->create($attributes);
+            return redirect()->route('admin.games.index')->with('success', 'Task Completed.');
+        }
+        return redirect()->route('admin.games.index')->withErrors(['error' => "Sorry task failed."]);
     }
     public static function show(Game $game, $field = null)
     {
