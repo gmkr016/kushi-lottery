@@ -27,7 +27,7 @@ class TicketController extends Controller
             $lotteryNumbersRowWithType = $this->lotteryNumberService->prepareRowArray($validated['lotteryNumbers']);
             $this->ticketService->create($ticketData)->createManyLotteryNumbers($lotteryNumbersRowWithType);
             DB::commit();
-            $responseData['data'] = $this->ticketService->getTicketModel();
+            $responseData['data'] = $this->ticketService->getTicketModel(withLotteryNumbers: true);
             $responseData['data']['infoText'] = config('lottery.ticketInfoText');
             $responseData['data']['dueDate'] = Carbon::now()->addYear()->format('Y-m-d');
 
@@ -44,7 +44,8 @@ class TicketController extends Controller
     public function show(Ticket $ticket)
     {
         try {
-            $response = $this->ticketService->setTicketModel($ticket)->getTicketModel();
+            $response = $this->ticketService->setTicketModel($ticket)->getTicketModel(withLotteryNumbers: true);
+
             return response()->success(['data' => $response]);
         } catch (\Exception $exception) {
             return response()->fail(['data' => $exception->getMessage()]);

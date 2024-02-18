@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Game\Enums\EnumNumbersType;
 
@@ -33,5 +34,10 @@ class LotteryNumber extends Model
     public function ticket(): BelongsTo
     {
         return $this->belongsTo(Ticket::class, 'ticketId');
+    }
+
+    public function gameLotteryNumber(): BelongsToMany
+    {
+        return $this->belongsToMany(Game::class);
     }
 }

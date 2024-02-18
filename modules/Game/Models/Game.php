@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -32,11 +33,11 @@ class Game extends Model
 
     public $incrementing = false;
 
-    const CREATED_AT = 'createdAt';
+    const string CREATED_AT = 'createdAt';
 
-    const UPDATED_AT = 'updatedAt';
+    const string UPDATED_AT = 'updatedAt';
 
-    const DELETED_AT = 'deletedAt';
+    const string DELETED_AT = 'deletedAt';
 
     protected $guarded = null;
 
@@ -76,9 +77,14 @@ class Game extends Model
         return $this->hasManyThrough(LotteryNumber::class, Ticket::class, 'gameId', 'ticketId');
     }
 
-    public function lottery(): HasOne
+    public function draw(): HasOne
     {
-        return $this->hasOne(Lottery::class, 'gameId', 'id');
+        return $this->hasOne(Draw::class, 'gameId', 'id');
+    }
+
+    public function gameLotteryNumber(): BelongsToMany
+    {
+        return $this->belongsToMany(LotteryNumber::class);
     }
 
     public function scopeWithCounts($query)

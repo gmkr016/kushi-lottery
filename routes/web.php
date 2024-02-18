@@ -4,8 +4,8 @@ use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\StatisticController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Modules\Game\Models\Ticket;
-use Modules\Game\Services\TicketService;
+use Modules\Game\Models\Game;
+use Modules\Game\Services\WinningPositionSelector;
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
@@ -46,7 +46,7 @@ Route::prefix('/admin')
             Route::resource('tickets', 'TicketController');
             Route::resource('results', 'ResultController');
             Route::post('games/storeLottery', [GameController::class, 'storeLottery'])->name('games.storeLottery');
-            Route::get('statistics/listGames', [StatisticController::class,'listGames'])->name('statistics.listGames');
+            Route::get('statistics/listGames', [StatisticController::class, 'listGames'])->name('statistics.listGames');
             Route::get('agentsale', 'ChartController@agentWiseSale')->name('agentwisesale');
             Route::get('districtsale', 'ChartController@districtWiseSale')->name('districtwisesale');
             Route::get('provincesale', 'ChartController@provinceWiseSale')->name('provincewisesale');
@@ -79,18 +79,20 @@ Route::prefix('/admin')
     });
 
 Route::get('test', function () {
-    try {
-        $gameService = new \Modules\Game\Services\GameService();
-        $currentGame = $gameService->getCurrentGame()->first();
-        return $currentGame->load(['lotteryNumbers' => fn($query) => $query->select(['first', 'second', 'third', 'fourth', 'fifth', 'sixth'])]);
-        $lotteryNumberService = new \Modules\Game\Services\LotteryNumberService();
-        $ticketService = new TicketService((new Ticket()), $lotteryNumberService);
-        $statService = new \Modules\Statistics\Services\StatisticService($gameService, $ticketService);
+    $drawColumns = ['id', 'gameId', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
+    $lotteryNumbersColumns = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'lottery_numbers.id'];
+    $game = Game::query()->whereHas('draw')
+        ->with([
+            'draw' => fn ($query) => $query->select($drawColumns),
+            'lotteryNumbers' => fn ($query) => $query->select($lotteryNumbersColumns),
+        ])
+        ->first();
 
-        return $statService->grossSale();
-    } catch (Exception $exception) {
-        return $exception->getMessage();
-    }
+    $draw = $game->getAttribute('draw');
+    $lotteryNumbers = $game->getAttribute('lotteryNumbers');
+    $selector = (new WinningPositionSelector($draw->toArray(), $lotteryNumbers->toArray()));
+
+    return $selector->getWinners();
 });
 
 Auth::routes();

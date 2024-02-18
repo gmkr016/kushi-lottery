@@ -11,7 +11,7 @@ use Modules\Game\Services\Interfaces\InterfaceTicketService;
 
 class TicketService implements InterfaceTicketService
 {
-    public function __construct(protected ?Ticket $ticket, protected InterfaceLotteryNumberService $lotteryNumberService)
+    public function __construct(protected Ticket $ticket, protected InterfaceLotteryNumberService $lotteryNumberService)
     {
 
     }
@@ -36,7 +36,6 @@ class TicketService implements InterfaceTicketService
             $lotteryNumberData = LotteryNumberData::from($rowWithType + ['ticketId' => $this->ticket->getAttribute('id')]);
             $this->lotteryNumberService->create($lotteryNumberData);
         });
-        $this->ticket->load('lotteryNumbers');
 
         return $this;
     }
@@ -58,14 +57,15 @@ class TicketService implements InterfaceTicketService
     public function setTicketModel(Ticket $ticket): static
     {
         $this->ticket = $ticket;
+
         return $this;
     }
 
-    public function listTicketsWithLotteryNumberCountByGame(array $columns =['*'], int $page = 10): Paginator
+    public function listTicketsWithLotteryNumberCountByGame(array $columns = ['*'], int $page = 10): Paginator
     {
         return Ticket::query()
             ->select($columns)
-            ->with(['game' => fn($query) => $query->select(['id', 'title', 'startDate', 'endDate', 'drawDate'])])
+            ->with(['game' => fn ($query) => $query->select(['id', 'title', 'startDate', 'endDate', 'drawDate'])])
             ->withCount('lotteryNumbers')
             ->simplePaginate($page);
     }

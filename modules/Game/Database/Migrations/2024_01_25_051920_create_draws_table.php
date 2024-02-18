@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lotteries', function (Blueprint $table) {
+        Schema::create('draws', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('gameId')->constrained()->references('id')->on('games');
             $table->unsignedInteger('first');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lottery_numbers');
+        Schema::dropIfExists('draws');
     }
 };

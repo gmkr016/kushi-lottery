@@ -58,22 +58,34 @@
                                         </thead>
 
                                         <tbody>
+                                        <form id="filter" action="{{route("admin.games.index")}}">
+                                            <div class="row my-2 w-50">
+                                                <div class="col">
+                                                    <input name="from" class="form-control" type="date" value="{{$from}}">
+                                                </div>
+                                                <div class="col">
+                                                    <input name="to" class="form-control" type="date" value="{{$to}}">
+                                                </div>
+                                                <div class="col">
+                                                    <button class="btn btn-info">Filter</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                         @if (count($lists) )
-
                                             @foreach ($lists as $item)
                                                 <tr role="row" class="odd">
                                                     <td class="sorting_1" style="vertical-align:middle">
                                                         {{ ucfirst($item->title) }}
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
-                                                        {{ $item->drawDate }}
+                                                        {{ $item->drawDate->format('Y-m-d') }}
                                                     </td>
                                                     {{-- how many total lotteries submitted from users --}}
                                                     <td class="sorting_1" style="vertical-align:middle">
                                                         {{ $item->lottery_numbers_count }}
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
-                                                        @if(is_null($item->lottery) && $item->drawDate->gte(\Carbon\Carbon::now()))
+                                                        @if(is_null($item->draw) && $item->drawDate->gte(\Carbon\Carbon::now()))
                                                             <a href="javascript:void(0)"
                                                                onclick="setWinningNumbers(this, '{{$item->id}}')"
                                                                class="btn btn-warning">Set Winning Number</a>

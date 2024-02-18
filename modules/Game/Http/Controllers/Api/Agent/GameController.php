@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Modules\Game\DTO\GameData;
+use Modules\Game\DTO\GetGameParamData;
 use Modules\Game\Http\Requests\Agent\CreateGameRequest;
 use Modules\Game\Services\Interfaces\InterfaceGameService;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +33,7 @@ class GameController extends Controller
 
     public function index()
     {
-        $response = GameData::collection($this->gameService->get());
+        $response = GameData::collection($this->gameService->get(new GetGameParamData()));
 
         return response()->success(['data' => $response]);
     }

@@ -5,23 +5,28 @@ namespace Modules\Game\Services;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Number;
 use Modules\Game\DTO\GameData;
 use Modules\Game\Models\Game;
 use Modules\Game\Services\Interfaces\InterfaceGameService;
-use Ramsey\Uuid\Uuid;
 
 class GameService implements InterfaceGameService
 {
-    public function get(array $columns = ['*'], int $pageSize = 10, bool $withLotteryNumberCount = false): Paginator
+    public function getBuilderOrPaginator($data): Paginator|Builder
     {
-        return Game::query()
-            ->select($columns)
-            ->when($withLotteryNumberCount, fn ($query) => $query->withCount('lotteryNumbers'))
-            ->orderBy('drawDate', 'desc')
-            ->with(['lottery'])
-            ->paginate($pageSize);
+        $query = Game::query()
+            ->select($data->columns)
+            ->withCount($data->withCount)
+            ->when($data->from, fn ($query) => $query->where('drawDate', '>', $data->from))
+            ->when($data->to, fn ($query) => $query->where('drawDate', '<', $data->to))
+            ->with($data->withRelation)
+            ->orderBy($data->orderByColumn, $data->orderDirection);
+        if ($data->getBuilder) {
+            return $query;
+        }
+
+        return $query->simplePaginate($data->pageSize);
     }
 
     public function getLatestWithSalesCount(): array
@@ -39,7 +44,7 @@ class GameService implements InterfaceGameService
         return Game::query()->tickets()->count();
     }
 
-    public function getCurrentGame(): Model|Builder|null
+    public function getCurrentGame(array $with = []): Model|Builder|null
     {
         return Game::getGamesByStartDate(constraint: '<=', startDate: Carbon::now())
             ->first();
@@ -50,23 +55,35 @@ class GameService implements InterfaceGameService
         return Game::query()->create($data->toArray())->toArray();
     }
 
-    public function countTotalLotteryNumber(): int
-    {
-        $grossSale = 0;
-        $currentGame = $this->getCurrentGame();
-        if ($currentGame) {
-            $ticketSale = $currentGame->tickets()->count();
-            $grossSale = config('lottery.ticketSale') * 100;
-        }
-
-        return $grossSale;
-    }
-
     public function findById(string $gameId): ?GameData
     {
-        if($game = Game::query()->find($gameId)){
+        if ($game = Game::query()->find($gameId)) {
             return GameData::from($game);
         }
+
         return null;
+    }
+
+    public function distributePrice(Game $game)
+    {
+        $winningNumber = $game->getRelation('lottery');
+    }
+
+    public function pullLotteryNumbersCount(array $gamesArray): array
+    {
+        return array_column($gamesArray, 'lottery_numbers_count');
+    }
+
+    public function calculateGrossSaleByGames(array $gamesArray): int
+    {
+        return array_sum($this->pullLotteryNumbersCount($gamesArray)) * config('lottery.ticketPrice', 100);
+    }
+
+    public function getGrossSaleByGamesWithCurrency(array $gamesArray, string $currency): string
+    {
+        return Number::currency(
+            $this->calculateGrossSaleByGames($gamesArray),
+            $currency
+        );
     }
 }

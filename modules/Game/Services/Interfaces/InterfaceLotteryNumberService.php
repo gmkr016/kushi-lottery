@@ -12,4 +12,6 @@ interface InterfaceLotteryNumberService
     public function prepareRowArray(array &$lotteryNumbersWithType): array;
 
     public function fillKeysToNumberListAndType(array &$lotteryNumberList, string $type): array;
+
+    public function totalCount(): int;
 }

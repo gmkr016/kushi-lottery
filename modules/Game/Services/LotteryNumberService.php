@@ -36,4 +36,9 @@ class LotteryNumberService implements InterfaceLotteryNumberService
 
         return array_combine($keys, $lotteryNumberList);
     }
+
+    public function totalCount(): int
+    {
+        return LotteryNumber::query()->count();
+    }
 }
