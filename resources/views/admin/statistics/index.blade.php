@@ -23,8 +23,9 @@
                                 <h6 class="m-0 font-weight-bold text-primary">List {{$label ?? ''}}</h6>
                             </div>
                             <div class="col-6">
-                                <a href="{{ route('admin.games.create') }}" class="btn btn-info mb-2  float-right">Create
-                                    Game</a>
+                                <p class="float-right">
+                                    Gross Sale: {{$grossSale}}
+                                </p>
                             </div>
                         </div>
 
@@ -42,9 +43,6 @@
                         @endsession
 
                         <div class="table-responsive">
-                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-
-                            </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table class="table table-bordered dataTable" id="dataTable" width="100%"
@@ -53,46 +51,55 @@
                                         <thead>
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%"> Title
+                                                colspan="1" width="20%">Title
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" width="20%">Draw Date
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%">Total Lottery Numbers Choosen
+                                                colspan="1" width="20%">Tickets
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="20%">Action
+                                                colspan="1" width="20%">Lottery Numbers
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" width="20%">Gross Sales (NPR)
                                             </th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        @if (count($lists) )
-
-                                            @foreach ($lists as $item)
+                                        <form action="{{route("admin.statistics.listGames")}}">
+                                            <div class="row my-2 w-50">
+                                                <div class="col">
+                                                    <input name="from" class="form-control" type="date" value="{{$from}}">
+                                                </div>
+                                                <div class="col">
+                                                    <input name="to" class="form-control" type="date" value="{{$to}}">
+                                                </div>
+                                                <div class="col">
+                                                    <button class="btn btn-info">Filter</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        @if (count($games) )
+                                            @foreach ($games as $item)
                                                 <tr role="row" class="odd">
                                                     <td class="sorting_1" style="vertical-align:middle">
                                                         {{ ucfirst($item->title) }}
                                                     </td>
                                                     <td class="sorting_1" style="vertical-align:middle">
-                                                        {{ date('Y-m-d H:i:s', $item->draw_date) }}
+                                                        {{ $item->drawDate?->format('Y-m-d') }}
+                                                    </td>
+                                                    <td class="sorting_1" style="vertical-align:middle">
+                                                        {{ $item->tickets_count }}
                                                     </td>
                                                     {{-- how many total lotteries submitted from users --}}
                                                     <td class="sorting_1" style="vertical-align:middle">
                                                         {{ $item->lottery_numbers_count }}
                                                     </td>
-                                                    <td class="sorting_1" style="vertical-align:middle">
-                                                        <a class="btn btn-primary"
-                                                           href="{{ route("admin.games.edit",$item->id) }}">Edit</a>
-                                                        <a href="javascript:void()" class="btn btn-danger"
-                                                           onclick="event.preventDefault();document.querySelector('#item{{$item->id}}-delete').submit();">Delete</a>
-                                                        <form method='POST' id="item{{$item->id}}-delete"
-                                                              action='{{ route("admin.games.destroy",$item->id) }}'>
-                                                            @csrf
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                        </form>
-
+                                                    <td>
+                                                        {{$item->lottery_numbers_count * config('lottery.ticketPrice')}}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -108,8 +115,10 @@
                                         <tr>
                                             <th rowspan="1" colspan="1">Title</th>
                                             <th rowspan="1" colspan="1">Draw Date</th>
-                                            <th rowspan="1" colspan="1">Total Lottery Numbers Choosen</th>
-                                            <th rowspan="1" colspan="1">Action</th>
+                                            <th rowspan="1" colspan="1">Tickets</th>
+                                            <th rowspan="1" colspan="1">Lottery Numbers</th>
+                                            <th rowspan="1" colspan="1">Gross Sale (NPR)</th>
+                                            {{--                                            <th rowspan="1" colspan="1">Action</th>--}}
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -117,7 +126,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 col-md-7">
-                                    {{$lists->links()}}
+                                    {{$games->links()}}
                                 </div>
                             </div>
                         </div>

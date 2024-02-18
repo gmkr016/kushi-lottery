@@ -73,8 +73,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">All Results</h6>
 
-                <a class="collapse-item" href="{{route("admin.statistics.listTickets")}}">View Sales</a>
-
+                <a class="collapse-item" href="{{route("admin.statistics.listGames")}}">View Sales</a>
+                <a class="collapse-item" href="">View Winners</a>
             </div>
         </div>
     </li>

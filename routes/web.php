@@ -46,7 +46,7 @@ Route::prefix('/admin')
             Route::resource('tickets', 'TicketController');
             Route::resource('results', 'ResultController');
             Route::post('games/storeLottery', [GameController::class, 'storeLottery'])->name('games.storeLottery');
-            Route::get('statistics/listTickets', [StatisticController::class,'listTickets'])->name('statistics.listTickets');
+            Route::get('statistics/listGames', [StatisticController::class,'listGames'])->name('statistics.listGames');
             Route::get('agentsale', 'ChartController@agentWiseSale')->name('agentwisesale');
             Route::get('districtsale', 'ChartController@districtWiseSale')->name('districtwisesale');
             Route::get('provincesale', 'ChartController@provinceWiseSale')->name('provincewisesale');
