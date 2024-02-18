@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\Game\Game;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Modules\Game\Traits\HasManyThroughGames;
+use Modules\Game\Traits\HasRelationsWithGame;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasManyThroughGames, Notifiable;
+    use HasApiTokens, HasFactory, HasRelationsWithGame, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -62,10 +60,5 @@ class User extends Authenticatable
     public function getJWTIdentifier()
     {
         return $this->getKey();
-    }
-
-    public function games(): HasMany
-    {
-        return $this->hasMany(Game::class);
     }
 }

@@ -2,13 +2,19 @@
 
 namespace Modules\Game\Traits;
 
+use App\Models\Game\Game;
+use App\Models\Game\LotteryNumber;
+use App\Models\Game\Ticket;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Modules\Game\Models\LotteryNumber;
-use Modules\Game\Models\Ticket;
 
-trait HasManyThroughGames
+trait HasRelationsWithGame
 {
+    public function games(): HasMany
+    {
+        return $this->hasMany(Game::class);
+    }
+
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, $this->getForeignKey());
