@@ -13,9 +13,15 @@ class GetGameParamData extends Data
         public array $withRelation = [],
         public ?string $from = null,
         public ?string $to = null,
-        public string $orderByColumn = 'drawDate',
-        public string $orderDirection = 'desc',
-        public bool $getBuilder = false
+        public ?string $orderByColumn = 'drawDate',
+        public ?string $orderDirection = 'desc',
+        public bool    $getBuilder = false,
     ) {
+        if (is_null($this->orderDirection)) {
+            $this->orderDirection = 'desc';
+        }
+        if (is_null($this->orderByColumn)) {
+            $this->orderByColumn = 'drawDate';
+        }
     }
 }

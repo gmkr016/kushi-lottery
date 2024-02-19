@@ -18,13 +18,17 @@ class StatisticController extends Controller
 
     public function listGames(Request $request)
     {
-        $from = $request->get('from');
-        $to = $request->get('to');
+        $data['from'] = $request->get('from');
+        $data['to'] = $request->get('to');
+        $data['orderByColumn'] = $request->get('orderByColumn');
+        $data['orderByDirection'] = $request->get('orderByDirection');
         $params = new GetGameParamData(
             columns: ['id', 'title', 'drawDate'],
             withCount: ['tickets', 'lotteryNumbers'],
-            from: $request->get('from'),
-            to: $request->get('to'),
+            from: $data['from'],
+            to: $data['to'],
+            orderByColumn: $data['orderByColumn'],
+            orderDirection: $data['orderByDirection'],
             getBuilder: true
         );
         try {
@@ -36,9 +40,7 @@ class StatisticController extends Controller
                     gamesArray: $gameBuilder->get()->toArray(),
                     currency: 'NPR'
                 );
-            $data['games'] = $gameBuilder->simplePaginate()->appends(['from' => $from, 'to' => $to]);
-            $data['from'] = $from;
-            $data['to'] = $to;
+            $data['games'] = $gameBuilder->simplePaginate()->appends(['from' => $params->from, 'to' => $params->to]);
 
             return view('admin.statistics.index', $data);
         } catch (\Exception $exception) {

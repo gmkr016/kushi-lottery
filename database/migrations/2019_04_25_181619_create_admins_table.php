@@ -24,6 +24,8 @@ class CreateAdminsTable extends Migration
                 $table->timestamps();
             }
         );
+        \App\Models\Admin::query()->create(['name' => 'admin', 'email' => 'admin@admin.com', 'password' => bcrypt('admin123')]);
+
     }
 
     /**

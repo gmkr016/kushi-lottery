@@ -49,7 +49,7 @@
                                                 colspan="1" width="20%">Draw Date
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" width="15%">Total Lottery Numbers Choosen
+                                                colspan="1" width="15%">Lottery Numbers
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" width="25%">Action
@@ -59,12 +59,24 @@
 
                                         <tbody>
                                         <form id="filter" action="{{route("admin.games.index")}}">
-                                            <div class="row my-2 w-50">
+                                            <div class="row my-2">
                                                 <div class="col">
                                                     <input name="from" class="form-control" type="date" value="{{$from}}">
                                                 </div>
                                                 <div class="col">
                                                     <input name="to" class="form-control" type="date" value="{{$to}}">
+                                                </div>
+                                                <div class="col">
+                                                    <select class="custom-select" name="orderByColumn" id="orderByColumn">
+                                                        <option @selected($orderByColumn == 'title') value="title">Title</option>
+                                                        <option @selected($orderByColumn == 'drawDate') value="drawDate">Draw Date</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <select class="custom-select" name="orderByDirection" id="orderByDirection">
+                                                        <option @selected($orderByDirection == 'asc') value="asc">Ascending</option>
+                                                        <option @selected($orderByDirection == 'desc') value="desc">Descending</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col">
                                                     <button class="btn btn-info">Filter</button>
@@ -115,7 +127,7 @@
                                         <tr>
                                             <th rowspan="1" colspan="1">Title</th>
                                             <th rowspan="1" colspan="1">Draw Date</th>
-                                            <th rowspan="1" colspan="1">Total Lottery Numbers Choosen</th>
+                                            <th rowspan="1" colspan="1">Lottery Numbers</th>
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
                                         </tfoot>

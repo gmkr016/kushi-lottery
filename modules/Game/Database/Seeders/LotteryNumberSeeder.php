@@ -9,6 +9,6 @@ class LotteryNumberSeeder extends Seeder
 {
     public function run(): void
     {
-        LotteryNumber::factory()->count(1000)->create();
+        LotteryNumber::factory()->count(5000)->create();
     }
 }

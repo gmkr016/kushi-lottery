@@ -24,7 +24,15 @@ class GameController extends Controller
     {
         $data['from'] = $request->get('from');
         $data['to'] = $request->get('to');
-        $params = new GetGameParamData(withCount: ['lotteryNumbers'], from: $data['from'], to: $data['to']);
+        $data['orderByColumn'] = $request->get('orderByColumn');
+        $data['orderByDirection'] = $request->get('orderByDirection');
+        $params = new GetGameParamData(
+            withCount: ['lotteryNumbers'],
+            from: $data['from'],
+            to: $data['to'],
+            orderByColumn: $data['orderByColumn'],
+            orderDirection: $data['orderByDirection']
+        );
         $data['lists'] = $this->gameService->getBuilderOrPaginator($params);
 
         return view('admin.games.index', $data);

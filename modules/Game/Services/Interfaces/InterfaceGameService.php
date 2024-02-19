@@ -11,7 +11,7 @@ use Modules\Game\DTO\GetGameParamData;
 interface InterfaceGameService
 {
     public function getBuilderOrPaginator(
-        GetGameParamData $data
+        GetGameParamData $paramData
     ): Paginator|Builder;
 
     public function findById(string $gameId);

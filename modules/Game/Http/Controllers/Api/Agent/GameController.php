@@ -33,7 +33,7 @@ class GameController extends Controller
 
     public function index()
     {
-        $response = GameData::collection($this->gameService->getBuilderOrPaginator(new GetGameParamData()));
+        $response = GameData::collection($this->gameService->getBuilderOrPaginator(new GetGameParamData));
 
         return response()->success(['data' => $response]);
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\StatisticController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Modules\Game\Models\Game;
@@ -79,6 +80,7 @@ Route::prefix('/admin')
     });
 
 Route::get('test', function () {
+    return session()->get('drawDate');
     $drawColumns = ['id', 'gameId', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
     $lotteryNumbersColumns = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'lottery_numbers.id'];
     $game = Game::query()->whereHas('draw')
