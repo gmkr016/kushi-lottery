@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\StatisticController;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Modules\Game\Models\Game;
-use Modules\Game\Services\WinningPositionSelector;
+use Modules\Statistics\Services\WinningPositionSelector;
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
@@ -80,21 +79,23 @@ Route::prefix('/admin')
     });
 
 Route::get('test', function () {
-    return session()->get('drawDate');
     $drawColumns = ['id', 'gameId', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
     $lotteryNumbersColumns = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'lottery_numbers.id'];
-    $game = Game::query()->whereHas('draw')
+    $game = Game::query()
+        ->whereHas('draw')
         ->with([
             'draw' => fn ($query) => $query->select($drawColumns),
             'lotteryNumbers' => fn ($query) => $query->select($lotteryNumbersColumns),
         ])
         ->first();
+    if ($game) {
+        $draw = $game->getAttribute('draw');
+        $lotteryNumbers = $game->getAttribute('lotteryNumbers');
+        $selector = (new WinningPositionSelector($draw->toArray(), $lotteryNumbers->toArray()));
 
-    $draw = $game->getAttribute('draw');
-    $lotteryNumbers = $game->getAttribute('lotteryNumbers');
-    $selector = (new WinningPositionSelector($draw->toArray(), $lotteryNumbers->toArray()));
-
-    return $selector->getWinners();
+        return $selector->getWinners();
+    }
+    return response()->fail(['data'=>'no game found']);
 });
 
 Auth::routes();

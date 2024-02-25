@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Game\Services;
+namespace Modules\Statistics\Services;
 
 use Illuminate\Support\Arr;
 
@@ -14,26 +14,31 @@ class WinningPositionSelector
                 'position' => 5,
                 'intersection' => 3,
                 'lotteryNumbers' => [],
+                'pricePool' => null,
             ],
             'fourth' => [
                 'position' => 4,
                 'intersection' => 4,
                 'lotteryNumbers' => [],
+                'pricePool' => null,
             ],
             'third' => [
                 'position' => 3,
                 'intersection' => 5,
                 'lotteryNumbers' => [],
+                'pricePool' => null,
             ],
             'second' => [
                 'position' => 2,
                 'intersection' => 5,
                 'lotteryNumbers' => [],
+                'pricePool' => null,
             ],
             'first' => [
                 'position' => 1,
                 'intersection' => 6,
                 'lotteryNumbers' => [],
+                'pricePool' => null,
             ],
         ],
         private readonly array $columns = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
@@ -57,7 +62,7 @@ class WinningPositionSelector
         if (! in_array($position, $this->columns)) {
             throw new \Error(sprintf('Only %s positions allowed.', Arr::join($this->columns, ',')));
         }
-        $this->winners[$position]['lotteryNumbers'] = $this->getWinnersOf($this->winners[$position]['intersection']);
+        $this->winners[$position]['lotteryNumbers'] = $this->getIntersectedLotteryNumbers($this->winners[$position]['intersection']);
     }
 
     public function getDraw(): array
@@ -70,7 +75,7 @@ class WinningPositionSelector
         return $this->lotteryNumbers;
     }
 
-    private function getWinnersOf(int $intersection): array
+    private function getIntersectedLotteryNumbers(int $intersection): array
     {
         return collect($this->lotteryNumbers)->filter(function ($numbers) use ($intersection) {
             $drawNumbers = collect($this->draw)->only($this->columns)->toArray();
